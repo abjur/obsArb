@@ -1,0 +1,29 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# obsArb
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+Repositório do Observatório da Arbitragem. O Observatório da Arbitragem é um projeto que visa compreender o reflexo do fenômeno jurídico da arbitragem nos tribunais. Em sua primeira fase, o projeto busca compreender o fluxo dos processos de i) anulação de decisão arbitral, ii) cumprimento de sentença / execução, iii) medida cautelar antecedente ao tribunal arbitral iv) ação de instauração da arbitragem v) compromisso arbitral.
+
+Relatório preliminar disponível aqui: [[word]](https://github.com/abjur/obsArb/raw/main/inst/relatorio/relatorio.docx) [[html]](https://jtrecenti.quarto.pub/obsarb/)
+
+Base de dados do relatório preliminar disponível aqui: [[xlsx]](https://github.com/abjur/obsArb/raw/main/inst/da_arbitragem.xlsx)
+
+## Licença
+
+MIT
