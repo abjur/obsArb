@@ -63,6 +63,12 @@ writexl::write_xlsx(da_tidy, "inst/da_arbitragem.xlsx")
 usethis::use_data(da_tidy, overwrite = TRUE)
 usethis::use_data(da_cjpg_tidy, overwrite = TRUE)
 
+piggyback::pb_release_create(tag = "relatorio_preliminar")
+piggyback::pb_upload("data-raw/da_cjpg.rds", tag = "relatorio_preliminar")
+piggyback::pb_upload("data-raw/da_cpopg.rds", tag = "relatorio_preliminar")
+piggyback::pb_upload("data-raw/da_cjpg.zip", tag = "relatorio_preliminar")
+piggyback::pb_upload("data-raw/da_cpopg.zip", tag = "relatorio_preliminar")
+
 # da_cpopg_tidy |>
 #   dplyr::count(status)
 #
