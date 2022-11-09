@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.258">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Associação Brasileira de Jurimetria">
+
+<title>Processos relacionados à Arbitragem</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="relatorio_files/libs/clipboard/clipboard.min.js"></script>
+<script src="relatorio_files/libs/quarto-html/quarto.js"></script>
+<script src="relatorio_files/libs/quarto-html/popper.min.js"></script>
+<script src="relatorio_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="relatorio_files/libs/quarto-html/anchor.min.js"></script>
+<link href="relatorio_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="relatorio_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="relatorio_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="relatorio_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="relatorio_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Processos relacionados à Arbitragem</h1>
+<p class="subtitle lead">Um levantamento preliminar no banco de sentenças do TJSP</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-contents">
+             <p>Associação Brasileira de Jurimetria </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Data de Publicação</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">10 de novembro de 2022</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+
+</div>
+<p>O Observatório da Arbitragem é um projeto que visa compreender o reflexo do fenômeno jurídico da arbitragem nos tribunais. Em sua primeira fase, o projeto busca compreender o fluxo dos processos de i) anulação de decisão arbitral, ii) cumprimento de sentença / execução, iii) medida cautelar antecedente ao tribunal arbitral iv) ação de instauração da arbitragem v) compromisso arbitral.</p>
+<p>O objetivo do levantamento é realizar uma análise preliminar a partir do banco de sentenças do Tribunal de Justiça de São Paulo (TJSP). O levantamento terá como resultado algumas estatísticas básicas como volume de sentenças ao longo do tempo, proporção de decisões favoráveis ao autor e tempo mediano dos processos. O estudo pode ser utilizado como insumo para decidir sobre a viabilidade de uma pesquisa mais aprofundada – envolvendo análise de autos processuais – a partir dos dados disponibilizados no banco de sentenças.</p>
+<p>O presente levantamento descreve o fluxo de download, arrumação e análise dos dados de sentenças relacionadas à arbitragem. Na parte de download, descrevemos os termos utilizados para consulta e o procedimento de acesso aos dados, que são públicos, mas não são abertos. A parte de arrumação descreve todos os passos para chegar da base bruta até a base organizada, informando as colunas utilizadas. A análise mostra os resultados do levantamento, com estatísticas sobre o perfil dos processos, o volume de sentenças ao longo do tempo, a proporção de decisões favoráveis e o tempo médio das ações.</p>
+<section id="download" class="level2">
+<h2 class="anchored" data-anchor-id="download">Download</h2>
+<p>Os dados de processos do TJSP são públicos, mas não são abertos. Isso significa que não existe um meio fácil de obter uma lista de todos os processos que existem no tribunal a partir de um critério jurídico, geográfico ou temporal.</p>
+<p>O tribunal, no entanto, disponibiliza ferramentas de consulta. Na <a href="https://esaj.tjsp.jus.br/cjpg/pesquisar.do">Consulta de Julgados do Primeiro Grau (CJPG)</a> é possível acessar, manualmente, a lista de processos a partir de termos de busca (como palavras-chave, classes e assuntos). Cada processo, por sua vez, pode ser pesquisado manualmente em uma consulta de processos <a href="https://esaj.tjsp.jus.br/cpopg/open.do">Consulta de Processos do Primeiro Grau</a>.</p>
+<p>Por conta da necessidade de realizar pesquisas no Direito, a ABJ desenvolveu, ao longo de sua história, algumas ferramentas que automatizam o fluxo manual de obtenção de dados. Essas ferramentas utilizam técnicas de raspagem de dados <span class="citation" data-cites="zhaoWebScraping2017">(<a href="#ref-zhaoWebScraping2017" role="doc-biblioref">Zhao 2017</a>)</span> que, em poucas palavras, envolvem imitar o que um ser humano faria para acessar as páginas, mas de forma automática. Vale ressaltar que essa não é uma estratégia oficial nem desejável de ser utilizada ao acessar dados públicos. No entanto, por conta das limitações do tribunal, utilizar raspagem de dados acaba sendo necessário para tornar as pesquisas viáveis.</p>
+<p>Ao acessar os dados via raspagem do CJPG, a primeira limitação que aparece são os campos disponíveis. Processos de arbitragem podem aparecer com classes e assuntos processuais<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> que não identificam corretamente os casos. Por exemplo, é comum encontrar como classe “procedimento ordinário” ou como assunto “anulação”. Por isso, a única forma de listar os processos relacionados à arbitragem é através das palavras-chave.</p>
+<p>A desvantagem em utilizar palavras-chave é que as pesquisas se limitam ao que as ferramentas de pesquisa disponibilizam. Se a ferramenta de busca é falha, o resultado é falho. De qualquer forma, por falta de outros meios, essa foi a decisão tomada para acessar os processos relacionados à arbitragem.</p>
+<p>O termo de busca utilizado para realizar a pesquisa foi <code>"arbitral" OU "lei de arbitragem" OU "9307" OU "9.307"</code>. A ideia da pesquisa foi realizar a busca mais genérica possível relacionada à arbitragem, sem incluir o termo “arbitragem”, já que este aparece no nome das varas, o que implicaria em uma lista com todos os processos da vara.</p>
+<p>Outro filtro realizado foi o das varas. Foram consideradas 4 varas no total: 1ª vara empresarial e conflitos de arbitragem, 2ª vara empresarial e conflitos de arbitragem, 1ª vara regional de competência empresarial e de conflitos relacionados à arbitragem e 2ª vara regional de competência empresarial e de conflitos relacionados à arbitragem.</p>
+<p>A pesquisa retornou um total de 348 decisões. Dentre esses casos, foram encontrados 338 números de processos únicos, já que um processo pode apresentar mais de uma decisão. A consulta desses processos individualmente retornou 337 casos (1 caso foi descartado por estar em segredo de justiça). A base bruta final, portanto, possui 337 processos.</p>
+<p>Neste ponto, uma discussão pode ser iniciada sobre o volume total de ações. Por envolver casos que potencialmente correm em segredo de justiça, é possível que uma parte dos casos não são acessíveis através do banco de sentenças. Além disso, por envolver apenas as varas empresariais, o recorte pode apresentar limitações de espaço (regiões) e tempo (criação das varas). Por último, por se tratar de um estudo retrospectivo (envolve apenas casos com sentença), pode ser que casos que ainda estão ativos fiquem de fora da lista. De qualquer forma, espera-se que a lista obtida, depois de limpa, possa ser utilizada como amostra aleatória da população de todos os processos relacionados a arbitragem.</p>
+</section>
+<section id="arrumação" class="level2">
+<h2 class="anchored" data-anchor-id="arrumação">Arrumação</h2>
+<p>O primeiro passo da arrumação dos dados foi a classificação dos tipos de processos e remoção de casos que não fazem parte do escopo. Para classificar as cinco categorias, foram utilizados os termos e expressões regulares da <a href="#tbl-rx-tipo">Tabela&nbsp;1</a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-rx-tipo" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Tabela&nbsp;1: Expressões regulares utilizadas para classificar o tipo de ação</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Categoria</th>
+<th style="text-align: left;">Expressões regulares</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Compromisso</td>
+<td style="text-align: left;">compromisso arbitral</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Instauracao</td>
+<td style="text-align: left;">instauracao</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cautelar</td>
+<td style="text-align: left;">cautelar, antecipada</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Anulacao</td>
+<td style="text-align: left;">anulacao, nulidade</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cumprimento</td>
+<td style="text-align: left;">cumprimento</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>A <a href="#tbl-tabela-tipo">Tabela&nbsp;2</a> mostra a quantidade de processos que caiu em cada categoria. É importante destacar que toda classificação automática pode incorrer em erros, ou seja, pode ser que as categorias finais fiquem incorretas. Os casos vazios foram retirados.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-tabela-tipo" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Tabela&nbsp;2: Processos classificados por tipo</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Resultado</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Compromisso</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: right;">39.94%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cumprimento</td>
+<td style="text-align: right;">83</td>
+<td style="text-align: right;">24.56%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Instauracao</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">13.02%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cautelar</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">10.36%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Anulacao</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">10.06%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">(Vazio)</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">2.07%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total</td>
+<td style="text-align: right;">338</td>
+<td style="text-align: right;">100.00%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>O passo seguinte foi a obtenção dos resultados dos processos. Para classificar as categorias de resultados, foram utilizados os termos e expressões regulares da <a href="#tbl-rx-resultado">Tabela&nbsp;3</a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-rx-resultado" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Tabela&nbsp;3: Expressões regulares utilizadas para classificar o resultado</caption>
+<colgroup>
+<col style="width: 13%">
+<col style="width: 86%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Categoria</th>
+<th style="text-align: left;">Expressões regulares</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Improcedente</td>
+<td style="text-align: left;">julgo improcedente, indefiro a tutela</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Parcial</td>
+<td style="text-align: left;">julgo procedente em parte, parcialmente procedente, defiro parcialmente a tutela</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Acordo</td>
+<td style="text-align: left;">homologo o acordo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Procedente</td>
+<td style="text-align: left;">julgo (o pedido )?procedente, homologo, defiro a tutela</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Extinto</td>
+<td style="text-align: left;">julgo extinto, julgo extinta, determino a extincao, determinar a extincao</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>A <a href="#tbl-tabela-resultado">Tabela&nbsp;4</a> mostra a quantidade de processos que caiu em cada categoria de resultado. Novamente, a classificação automática pode incorrer em erros, ou seja, pode ser que os resultados finais estejam incorretos. Os casos vazios foram retirados da análise.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-tabela-resultado" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Tabela&nbsp;4: Processos classificados por tipo</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Resultado</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Extinto</td>
+<td style="text-align: right;">142</td>
+<td style="text-align: right;">42.0%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Procedente</td>
+<td style="text-align: right;">74</td>
+<td style="text-align: right;">21.9%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Improcedente</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">20.7%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Parcial</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">8.0%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Acordo</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">6.2%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">(Vazio)</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1.2%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total</td>
+<td style="text-align: right;">338</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Por último, as colunas importantes de análise foram construídas. As colunas escolhidas foram: status (em andamento, extinto, em grau de recurso ou suspenso), classe, assunto, valor da causa, processo digital, data de disponibilização da sentença, vara, resultado e tempo (calculado pelo tempo entre a data de distribuição e data da disponibilização da decisão).</p>
+<p>No final, a base ficou com 326 linhas e 11 colunas, contendo todas as informações utilizadas na parte de análise.</p>
+</section>
+<section id="análise" class="level2">
+<h2 class="anchored" data-anchor-id="análise">Análise</h2>
+<p>A base possui 326 casos, dentre os quais 256 são digitais ou digitalizados (79%). Em uma potencial análise manual, seriam considerados apenas processos digitais ou digitalizados.</p>
+<p>A <a href="#tbl-status">Tabela&nbsp;5</a> mostra os status dos processos no momento da coleta dos dados, em novembro/2022. A maioria dos casos está extinta e aproximadamente um quinto dos casos está em grau de recurso.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-status" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Tabela&nbsp;5: Status dos processos no momento da coleta dos dados</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">status</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">prop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Extinto</td>
+<td style="text-align: right;">181</td>
+<td style="text-align: right;">55.5%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Em grau de recurso</td>
+<td style="text-align: right;">71</td>
+<td style="text-align: right;">21.8%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Em andamento</td>
+<td style="text-align: right;">68</td>
+<td style="text-align: right;">20.9%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Suspenso</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">1.8%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>A <a href="#tbl-classe">Tabela&nbsp;6</a> mostra as dez classes processuais mais comuns encontradas. É possível notar que existem muitas classes que não são relacionadas diretamente a arbitragem.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-classe" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Tabela&nbsp;6: Dez classes mais comuns</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Classe</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Procedimento Comum Cível</td>
+<td style="text-align: right;">82</td>
+<td style="text-align: right;">25.2%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Compromisso Arbitral</td>
+<td style="text-align: right;">79</td>
+<td style="text-align: right;">24.2%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cumprimento de sentença - Lei Arbitral (Lei 9.307/1996)</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">16.9%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tutela Cautelar Antecedente</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">12.9%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cumprimento de sentença</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">7.1%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tutela Antecipada Antecedente</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">4.9%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Produção Antecipada da Prova</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">3.4%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Dissolução Parcial de Sociedade</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">2.8%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Outros</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1.2%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Protesto</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.9%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Embargos à Execução</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.6%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Total</td>
+<td style="text-align: right;">326</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>A <a href="#tbl-assunto">Tabela&nbsp;7</a> mostra as dez classes processuais mais comuns encontradas. Assim como nas classes, é possível notar que existem muitos assuntos que não são relacionadas diretamente a arbitragem.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-assunto" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Tabela&nbsp;7: Dez assuntos mais comuns</caption>
+<colgroup>
+<col style="width: 86%">
+<col style="width: 4%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Assunto</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Defeito, nulidade ou anulação</td>
+<td style="text-align: right;">93</td>
+<td style="text-align: right;">28.5%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sentença arbitral (artigo 515, inciso VII, CPC)</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">19.0%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Outros</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">15.3%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Liminar</td>
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">14.4%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Franquia</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">5.8%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Medida cautelar ou de urgência pré-arbitral (Art. 22-A, Lei nº 9.307/96)</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">4.3%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Marca</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">2.5%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ingresso e Exclusão dos Sócios na Sociedade</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">2.1%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Constrição / Penhora / Avaliação / Indisponibilidade de Bens</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">1.8%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Obrigação de Fazer / Não Fazer</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1.5%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Obrigações</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1.5%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Provas em geral</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1.5%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Valor da Execução / Cálculo / Atualização</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1.5%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Total</td>
+<td style="text-align: right;">326</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>A <a href="#tbl-valor">Tabela&nbsp;8</a> mostra a contagem de processos por faixa de valores de causa. É possível notar que existe uma alta assimetria, já que temos vários processos de até 10 mil reais, mas também processos de mais de 100 milhões de reais.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-valor" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Tabela&nbsp;8: Faixas de valores</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Faixa</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Até R$ 10.000</td>
+<td style="text-align: right;">115</td>
+<td style="text-align: right;">35.3%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Entre R$ 10.000 e R$ 100.000</td>
+<td style="text-align: right;">73</td>
+<td style="text-align: right;">22.4%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Entre R$ 100.000 e R$ 1 milhão</td>
+<td style="text-align: right;">87</td>
+<td style="text-align: right;">26.7%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Entre R$ 1 milhão e R$ 100 milhões</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">15.3%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">(Vazio)</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Total</td>
+<td style="text-align: right;">326</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>A <a href="#tbl-vara">Tabela&nbsp;9</a> mostra a contagem de processos por vara. As varas empresariais do foro central cível concentram a maior parte dos casos. Por conta do pequeno número de informações, as análises de contagem de resultados e categorias por vara vão desconsiderar as RAJs.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-vara" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Tabela&nbsp;9: Quantidade de processos por vara</caption>
+<colgroup>
+<col style="width: 89%">
+<col style="width: 4%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">vara</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">prop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2ª VARA EMPRESARIAL E CONFLITOS DE ARBITRAGEM</td>
+<td style="text-align: right;">159</td>
+<td style="text-align: right;">48.8%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1ª VARA EMPRESARIAL E CONFLITOS DE ARBITRAGEM</td>
+<td style="text-align: right;">155</td>
+<td style="text-align: right;">47.5%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1ª Vara Regional de Competência Empresarial e de Conflitos Relacionados à Arbitragem</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">1.8%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2ª Vara Regional de Competência Empresarial e de Conflitos Relacionados à Arbitragem</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">1.8%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>A <a href="#fig-no-tempo">Figura&nbsp;1</a> mostra o volume de decisões ao longo do tempo, considerando como base a data de disponibilização das sentenças. É possível notar um aumento na quantidade de decisões nos anos de 2021 e 2022 (que ainda não acabou).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-no-tempo" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="relatorio_files/figure-html/fig-no-tempo-1.png" class="img-fluid figure-img" width="2100"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;1: Quantidade de decisões por ano</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A <a href="#fig-no-tempo-categoria">Figura&nbsp;2</a> mostra o volume de decisões ao longo do tempo, separando por categoria de caso. Com exceção das ações de Instauração, é possível observar um crescimento de casos nos anos de 2021 e 2022.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-no-tempo-categoria" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="relatorio_files/figure-html/fig-no-tempo-categoria-1.png" class="img-fluid figure-img" width="2100"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;2: Quantidade de decisões por ano e categoria</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A <a href="#tbl-resultado">Tabela&nbsp;10</a> mostra os resultados dos processos por categoria. Nas últimas linha e coluna, são apresentadas as contagens e proporções marginais. A proporção de casos extintos observada é mais alta do que o comum na análise de processos do TJSP. A categoria de processos com maior taxa de procedência (parcial ou total) é o de Compromisso arbitral.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-resultado" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Tabela&nbsp;10: Resultados dos processos por categoria</caption>
+<colgroup>
+<col style="width: 16%">
+<col style="width: 13%">
+<col style="width: 17%">
+<col style="width: 12%">
+<col style="width: 14%">
+<col style="width: 12%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Categoria</th>
+<th style="text-align: left;">Extinto</th>
+<th style="text-align: left;">Improcedente</th>
+<th style="text-align: left;">Parcial</th>
+<th style="text-align: left;">Procedente</th>
+<th style="text-align: left;">Acordo</th>
+<th style="text-align: left;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Anulacao</td>
+<td style="text-align: left;">16 (47%)</td>
+<td style="text-align: left;">13 (38%)</td>
+<td style="text-align: left;">1 (3%)</td>
+<td style="text-align: left;">4 (12%)</td>
+<td style="text-align: left;">0 (0%)</td>
+<td style="text-align: left;">34 (10%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cautelar</td>
+<td style="text-align: left;">9 (26%)</td>
+<td style="text-align: left;">6 (18%)</td>
+<td style="text-align: left;">3 (9%)</td>
+<td style="text-align: left;">11 (32%)</td>
+<td style="text-align: left;">5 (15%)</td>
+<td style="text-align: left;">34 (10%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Compromisso</td>
+<td style="text-align: left;">47 (35%)</td>
+<td style="text-align: left;">33 (25%)</td>
+<td style="text-align: left;">16 (12%)</td>
+<td style="text-align: left;">34 (26%)</td>
+<td style="text-align: left;">3 (2%)</td>
+<td style="text-align: left;">133 (41%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cumprimento</td>
+<td style="text-align: left;">47 (57%)</td>
+<td style="text-align: left;">5 (6%)</td>
+<td style="text-align: left;">1 (1%)</td>
+<td style="text-align: left;">18 (22%)</td>
+<td style="text-align: left;">11 (13%)</td>
+<td style="text-align: left;">82 (25%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Instauracao</td>
+<td style="text-align: left;">20 (47%)</td>
+<td style="text-align: left;">10 (23%)</td>
+<td style="text-align: left;">6 (14%)</td>
+<td style="text-align: left;">6 (14%)</td>
+<td style="text-align: left;">1 (2%)</td>
+<td style="text-align: left;">43 (13%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Total</td>
+<td style="text-align: left;">139 (43%)</td>
+<td style="text-align: left;">67 (21%)</td>
+<td style="text-align: left;">27 (8%)</td>
+<td style="text-align: left;">73 (22%)</td>
+<td style="text-align: left;">20 (6%)</td>
+<td style="text-align: left;">326 (100%)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>A <a href="#fig-resultado-vara">Figura&nbsp;3</a> mostra os resultados dos processos por categoria e vara, considerando apenas as duas varas empresariais. A quantidade de processos é muito pequena para obter resultados conclusivos, mas aparentemente a segunda vara tende a dar mais resultados procedentes ou parcialmente procedentes para a maioria das categorias de casos.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-resultado-vara" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="relatorio_files/figure-html/fig-resultado-vara-1.png" class="img-fluid figure-img" width="2400"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;3: Proporção dos resultados dos processos por categoria e vara</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Finalmente, a <a href="#tbl-tempo">Tabela&nbsp;11</a> mostra os tempos médios e medianos, geral e por categoria. Os processos mais longos são os de Anulação, com mediana de quase um ano. Já os processos mais curtos são os de Instauração, com mediana de aproximadamente meio ano.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-tempo" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Tabela&nbsp;11: Estatísticas descritivas dos tempos dos processos</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Categoria</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">Média</th>
+<th style="text-align: right;">Mediana</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Anulacao</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">412.6</td>
+<td style="text-align: right;">349.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cumprimento</td>
+<td style="text-align: right;">82</td>
+<td style="text-align: right;">320.9</td>
+<td style="text-align: right;">268.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Compromisso</td>
+<td style="text-align: right;">133</td>
+<td style="text-align: right;">295.5</td>
+<td style="text-align: right;">225.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cautelar</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">240.1</td>
+<td style="text-align: right;">194.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Instauracao</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">265.0</td>
+<td style="text-align: right;">188.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Total</td>
+<td style="text-align: right;">326</td>
+<td style="text-align: right;">304.3</td>
+<td style="text-align: right;">238.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Referências</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-zhaoWebScraping2017" class="csl-entry" role="doc-biblioentry">
+Zhao, Bo. 2017. <span>"Web Scraping"</span>. <em>Encyclopedia of big data</em>, 1–3.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Notas de rodapé</h2>
+
+<ol>
+<li id="fn1"><p>Classes e assuntos são listas de tipos de processos organizadas pelo Conselho Nacional de Justiça (CNJ), através das Tabelas Processuais Unificadas (TPU), Res. 46 CNJ.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiada");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiada");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
