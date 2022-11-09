@@ -200,7 +200,8 @@ A @tbl-vara mostra a contagem de processos por vara. As varas empresariais do fo
 da_tidy |> 
   dplyr::count(vara, sort = TRUE) |> 
   dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |> 
-  knitr::kable()
+  janitor::adorn_totals() |> 
+  knitr::kable(col.names = c("Faixa", "N", "%"))
 ```
 
 A @fig-no-tempo mostra o volume de decisões ao longo do tempo, considerando como base a data de disponibilização das sentenças. É possível notar um aumento na quantidade de decisões nos anos de 2021 e 2022 (que ainda não acabou).
