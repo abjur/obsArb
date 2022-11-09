@@ -119,7 +119,7 @@ da_cjpg_tidy |>
 
 Por último, as colunas importantes de análise foram construídas. As colunas escolhidas foram: status (em andamento, extinto, em grau de recurso ou suspenso), classe, assunto, valor da causa, processo digital, data de disponibilização da sentença, vara, resultado e tempo (calculado pelo tempo entre a data de distribuição e data da disponibilização da decisão).
 
-No final, a base ficou com 326 linhas e 11 colunas, contendo todas as informações utilizadas na parte de análise. A base de dados em Excel pode ser baixada [neste link]().
+No final, a base ficou com 326 linhas e 11 colunas, contendo todas as informações utilizadas na parte de análise. A base de dados em Excel pode ser baixada [neste link](https://github.com/abjur/obsArb/raw/main/inst/da_arbitragem.xlsx).
 
 ## Análise
 
