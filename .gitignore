@@ -6,5 +6,7 @@
 inst/relatorio/relatorio_files
 data-raw/cjpg
 data-raw/cpopg
+data-raw/cjpg.zip
+data-raw/cpopg.zip
 data-raw/da_cjpg.rds
 data-raw/da_cpopg.rds
