@@ -1,0 +1,4 @@
+- source: relatorio.qmd
+  quarto-pub:
+    - id: eecd7711-7a3f-43b7-ac48-615ed3f8791f
+      url: 'https://quartopub.com/sites/jtrecenti/obsarb'
