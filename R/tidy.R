@@ -1,8 +1,11 @@
 get_category <- function(text, rx) {
   purrr::map(
     rx,
-    \(x) stringr::str_detect(text, stringr::regex(paste(x, collapse = "|"), TRUE))
+    \(x) {
+      purrr::map_lgl(x, \(z) stringr::str_detect(text, stringr::regex(paste(z, collapse = "|"), TRUE)))
+    }
   ) |>
+    purrr::map(all) |>
     purrr::keep(isTRUE) |>
     names() |>
     dplyr::first()
@@ -10,46 +13,46 @@ get_category <- function(text, rx) {
 
 rx_tipo <- function() {
   list(
-    compromisso = c(
+    compromisso = list(c(
       "compromisso arbitral"
-    ),
-    instauracao = c(
+    )),
+    instauracao = list(c(
       "instauracao"
-    ),
-    cautelar = c(
+    )),
+    cautelar = list(c(
       "cautelar", "antecipada"
-    ),
-    anulacao = c(
+    )),
+    anulacao = list(c(
       "anulacao", "nulidade"
-    ),
-    cumprimento = c(
+    )),
+    cumprimento = list(c(
       "cumprimento"
-    )
+    ))
   )
 
 }
 
 rx_resultado <- function() {
   list(
-    improcedente = c(
+    improcedente = list(c(
       "julgo improcedente", "indefiro a tutela"
-    ),
-    parcial = c(
+    )),
+    parcial = list(c(
       "julgo procedente em parte", "parcialmente procedente",
       "defiro parcialmente a tutela"
-    ),
-    acordo = c(
+    )),
+    acordo = list(c(
       "homologo o acordo"
-    ),
-    procedente = c(
+    )),
+    procedente = list(c(
       "julgo (o pedido )?procedente", "homologo",
       "defiro a tutela"
-    ),
-    extinto = c(
+    )),
+    extinto = list(c(
       "julgo extinto", "julgo extinta",
       "determino a extincao",
       "determinar a extincao"
-    )
+    ))
   )
 
 }
