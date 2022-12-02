@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.258">
+<meta name="generator" content="quarto-1.2.269">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -83,7 +83,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Data de Publicação</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">10 de novembro de 2022</p>
+      <p class="date">2 de dezembro de 2022</p>
     </div>
   </div>
   
@@ -96,7 +96,7 @@ div.csl-indent {
 <div class="cell">
 
 </div>
-<p>O Observatório da Arbitragem é um projeto que visa compreender o reflexo do fenômeno jurídico da arbitragem nos tribunais. Em sua primeira fase, o projeto busca compreender o fluxo dos processos de i) anulação de decisão arbitral, ii) cumprimento de sentença / execução, iii) medida cautelar antecedente ao tribunal arbitral iv) ação de instauração da arbitragem v) compromisso arbitral.</p>
+<p>O Observatório da Arbitragem é um projeto que visa compreender o reflexo do fenômeno jurídico da arbitragem nos tribunais. Em sua primeira fase, o projeto busca compreender o fluxo dos processos de i) anulação de decisão arbitral, ii) cumprimento de sentença / execução, iii) medida cautelar antecedente ao tribunal arbitral, iv) compromisso arbitral e v) ação de instauração da arbitragem.</p>
 <p>O objetivo do levantamento é realizar uma análise preliminar a partir do banco de sentenças do Tribunal de Justiça de São Paulo (TJSP). O levantamento terá como resultado algumas estatísticas básicas como volume de sentenças ao longo do tempo, proporção de decisões favoráveis ao autor e tempo mediano dos processos. O estudo pode ser utilizado como insumo para decidir sobre a viabilidade de uma pesquisa mais aprofundada – envolvendo análise de autos processuais – a partir dos dados disponibilizados no banco de sentenças.</p>
 <p>O presente levantamento descreve o fluxo de download, arrumação e análise dos dados de sentenças relacionadas à arbitragem. Na parte de download, descrevemos os termos utilizados para consulta e o procedimento de acesso aos dados, que são públicos, mas não são abertos. A parte de arrumação descreve todos os passos para chegar da base bruta até a base organizada, informando as colunas utilizadas. A análise mostra os resultados do levantamento, com estatísticas sobre o perfil dos processos, o volume de sentenças ao longo do tempo, a proporção de decisões favoráveis e o tempo médio das ações.</p>
 <section id="download" class="level2">
@@ -113,12 +113,12 @@ div.csl-indent {
 </section>
 <section id="arrumação" class="level2">
 <h2 class="anchored" data-anchor-id="arrumação">Arrumação</h2>
-<p>O primeiro passo da arrumação dos dados foi a classificação dos tipos de processos e remoção de casos que não fazem parte do escopo. Para classificar as cinco categorias, foram utilizados os termos e expressões regulares da <a href="#tbl-rx-tipo">Tabela&nbsp;1</a>.</p>
+<p>O primeiro passo da arrumação dos dados foi a classificação das categorias de processos e remoção de casos que não fazem parte do escopo. Para classificar as cinco categorias, foram utilizados os termos e expressões regulares da <a href="#tbl-rx-tipo">Tabela&nbsp;1</a>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-rx-tipo" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Tabela&nbsp;1: Expressões regulares utilizadas para classificar o tipo de ação</caption>
+<caption>Tabela&nbsp;1: Expressões regulares utilizadas para classificar a categoria de ação</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Categoria</th>
@@ -127,24 +127,24 @@ div.csl-indent {
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Compromisso</td>
-<td style="text-align: left;">compromisso arbitral</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">Instauracao</td>
-<td style="text-align: left;">instauracao</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Cautelar</td>
-<td style="text-align: left;">cautelar, antecipada</td>
+<td style="text-align: left;">(instauracao)</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Anulacao</td>
-<td style="text-align: left;">anulacao, nulidade</td>
+<td style="text-align: left;">Cumprimento</td>
+<td style="text-align: left;">(cumprimento)</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Cumprimento</td>
-<td style="text-align: left;">cumprimento</td>
+<td style="text-align: left;">Compromisso</td>
+<td style="text-align: left;">(compromisso arbitral)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cautelar</td>
+<td style="text-align: left;">(cautelar OU antecipada)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Anulacao</td>
+<td style="text-align: left;">(anulacao OU nulidade)</td>
 </tr>
 </tbody>
 </table>
@@ -156,7 +156,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="tbl-tabela-tipo" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Tabela&nbsp;2: Processos classificados por tipo</caption>
+<caption>Tabela&nbsp;2: Processos classificados por categoria</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Resultado</th>
@@ -213,7 +213,7 @@ div.csl-indent {
 <caption>Tabela&nbsp;3: Expressões regulares utilizadas para classificar o resultado</caption>
 <colgroup>
 <col style="width: 13%">
-<col style="width: 86%">
+<col style="width: 87%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -223,24 +223,24 @@ div.csl-indent {
 </thead>
 <tbody>
 <tr class="odd">
+<td style="text-align: left;">Acordo</td>
+<td style="text-align: left;">(homologo o acordo)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Extinto</td>
+<td style="text-align: left;">(julgo extinto OU julgo extinta OU determino a extincao OU determinar a extincao)</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">Improcedente</td>
-<td style="text-align: left;">julgo improcedente, indefiro a tutela</td>
+<td style="text-align: left;">(julgo improcedente OU indefiro a tutela)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Parcial</td>
-<td style="text-align: left;">julgo procedente em parte, parcialmente procedente, defiro parcialmente a tutela</td>
+<td style="text-align: left;">(julgo procedente em parte OU parcialmente procedente OU defiro parcialmente a tutela)</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Acordo</td>
-<td style="text-align: left;">homologo o acordo</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">Procedente</td>
-<td style="text-align: left;">julgo (o pedido )?procedente, homologo, defiro a tutela</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Extinto</td>
-<td style="text-align: left;">julgo extinto, julgo extinta, determino a extincao, determinar a extincao</td>
+<td style="text-align: left;">(julgo (o pedido )?procedente OU homologo OU defiro a tutela)</td>
 </tr>
 </tbody>
 </table>
@@ -252,7 +252,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="tbl-tabela-resultado" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Tabela&nbsp;4: Processos classificados por tipo</caption>
+<caption>Tabela&nbsp;4: Processos classificados por resultado</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Resultado</th>
@@ -302,17 +302,121 @@ div.csl-indent {
 </div>
 </div>
 <p>Por último, as colunas importantes de análise foram construídas. As colunas escolhidas foram: status (em andamento, extinto, em grau de recurso ou suspenso), classe, assunto, valor da causa, processo digital, data de disponibilização da sentença, vara, resultado e tempo (calculado pelo tempo entre a data de distribuição e data da disponibilização da decisão).</p>
-<p>No final, a base ficou com 326 linhas e 11 colunas, contendo todas as informações utilizadas na parte de análise. A base de dados em Excel pode ser baixada <a href="https://github.com/abjur/obsArb/raw/main/inst/da_arbitragem.xlsx">neste link</a>.</p>
+<section id="revisão-manual" class="level3">
+<h3 class="anchored" data-anchor-id="revisão-manual">Revisão manual</h3>
+<p>A base de dados arrumada foi revisada manualmente a partir da leitura dos textos das decisões e outras características dos processos. A revisão foi realizada por profissionais do direito especializados no tema de arbitragem.</p>
+<p>A primeira mudança significativa foi com relação aos casos que fazem parte do escopo. Dos 338 casos iniciais, sobraram 289 que realmente faziam parte do escopo<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<p>Com relação às colunas da base, as principais informações alteradas foram as de categoria e resultado. A informação de categoria foi a que mais sofreu alterações, especialmente em ações de anulação de decisão arbitral, que ficaram maiores. A <a href="#tbl-tabela-tipo-revisao">Tabela&nbsp;5</a> mostra as classificações depois da correção manual.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-tabela-tipo-revisao" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Tabela&nbsp;5: Processos classificados por categoria, após revisão</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Resultado</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Anulacao</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">32.87%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cumprimento</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">25.95%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cautelar</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">21.80%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Compromisso</td>
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">15.92%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Instauracao</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">3.46%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Total</td>
+<td style="text-align: right;">289</td>
+<td style="text-align: right;">100.00%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Com relação aos resultados, não houve mudanças tão significativas. A categoria que mais mudou foi a de acordos, que costumam ser difíceis de mapear apenas por palavras-chave. A <a href="#tbl-tabela-resultado-revisao">Tabela&nbsp;6</a> mostra as classificações depois da correção manual.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-tabela-resultado-revisao" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Tabela&nbsp;6: Processos classificados por resultado, após revisão</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Resultado</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Extinto</td>
+<td style="text-align: right;">124</td>
+<td style="text-align: right;">42.9%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Improcedente</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">19.7%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Acordo</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">14.9%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Procedente</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">14.9%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Parcial</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">7.6%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Total</td>
+<td style="text-align: right;">289</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Por último, duas colunas foram adicionadas após a classificação manual. A primeira é com relação à concessão de liminar em casos de medida cautelar. A segunda é que, na revisão manual, vários casos relacionados à Unimed foram detectados. Uma coluna <code>unimed</code> foi adicionada para permitir novos filtros de análise.</p>
+<p>No final, a base ficou com 289 linhas e 13 colunas, contendo todas as informações utilizadas na parte de análise. A base de dados em Excel pode ser baixada <a href="https://github.com/abjur/obsArb/raw/main/inst/da_arbitragem.xlsx">neste link</a>.</p>
+</section>
 </section>
 <section id="análise" class="level2">
 <h2 class="anchored" data-anchor-id="análise">Análise</h2>
-<p>A base possui 326 casos, dentre os quais 256 são digitais ou digitalizados (79%). Em uma potencial análise manual, seriam considerados apenas processos digitais ou digitalizados.</p>
-<p>A <a href="#tbl-status">Tabela&nbsp;5</a> mostra os status dos processos no momento da coleta dos dados, em novembro/2022. A maioria dos casos está extinta e aproximadamente um quinto dos casos está em grau de recurso.</p>
+<p>A base possui 289 casos, dentre os quais 226 são digitais ou digitalizados (78%). Em uma nova análise manual mais aprofundada, seriam considerados apenas processos digitais ou digitalizados.</p>
+<p>A <a href="#tbl-status">Tabela&nbsp;7</a> mostra os status dos processos no momento da coleta dos dados, em novembro/2022. A maioria dos casos está extinta e aproximadamente um quinto dos casos está em grau de recurso.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-status" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Tabela&nbsp;5: Status dos processos no momento da coleta dos dados</caption>
+<caption>Tabela&nbsp;7: Status dos processos no momento da coleta dos dados</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Status</th>
@@ -323,27 +427,27 @@ div.csl-indent {
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Extinto</td>
-<td style="text-align: right;">181</td>
-<td style="text-align: right;">55.5%</td>
+<td style="text-align: right;">171</td>
+<td style="text-align: right;">59.2%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Em grau de recurso</td>
-<td style="text-align: right;">71</td>
-<td style="text-align: right;">21.8%</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">21.5%</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Em andamento</td>
-<td style="text-align: right;">68</td>
-<td style="text-align: right;">20.9%</td>
+<td style="text-align: left;">(Vazio)</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">17.3%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Suspenso</td>
 <td style="text-align: right;">6</td>
-<td style="text-align: right;">1.8%</td>
+<td style="text-align: right;">2.1%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Total</td>
-<td style="text-align: right;">326</td>
+<td style="text-align: right;">289</td>
 <td style="text-align: right;">100.0%</td>
 </tr>
 </tbody>
@@ -351,12 +455,13 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>A <a href="#tbl-classe">Tabela&nbsp;6</a> mostra as dez classes processuais mais comuns encontradas. É possível notar que existem muitas classes que não são relacionadas diretamente a arbitragem.</p>
+<p>Em seguida, são apresentadas tabelas das classes e assuntos mais comuns nos processos encontrados. É importante destacar que classes e assuntos nem sempre identificam corretamente o tipo de ação, tanto por motivos de taxonomia (o tipo de processo não existe na classificação do CNJ) quanto por motivos de má classificação (a pessoa que protocolou a ação colocou uma classe/assunto inadequada). Por isso, a classe e assunto não está sendo usada para classificar os tipos de processo.</p>
+<p>A <a href="#tbl-classe">Tabela&nbsp;8</a> mostra as classes processuais mais comuns encontradas. É possível notar que existem muitas classes que não são relacionadas diretamente a arbitragem.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-classe" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Tabela&nbsp;6: Dez classes mais comuns</caption>
+<caption>Tabela&nbsp;8: Classes mais comuns</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Classe</th>
@@ -366,63 +471,58 @@ div.csl-indent {
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Procedimento Comum Cível</td>
-<td style="text-align: right;">82</td>
-<td style="text-align: right;">25.2%</td>
+<td style="text-align: left;">Compromisso Arbitral</td>
+<td style="text-align: right;">77</td>
+<td style="text-align: right;">26.6%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Compromisso Arbitral</td>
-<td style="text-align: right;">79</td>
-<td style="text-align: right;">24.2%</td>
+<td style="text-align: left;">Procedimento Comum Cível</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">22.1%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Cumprimento de sentença - Lei Arbitral (Lei 9.307/1996)</td>
-<td style="text-align: right;">55</td>
-<td style="text-align: right;">16.9%</td>
+<td style="text-align: right;">54</td>
+<td style="text-align: right;">18.7%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Tutela Cautelar Antecedente</td>
 <td style="text-align: right;">42</td>
-<td style="text-align: right;">12.9%</td>
+<td style="text-align: right;">14.5%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Cumprimento de sentença</td>
-<td style="text-align: right;">23</td>
-<td style="text-align: right;">7.1%</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">7.6%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Tutela Antecipada Antecedente</td>
 <td style="text-align: right;">16</td>
-<td style="text-align: right;">4.9%</td>
+<td style="text-align: right;">5.5%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Produção Antecipada da Prova</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">3.4%</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">2.4%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Dissolução Parcial de Sociedade</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">2.8%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Outros</td>
 <td style="text-align: right;">4</td>
-<td style="text-align: right;">1.2%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Protesto</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">0.9%</td>
+<td style="text-align: right;">1.4%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Embargos à Execução</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">0.6%</td>
+<td style="text-align: right;">0.7%</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">Interpelação</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3%</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">Total</td>
-<td style="text-align: right;">326</td>
+<td style="text-align: right;">289</td>
 <td style="text-align: right;">100.0%</td>
 </tr>
 </tbody>
@@ -430,12 +530,12 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>A <a href="#tbl-assunto">Tabela&nbsp;7</a> mostra as dez classes processuais mais comuns encontradas. Assim como nas classes, é possível notar que existem muitos assuntos que não são relacionadas diretamente a arbitragem.</p>
+<p>A <a href="#tbl-assunto">Tabela&nbsp;9</a> mostra os dez assuntos processuais mais comuns encontrados. Assim como nas classes, é possível notar que existem muitos assuntos que não são relacionadas diretamente a arbitragem.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-assunto" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Tabela&nbsp;7: Dez assuntos mais comuns</caption>
+<caption>Tabela&nbsp;9: Assuntos mais comuns</caption>
 <colgroup>
 <col style="width: 86%">
 <col style="width: 4%">
@@ -451,72 +551,62 @@ div.csl-indent {
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Defeito, nulidade ou anulação</td>
-<td style="text-align: right;">93</td>
-<td style="text-align: right;">28.5%</td>
+<td style="text-align: right;">92</td>
+<td style="text-align: right;">31.8%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Sentença arbitral (artigo 515, inciso VII, CPC)</td>
-<td style="text-align: right;">62</td>
-<td style="text-align: right;">19.0%</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">20.8%</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Outros</td>
-<td style="text-align: right;">50</td>
-<td style="text-align: right;">15.3%</td>
+<td style="text-align: left;">Liminar</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">15.6%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Liminar</td>
-<td style="text-align: right;">47</td>
-<td style="text-align: right;">14.4%</td>
+<td style="text-align: left;">Outros</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">14.5%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Franquia</td>
-<td style="text-align: right;">19</td>
-<td style="text-align: right;">5.8%</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">4.5%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Medida cautelar ou de urgência pré-arbitral (Art. 22-A, Lei nº 9.307/96)</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">4.3%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Marca</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">2.5%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Ingresso e Exclusão dos Sócios na Sociedade</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">2.1%</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">4.5%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Constrição / Penhora / Avaliação / Indisponibilidade de Bens</td>
 <td style="text-align: right;">6</td>
-<td style="text-align: right;">1.8%</td>
+<td style="text-align: right;">2.1%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Obrigação de Fazer / Não Fazer</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">1.5%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Obrigações</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">1.5%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Provas em geral</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">1.5%</td>
+<td style="text-align: right;">1.7%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Valor da Execução / Cálculo / Atualização</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">1.5%</td>
+<td style="text-align: right;">1.7%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Obrigações</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1.4%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Provas em geral</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1.4%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Total</td>
-<td style="text-align: right;">326</td>
+<td style="text-align: right;">289</td>
 <td style="text-align: right;">100.0%</td>
 </tr>
 </tbody>
@@ -524,12 +614,12 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>A <a href="#tbl-valor">Tabela&nbsp;8</a> mostra a contagem de processos por faixa de valores de causa. É possível notar que existe uma alta assimetria, já que temos vários processos de até 10 mil reais, mas também processos de mais de 100 milhões de reais.</p>
+<p>A <a href="#tbl-valor">Tabela&nbsp;10</a> mostra a contagem de processos por faixa de valores de causa. É possível notar que existe uma alta assimetria, já que temos vários processos de até 10 mil reais, mas também processos de mais de 10 milhões de reais.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-valor" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Tabela&nbsp;8: Faixas de valores</caption>
+<caption>Tabela&nbsp;10: Faixas de valores</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Faixa</th>
@@ -540,32 +630,37 @@ div.csl-indent {
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Até R$ 10.000</td>
-<td style="text-align: right;">115</td>
+<td style="text-align: right;">102</td>
 <td style="text-align: right;">35.3%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Entre R$ 10.000 e R$ 100.000</td>
-<td style="text-align: right;">73</td>
-<td style="text-align: right;">22.4%</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">21.8%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Entre R$ 100.000 e R$ 1 milhão</td>
-<td style="text-align: right;">87</td>
-<td style="text-align: right;">26.7%</td>
+<td style="text-align: right;">74</td>
+<td style="text-align: right;">25.6%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Entre R$ 1 milhão e R$ 100 milhões</td>
-<td style="text-align: right;">50</td>
-<td style="text-align: right;">15.3%</td>
+<td style="text-align: left;">Entre R$ 1 milhão e R$ 10 milhões</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">9.7%</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">R$ 10 milhões ou mais</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">7.3%</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">(Vazio)</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0.3%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Total</td>
-<td style="text-align: right;">326</td>
+<td style="text-align: right;">289</td>
 <td style="text-align: right;">100.0%</td>
 </tr>
 </tbody>
@@ -573,12 +668,12 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>A <a href="#tbl-vara">Tabela&nbsp;9</a> mostra a contagem de processos por vara. As varas empresariais do foro central cível concentram a maior parte dos casos. Por conta do pequeno número de informações, as análises de contagem de resultados e categorias por vara vão desconsiderar as RAJs.</p>
+<p>A <a href="#tbl-vara">Tabela&nbsp;11</a> mostra a contagem de processos por vara. As varas empresariais do foro central cível concentram a maior parte dos casos. Por conta do pequeno número de informações, as análises de contagem de resultados e categorias por vara vão desconsiderar as RAJs.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-vara" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Tabela&nbsp;9: Quantidade de processos por vara</caption>
+<caption>Tabela&nbsp;11: Quantidade de processos por vara</caption>
 <colgroup>
 <col style="width: 88%">
 <col style="width: 4%">
@@ -593,28 +688,28 @@ div.csl-indent {
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">2ª VARA EMPRESARIAL E CONFLITOS DE ARBITRAGEM</td>
-<td style="text-align: right;">159</td>
-<td style="text-align: right;">48.8%</td>
+<td style="text-align: left;">1ª VARA EMPRESARIAL E CONFLITOS DE ARBITRAGEM</td>
+<td style="text-align: right;">140</td>
+<td style="text-align: right;">48.4%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">1ª VARA EMPRESARIAL E CONFLITOS DE ARBITRAGEM</td>
-<td style="text-align: right;">155</td>
-<td style="text-align: right;">47.5%</td>
+<td style="text-align: left;">2ª VARA EMPRESARIAL E CONFLITOS DE ARBITRAGEM</td>
+<td style="text-align: right;">137</td>
+<td style="text-align: right;">47.4%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1ª Vara Regional de Competência Empresarial e de Conflitos Relacionados à Arbitragem</td>
 <td style="text-align: right;">6</td>
-<td style="text-align: right;">1.8%</td>
+<td style="text-align: right;">2.1%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2ª Vara Regional de Competência Empresarial e de Conflitos Relacionados à Arbitragem</td>
 <td style="text-align: right;">6</td>
-<td style="text-align: right;">1.8%</td>
+<td style="text-align: right;">2.1%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Total</td>
-<td style="text-align: right;">326</td>
+<td style="text-align: right;">289</td>
 <td style="text-align: right;">100.0%</td>
 </tr>
 </tbody>
@@ -633,7 +728,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>A <a href="#fig-no-tempo-categoria">Figura&nbsp;2</a> mostra o volume de decisões ao longo do tempo, separando por categoria de caso. Com exceção das ações de Instauração, é possível observar um crescimento de casos nos anos de 2021 e 2022.</p>
+<p>A <a href="#fig-no-tempo-categoria">Figura&nbsp;2</a> mostra o volume de decisões ao longo do tempo, separando por categoria de caso. Com exceção das ações de Anulação, é possível observar um crescimento de casos nos anos de 2021 e 2022.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-no-tempo-categoria" class="quarto-figure quarto-figure-center anchored">
@@ -644,93 +739,93 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>A <a href="#tbl-resultado">Tabela&nbsp;10</a> mostra os resultados dos processos por categoria. Nas últimas linha e coluna, são apresentadas as contagens e proporções marginais. A proporção de casos extintos observada é mais alta do que o comum na análise de processos do TJSP. A categoria de processos com maior taxa de procedência (parcial ou total) é o de Compromisso arbitral.</p>
+<p>A <a href="#tbl-resultado">Tabela&nbsp;12</a> mostra os resultados dos processos por categoria. Nas últimas linha e coluna, são apresentadas as contagens e proporções marginais. A proporção de casos extintos observada é mais alta do que o comum em análises de processos do TJSP. A taxa de procedência em anulatórias (considerando casos procedentes, parcialmente procedentes e acordos) é de 45%.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-resultado" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Tabela&nbsp;10: Resultados dos processos por categoria</caption>
+<caption>Tabela&nbsp;12: Resultados dos processos por categoria</caption>
 <colgroup>
 <col style="width: 16%">
+<col style="width: 12%">
 <col style="width: 13%">
 <col style="width: 17%">
 <col style="width: 12%">
 <col style="width: 14%">
-<col style="width: 12%">
 <col style="width: 14%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Categoria</th>
+<th style="text-align: left;">Acordo</th>
 <th style="text-align: left;">Extinto</th>
 <th style="text-align: left;">Improcedente</th>
 <th style="text-align: left;">Parcial</th>
 <th style="text-align: left;">Procedente</th>
-<th style="text-align: left;">Acordo</th>
 <th style="text-align: left;">Total</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Anulacao</td>
-<td style="text-align: left;">16 (47%)</td>
-<td style="text-align: left;">13 (38%)</td>
-<td style="text-align: left;">1 (3%)</td>
-<td style="text-align: left;">4 (12%)</td>
-<td style="text-align: left;">0 (0%)</td>
-<td style="text-align: left;">34 (10%)</td>
+<td style="text-align: left;">2 (2%)</td>
+<td style="text-align: left;">6 (6%)</td>
+<td style="text-align: left;">46 (48%)</td>
+<td style="text-align: left;">16 (17%)</td>
+<td style="text-align: left;">25 (26%)</td>
+<td style="text-align: left;">95 (33%)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Cautelar</td>
-<td style="text-align: left;">9 (26%)</td>
-<td style="text-align: left;">6 (18%)</td>
-<td style="text-align: left;">3 (9%)</td>
-<td style="text-align: left;">11 (32%)</td>
-<td style="text-align: left;">5 (15%)</td>
-<td style="text-align: left;">34 (10%)</td>
+<td style="text-align: left;">9 (14%)</td>
+<td style="text-align: left;">40 (63%)</td>
+<td style="text-align: left;">10 (16%)</td>
+<td style="text-align: left;">0 (0%)</td>
+<td style="text-align: left;">4 (6%)</td>
+<td style="text-align: left;">63 (22%)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Compromisso</td>
-<td style="text-align: left;">47 (35%)</td>
-<td style="text-align: left;">33 (25%)</td>
-<td style="text-align: left;">16 (12%)</td>
-<td style="text-align: left;">34 (26%)</td>
-<td style="text-align: left;">3 (2%)</td>
-<td style="text-align: left;">133 (41%)</td>
+<td style="text-align: left;">0 (0%)</td>
+<td style="text-align: left;">34 (74%)</td>
+<td style="text-align: left;">1 (2%)</td>
+<td style="text-align: left;">5 (11%)</td>
+<td style="text-align: left;">6 (13%)</td>
+<td style="text-align: left;">46 (16%)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Cumprimento</td>
-<td style="text-align: left;">47 (57%)</td>
-<td style="text-align: left;">5 (6%)</td>
+<td style="text-align: left;">30 (40%)</td>
+<td style="text-align: left;">44 (59%)</td>
+<td style="text-align: left;">0 (0%)</td>
 <td style="text-align: left;">1 (1%)</td>
-<td style="text-align: left;">18 (22%)</td>
-<td style="text-align: left;">11 (13%)</td>
-<td style="text-align: left;">82 (25%)</td>
+<td style="text-align: left;">0 (0%)</td>
+<td style="text-align: left;">75 (26%)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Instauracao</td>
-<td style="text-align: left;">20 (47%)</td>
-<td style="text-align: left;">10 (23%)</td>
-<td style="text-align: left;">6 (14%)</td>
-<td style="text-align: left;">6 (14%)</td>
-<td style="text-align: left;">1 (2%)</td>
-<td style="text-align: left;">43 (13%)</td>
+<td style="text-align: left;">2 (20%)</td>
+<td style="text-align: left;">0 (0%)</td>
+<td style="text-align: left;">0 (0%)</td>
+<td style="text-align: left;">0 (0%)</td>
+<td style="text-align: left;">8 (80%)</td>
+<td style="text-align: left;">10 (3%)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Total</td>
-<td style="text-align: left;">139 (43%)</td>
-<td style="text-align: left;">67 (21%)</td>
-<td style="text-align: left;">27 (8%)</td>
-<td style="text-align: left;">73 (22%)</td>
-<td style="text-align: left;">20 (6%)</td>
-<td style="text-align: left;">326 (100%)</td>
+<td style="text-align: left;">43 (15%)</td>
+<td style="text-align: left;">124 (43%)</td>
+<td style="text-align: left;">57 (20%)</td>
+<td style="text-align: left;">22 (8%)</td>
+<td style="text-align: left;">43 (15%)</td>
+<td style="text-align: left;">289 (100%)</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
-<p>A <a href="#fig-resultado-vara">Figura&nbsp;3</a> mostra os resultados dos processos por categoria e vara, considerando apenas as duas varas empresariais. A quantidade de processos é muito pequena para obter resultados conclusivos, mas aparentemente a segunda vara tende a dar mais resultados procedentes ou parcialmente procedentes para a maioria das categorias de casos.</p>
+<p>A <a href="#fig-resultado-vara">Figura&nbsp;3</a> mostra os resultados dos processos por categoria e vara, considerando apenas as duas varas empresariais. A quantidade de processos é muito pequena para obter resultados conclusivos, mas aparentemente a segunda vara tende a dar mais resultados procedentes ou parcialmente procedentes nas ações anulatórias.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-resultado-vara" class="quarto-figure quarto-figure-center anchored">
@@ -741,12 +836,12 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>Finalmente, a <a href="#tbl-tempo">Tabela&nbsp;11</a> mostra os tempos médios e medianos, geral e por categoria. Os processos mais longos são os de Anulação, com mediana de quase um ano. Já os processos mais curtos são os de Instauração, com mediana de aproximadamente meio ano.</p>
+<p>Finalmente, a <a href="#tbl-tempo">Tabela&nbsp;13</a> mostra os tempos médios e medianos, geral e por categoria. Os processos mais longos são os de compromisso arbitral, com mediana de quase um ano. Já os processos mais curtos são os de anulação, com mediana de aproximadamente seis meses.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-tempo" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Tabela&nbsp;11: Estatísticas descritivas dos tempos dos processos</caption>
+<caption>Tabela&nbsp;13: Estatísticas descritivas dos tempos dos processos</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Categoria</th>
@@ -757,46 +852,232 @@ div.csl-indent {
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Anulacao</td>
-<td style="text-align: right;">34</td>
-<td style="text-align: right;">412.6</td>
-<td style="text-align: right;">349.0</td>
+<td style="text-align: left;">Compromisso</td>
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">353.6</td>
+<td style="text-align: right;">328.5</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Cumprimento</td>
-<td style="text-align: right;">82</td>
-<td style="text-align: right;">320.9</td>
-<td style="text-align: right;">268.5</td>
+<td style="text-align: left;">Instauracao</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">462.7</td>
+<td style="text-align: right;">301.0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Compromisso</td>
-<td style="text-align: right;">133</td>
-<td style="text-align: right;">295.5</td>
-<td style="text-align: right;">225.0</td>
+<td style="text-align: left;">Cumprimento</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">306.5</td>
+<td style="text-align: right;">251.0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Cautelar</td>
-<td style="text-align: right;">34</td>
-<td style="text-align: right;">240.1</td>
-<td style="text-align: right;">194.5</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">232.7</td>
+<td style="text-align: right;">194.0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Instauracao</td>
-<td style="text-align: right;">43</td>
-<td style="text-align: right;">265.0</td>
+<td style="text-align: left;">Anulacao</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">274.6</td>
 <td style="text-align: right;">188.0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Total</td>
-<td style="text-align: right;">326</td>
-<td style="text-align: right;">304.3</td>
-<td style="text-align: right;">238.0</td>
+<td style="text-align: right;">289</td>
+<td style="text-align: right;">292.8</td>
+<td style="text-align: right;">227.0</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
+<section id="questões-adicionais" class="level3">
+<h3 class="anchored" data-anchor-id="questões-adicionais">Questões adicionais</h3>
+<p>Após a revisão das análises, um novo conjunto de perguntas foi gerado. As perguntas foram respondidas com os gráficos e tabelas que seguem.</p>
+<section id="qual-a-proporção-de-resultado-para-a-categoria-anulação-envolvendo-ou-não-a-unimed" class="level4">
+<h4 class="anchored" data-anchor-id="qual-a-proporção-de-resultado-para-a-categoria-anulação-envolvendo-ou-não-a-unimed">Qual a proporção de resultado para a categoria anulação envolvendo ou não a Unimed?</h4>
+<p>A <a href="#tbl-resultado-unimed">Tabela&nbsp;14</a> mostra as proporções de resultados em processos de anulação considerando ou não a Unimed como parte. A taxa de casos favoráveis (soma de acordos, procedentes e parcialmente procedentes) é significativamente maior em casos envolvendo a Unimed. Para os demais casos, a taxa de casos favoráveis é de apenas 22%.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-resultado-unimed" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Tabela&nbsp;14: Resultados dos processos de anulação pela existência ou não da Unimed como parte</caption>
+<colgroup>
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 12%">
+<col style="width: 20%">
+<col style="width: 13%">
+<col style="width: 16%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Unimed</th>
+<th style="text-align: left;">Acordo</th>
+<th style="text-align: left;">Extinto</th>
+<th style="text-align: left;">Improcedente</th>
+<th style="text-align: left;">Parcial</th>
+<th style="text-align: left;">Procedente</th>
+<th style="text-align: left;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Não</td>
+<td style="text-align: left;">2 (5%)</td>
+<td style="text-align: left;">6 (16%)</td>
+<td style="text-align: left;">23 (62%)</td>
+<td style="text-align: left;">2 (5%)</td>
+<td style="text-align: left;">4 (11%)</td>
+<td style="text-align: left;">37 (39%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sim</td>
+<td style="text-align: left;">0 (0%)</td>
+<td style="text-align: left;">0 (0%)</td>
+<td style="text-align: left;">23 (40%)</td>
+<td style="text-align: left;">14 (24%)</td>
+<td style="text-align: left;">21 (36%)</td>
+<td style="text-align: left;">58 (61%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total</td>
+<td style="text-align: left;">2 (2%)</td>
+<td style="text-align: left;">6 (6%)</td>
+<td style="text-align: left;">46 (48%)</td>
+<td style="text-align: left;">16 (17%)</td>
+<td style="text-align: left;">25 (26%)</td>
+<td style="text-align: left;">95 (100%)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="qual-o-percentual-de-liminares-deferidas-na-categoria-de-ação-cautelar" class="level4">
+<h4 class="anchored" data-anchor-id="qual-o-percentual-de-liminares-deferidas-na-categoria-de-ação-cautelar">Qual o percentual de liminares deferidas na categoria de ação cautelar?</h4>
+<p>A base contem 63 ações cautelares, pouco mais de um quinto da base completa. A <a href="#tbl-cautelar-liminar">Tabela&nbsp;15</a> mostra os resultados das liminares nessas ações. É possível identificar que quase metade das liminares não são concedias. Importante destacar que, em 6 casos, a decisão liminar não foi encontrada.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-cautelar-liminar" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Tabela&nbsp;15: Resultados das liminares em ações cautelares.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Resultado</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Não</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">47.6%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sim</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">31.7%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Parcial</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">11.1%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">(Vazio)</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">9.5%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="qual-a-média-e-mediana-de-valor-para-cada-categoria-de-ação" class="level4">
+<h4 class="anchored" data-anchor-id="qual-a-média-e-mediana-de-valor-para-cada-categoria-de-ação">Qual a média e mediana de valor para cada categoria de ação?</h4>
+<p>Finalmente, a <a href="#tbl-valor-tipo">Tabela&nbsp;16</a> mostra os valores médios e medianos das causas, geral e por categoria. Os processos de maior valor são as anulatórias, com mediana de R$ 264.802,79. Já os processos de menor valor são as cautelares e instauração, com mediana de dez mil reais, provavelmente colocados apenas como valores de referência.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-valor-tipo" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Tabela&nbsp;16: Estatísticas descritivas dos valores de causa dos processos</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Categoria</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: left;">Média</th>
+<th style="text-align: left;">Mediana</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Anulacao</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: left;">R$ 3.601.345,63</td>
+<td style="text-align: left;">R$ 264.802,79</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Compromisso</td>
+<td style="text-align: right;">46</td>
+<td style="text-align: left;">R$ 10.081.664,83</td>
+<td style="text-align: left;">R$ 83.815,77</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cumprimento</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: left;">R$ 1.394.104,16</td>
+<td style="text-align: left;">R$ 23.468,15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cautelar</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: left;">R$ 3.326.566,44</td>
+<td style="text-align: left;">R$ 10.000,00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Instauracao</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">R$ 25.058,13</td>
+<td style="text-align: left;">R$ 10.000,00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Total</td>
+<td style="text-align: right;">289</td>
+<td style="text-align: left;">R$ 3.884.973,58</td>
+<td style="text-align: left;">R$ 80.355,58</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="qual-é-a-taxa-de-favorabilidade-em-anulatórias-ao-longo-do-tempo" class="level4">
+<h4 class="anchored" data-anchor-id="qual-é-a-taxa-de-favorabilidade-em-anulatórias-ao-longo-do-tempo">Qual é a taxa de favorabilidade em anulatórias ao longo do tempo?</h4>
+<p>A <a href="#fig-anulacao-no-tempo">Figura&nbsp;4</a> mostra a taxa de casos favoráveis (procedentes, parcialmente procedentes e acordos) em ações anulatórias por ano. Apesar da pequena quantidade de dados, é possível observar que a proporção de decisões favoráveis caiu em 2021 e 2022. Lembrando que a proporção geral de decisões favoráveis em anulatórias é de 45%, como demarcado na linha pontilhada.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-anulacao-no-tempo" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="relatorio_files/figure-html/fig-anulacao-no-tempo-1.png" class="img-fluid figure-img" width="2100"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;4: Quantidade de decisões por ano</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
 </section>
 <section id="referências" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="referências">Referências</h2>
@@ -812,6 +1093,7 @@ Zhao, Bo. 2017. <span>"Web Scraping"</span>. <em>Encyclopedia of big data</em>, 
 
 <ol>
 <li id="fn1"><p>Classes e assuntos são listas de tipos de processos organizadas pelo Conselho Nacional de Justiça (CNJ), através das Tabelas Processuais Unificadas (TPU), Res. 46 CNJ.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Um caso foi identificado em uma nova categoria “Carta Arbitral” (1099760-61.2021.8.26.0100). O caso foi desconsiderado da análise.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
