@@ -176,9 +176,11 @@ Depois de baixar e revisar as sentenças, procurou-se os números de processos o
 
 Dos 289 processos, 173 apresentaram algum recurso, sendo 126 (73%) com classe "Apelação Cível" e 47 (27%) com classe "Agravo de Instrumento". Nessa base, somente 132 (76%) possuem alguma decisão, sendo 98 apelações e 34 agravos. Os demais recursos ainda estavam em curso no momento da coleta de dados.
 
-A base de segunda instância foi considerada para calcular a taxa de recorribilidade e a taxa de decisões favoráveis na segunda instância. A taxa de reforma não foi calculada, porque para isso seria necessário analisar o polo da parte no processo de segunda instância, que não foi realizado por limitações técnicas.
+Após o filtro inicial, a base passou por uma revisão manual. Dos 173 casos, 98 foram considerados como dentro do escopo, sendo que 57 tinham alguma decisão. Na nova análise, foram incluídas duas informações manualmente: se a decisão arbitral foi reformada e uma coluna identificando se o caso era relacionado com a Unimed.
 
-A base considerada possui 173 linhas e 4 colunas. A base de dados em Excel pode ser baixada [neste link](https://github.com/abjur/obsArb/raw/main/inst/da_cposg_tidy.xlsx).
+A base de segunda instância foi considerada para calcular a taxa de recorribilidade e a taxa de decisões favoráveis na segunda instância. A taxa de reforma da decisão arbitral foi calculada a partir da análise manual.
+
+A base considerada possui 98 linhas e 8 colunas. A base de dados em Excel pode ser baixada [neste link](https://github.com/abjur/obsArb/raw/main/inst/da_cposg_tidy.xlsx).
 
 ## Análise
 
@@ -565,9 +567,7 @@ aux_anulacao |>
 
 #### Segunda instância
 
-A taxa de recorribilidade estimada é maior que 60%. Isso ocorre porque foram encontrados 173 recursos nos 289 casos estudados. No entanto, foram encontrados casos com mais de um agravo de instrumento, que não foram considerados na análise. Por isso, a taxa é maior que 60% e não exatamente 60%.
-
-Dividindo as taxas por categoria de processo, encontra-se o resultado da @tbl-tx-recorr-categoria. É possível notar que as anulatórias são as que apresentam maior taxa de recorribilidade.
+A taxa de recorribilidade estimada é de quase 20%. Isso ocorre porque foram encontrados 57 recursos nos 289 casos estudados. Dividindo as taxas por categoria de processo, encontra-se o resultado da @tbl-tx-recorr-categoria. É possível notar que as anulatórias são as que apresentam maior taxa de recorribilidade.
 
 ```{r}
 #| label: tbl-tx-recorr-categoria
@@ -575,7 +575,7 @@ Dividindo as taxas por categoria de processo, encontra-se o resultado da @tbl-tx
 
 da_tidy |> 
   dplyr::left_join(da_cposg_tidy, "id") |> 
-  dplyr::group_by(categoria) |> 
+  dplyr::group_by(categoria.x) |> 
   dplyr::summarise(
     total = dplyr::n(), 
     n = sum(!is.na(tem_decisao))
@@ -586,59 +586,11 @@ da_tidy |>
 ```
 
 
-Já com relação à taxa de decisões desfavoráveis, observa-se uma taxa geral de 57% de recursos negados. Desconsiderando-se os casos prejudicados, não conhecidos, ou com reexame de prova, a taxa de casos improvidos aumenta para 64%.
+Já com relação à taxa de recursos providos, observa-se uma taxa geral de 77% de recursos totalmente providos ou providos em parte. Não foi apresentada uma taxa de recursos providos ou parcialmente providos por categoria por conta da pequena quantidade de dados, que aumenta a variabilidade nas proporções encontradas.
 
-Dividindo as taxas por categoria de processo, encontra-se o resultado da @tbl-tx-desf-categoria. É possível notar que as anulatórias são as que apresentam menor proporção de recursos negados. No entanto, as taxas são muito próximas entre as categorias.
+Com relação à Unimed, observa-se que 31 dos 57 (54%) dos casos com decisão têm relação com a Unimed. A taxa de recursos providos nos casos que envolvem Unimed é de 94%, sendo que 74% dos recursos são providos em parte.
 
-```{r}
-#| label: tbl-tx-desf-categoria
-#| tbl-cap: "Quantidade e proporção de resultados por tipo de processo."
-
-da_analise <- da_tidy |> 
-  dplyr::inner_join(da_cposg_tidy, "id") |> 
-  dplyr::filter(!is.na(dec))
-
-tab_geral <- da_analise |> 
-  dplyr::count(categoria, dec) |> 
-  dplyr::group_by(categoria) |> 
-  dplyr::mutate(prop = n/sum(n)) |>
-  dplyr::ungroup() |> 
-  dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, 1)})")) 
-
-tab_total_col <- da_analise |> 
-  dplyr::count(categoria) |> 
-  dplyr::mutate(prop = n/sum(n)) |> 
-  dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, 1)})")) |> 
-  dplyr::select(Total = lab)
-
-tab_total_row <- da_analise |> 
-  dplyr::count(dec) |> 
-  dplyr::mutate(prop = n/sum(n)) |> 
-  dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, 1)})")) |> 
-  dplyr::transmute(
-    name = dec,
-    value = lab
-  ) |> 
-  tidyr::pivot_wider() |> 
-  dplyr::mutate(categoria = "Total", Total = stringr::str_glue("{nrow(da_analise)} (100%)"))
-
-tab_geral |> 
-  dplyr::select(dec, categoria, lab) |> 
-  tidyr::pivot_wider(
-    names_from = dec, 
-    values_from = lab, 
-    values_fill = "0 (0%)"
-  ) |> 
-  dplyr::bind_cols(tab_total_col) |> 
-  dplyr::bind_rows(tab_total_row) |> 
-  dplyr::rename(Categoria = categoria) |> 
-  knitr::kable()
-
-
-
-
-```
-
+Finalmente, com relação à reforma da decisão arbitral nas anulatórias, foi identificada uma proporção de 85% (28 de 33 casos). Isso significa que, dos casos que chegaram à segunda instância, a decisão final sobre a sentença arbitral foi de reformar da decisão arbitral, pelo menos em parte.
 
 ## Referências {.unnumbered}
 

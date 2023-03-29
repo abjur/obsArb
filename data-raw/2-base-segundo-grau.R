@@ -33,8 +33,8 @@ readr::write_rds(da_cposg, "data-raw/da_cposg.rds", compress = "xz")
 
 # filter ------------------------------------------------------------------
 
-da_cposg |>
-  dplyr::count(classe, sort = TRUE)
+# da_cposg |>
+#   dplyr::count(classe, sort = TRUE)
 
 da_cposg_filter <- da_cposg |>
   dplyr::filter(classe %in% c(
@@ -98,6 +98,58 @@ da_cposg_tidy <- da_cposg_filter |>
 
 
 # export ------------------------------------------------------------------
+
+# writexl::write_xlsx(da_cposg_tidy, "inst/da_cposg_tidy.xlsx")
+# usethis::use_data(da_cposg_tidy, overwrite = TRUE)
+
+
+da_cposg_tidy_sem_decisao <- da_cposg_tidy |>
+  dplyr::filter(!tem_decisao) |>
+  dplyr::select(id, classe, tem_decisao)
+
+# validação manual --------------------------------------------------------
+
+da_cposg_tidy_revisada <- readxl::read_excel("data-raw/planilha 2 grau.xlsx") |>
+  janitor::clean_names() |>
+  tidyr::replace_na(list(conferencia = "Provido")) |>
+  dplyr::select(-dec, -tem_decisao) |>
+  dplyr::rename(dec = conferencia) |>
+    dplyr::inner_join(
+      dplyr::select(da_tidy, id, categoria),
+      "id"
+    )
+
+# da_cposg_tidy_revisada |>
+#   dplyr::group_by(categoria, classe, alteracao) |>
+#   dplyr::summarise(
+#     processos = paste(unique(id), collapse = ","),
+#     n = dplyr::n(),
+#     .groups = "drop"
+#   ) |>
+#   dplyr::arrange(categoria, desc(n)) |>
+#   dplyr::filter(!is.na(alteracao)) |>
+#   writexl::write_xlsx("data-raw/planilha_2_grau_alteracao_decisao.xlsx")
+
+planilha_2_grau_alteracao_decisao <- readxl::read_excel(
+  "data-raw/planilha_2_grau_alteracao_decisao.xlsx"
+)
+
+da_cposg_tidy_com_decisao <- da_cposg_tidy_revisada |>
+  dplyr::left_join(
+    planilha_2_grau_alteracao_decisao,
+    c("categoria", "classe", "alteracao")
+  ) |>
+  dplyr::select(
+    id, classe, categoria, dec, unimed, reformou_sentenca_arbitral,
+    comentario = alteracao
+  ) |>
+  dplyr::mutate(tem_decisao = TRUE)
+
+da_cposg_tidy <- dplyr::bind_rows(
+  da_cposg_tidy_com_decisao,
+  da_cposg_tidy_sem_decisao
+)
+
 
 writexl::write_xlsx(da_cposg_tidy, "inst/da_cposg_tidy.xlsx")
 usethis::use_data(da_cposg_tidy, overwrite = TRUE)
