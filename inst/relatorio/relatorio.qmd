@@ -12,8 +12,9 @@ knitr:
     message: false
     warning: false
 lang: pt
+toc: true
 format: 
-  html: default
+  # html: default
   docx:
     reference-doc: template.docx
 bibliography: geral.bib
@@ -25,13 +26,15 @@ devtools::load_all()
 col_abj <- viridis::viridis(5, 1, .2, .8)
 ```
 
+# Introdução
+
 O Observatório da Arbitragem é um projeto que visa compreender o reflexo do fenômeno jurídico da arbitragem nos tribunais. Em sua primeira fase, o projeto busca compreender o fluxo dos processos de i) anulação de decisão arbitral, ii) cumprimento de sentença / execução, iii) medida cautelar antecedente ao tribunal arbitral, iv) compromisso arbitral e v) ação de instauração da arbitragem. 
 
 O objetivo do levantamento é realizar uma análise preliminar a partir do banco de sentenças do Tribunal de Justiça de São Paulo (TJSP). O levantamento terá como resultado algumas estatísticas básicas como volume de sentenças ao longo do tempo, proporção de decisões favoráveis ao autor e tempo mediano dos processos. O estudo pode ser utilizado como insumo para decidir sobre a viabilidade de uma pesquisa mais aprofundada -- envolvendo análise de autos processuais -- a partir dos dados disponibilizados no banco de sentenças.
 
 O presente levantamento descreve o fluxo de download, arrumação e análise dos dados de sentenças relacionadas à arbitragem. Na parte de download, descrevemos os termos utilizados para consulta e o procedimento de acesso aos dados, que são públicos, mas não são abertos. A parte de arrumação descreve todos os passos para chegar da base bruta até a base organizada, informando as colunas utilizadas. A análise mostra os resultados do levantamento, com estatísticas sobre o perfil dos processos, o volume de sentenças ao longo do tempo, a proporção de decisões favoráveis e o tempo médio das ações.
 
-## Download
+# Download
 
 Os dados de processos do TJSP são públicos, mas não são abertos. Isso significa que não existe um meio fácil de obter uma lista de todos os processos que existem no tribunal a partir de um critério jurídico, geográfico ou temporal.
 
@@ -53,7 +56,7 @@ A pesquisa retornou um total de 348 decisões. Dentre esses casos, foram encontr
 
 Neste ponto, uma discussão pode ser iniciada sobre o volume total de ações. Por envolver casos que potencialmente correm em segredo de justiça, é possível que uma parte dos casos não são acessíveis através do banco de sentenças. Além disso, por envolver apenas as varas empresariais, o recorte pode apresentar limitações de espaço (regiões) e tempo (criação das varas). Por último, por se tratar de um estudo retrospectivo (envolve apenas casos com sentença), pode ser que casos que ainda estão ativos fiquem de fora da lista. De qualquer forma, espera-se que a lista obtida, depois de limpa, possa ser utilizada como amostra aleatória da população de todos os processos relacionados a arbitragem.
 
-## Arrumação
+# Arrumação
 
 O primeiro passo da arrumação dos dados foi a classificação das categorias de processos e remoção de casos que não fazem parte do escopo. Para classificar as cinco categorias, foram utilizados os termos e expressões regulares da @tbl-rx-tipo. 
 
@@ -126,7 +129,7 @@ da_cjpg_tidy |>
 
 Por último, as colunas importantes de análise foram construídas. As colunas escolhidas foram: status (em andamento, extinto, em grau de recurso ou suspenso), classe, assunto, valor da causa, processo digital, data de disponibilização da sentença, vara, resultado e tempo (calculado pelo tempo entre a data de distribuição e data da disponibilização da decisão).
 
-### Revisão manual
+## Revisão manual
 
 A base de dados arrumada foi revisada manualmente a partir da leitura dos textos das decisões e outras características dos processos. A revisão foi realizada por profissionais do direito especializados no tema de arbitragem.
 
@@ -170,7 +173,7 @@ Por último, duas colunas foram adicionadas após a classificação manual. A pr
 
 No final, a base ficou com 289 linhas e 13 colunas, contendo todas as informações utilizadas na parte de análise. A base de dados em Excel pode ser baixada [neste link](https://github.com/abjur/obsArb/raw/main/inst/da_arbitragem.xlsx).
 
-### Segunda instância
+## Segunda instância
 
 Depois de baixar e revisar as sentenças, procurou-se os números de processos obtidos na segunda instância. Foram considerados apenas casos com apenas um recurso (agravo de instrumento ou apelação). Por exemplo, processos que tiveram mais de um agravo de instrumento foram desconsiderados.
 
@@ -182,7 +185,7 @@ A base de segunda instância foi considerada para calcular a taxa de recorribili
 
 A base considerada possui 98 linhas e 8 colunas. A base de dados em Excel pode ser baixada [neste link](https://github.com/abjur/obsArb/raw/main/inst/da_cposg_tidy.xlsx).
 
-## Análise
+# Análise
 
 A base possui 289 casos, dentre os quais 226 são digitais ou digitalizados (78%). Em uma nova análise manual mais aprofundada, seriam considerados apenas processos digitais ou digitalizados.
 
@@ -407,11 +410,11 @@ da_tidy |>
   knitr::kable(col.names = c("Categoria", "N", "Média", "Mediana"), digits = 1)
 ```
 
-### Questões adicionais
+## Questões adicionais
 
 Após a revisão das análises, um novo conjunto de perguntas foi gerado. As perguntas foram respondidas com os gráficos e tabelas que seguem.
 
-#### Qual a proporção de resultado para a categoria anulação envolvendo ou não a Unimed?
+### Qual a proporção de resultado para a categoria anulação envolvendo ou não a Unimed?
 
 A @tbl-resultado-unimed mostra as proporções de resultados em processos de anulação considerando ou não a Unimed como parte. A taxa de casos favoráveis (soma de acordos, procedentes e parcialmente procedentes) é significativamente maior em casos envolvendo a Unimed. Para os demais casos, a taxa de casos favoráveis é de apenas 22%.
 
@@ -461,7 +464,7 @@ tab_geral |>
 ```
 
 
-#### Qual o percentual de liminares deferidas na categoria de ação cautelar? 
+### Qual o percentual de liminares deferidas na categoria de ação cautelar? 
 
 A base contem 63 ações cautelares, pouco mais de um quinto da base completa. A @tbl-cautelar-liminar mostra os resultados das liminares nessas ações. É possível identificar que quase metade das liminares não são concedias. Importante destacar que, em 6 casos, a decisão liminar não foi encontrada.
 
@@ -483,7 +486,7 @@ da_cautelar |>
 ```
 
 
-#### Qual a média e mediana de valor para cada categoria de ação?
+### Qual a média e mediana de valor para cada categoria de ação?
 
 Finalmente, a @tbl-valor-tipo mostra os valores médios e medianos das causas, geral e por categoria. Os processos de maior valor são as anulatórias, com mediana de R$ 264.802,79. Já os processos de menor valor são as cautelares e instauração, com mediana de dez mil reais, provavelmente colocados apenas como valores de referência.
 
@@ -515,7 +518,7 @@ da_tidy |>
   knitr::kable(col.names = c("Categoria", "N", "Média", "Mediana"), digits = 1)
 ```
 
-#### Qual é a taxa de favorabilidade em anulatórias ao longo do tempo?
+### Qual é a taxa de favorabilidade em anulatórias ao longo do tempo?
 
 A @fig-anulacao-no-tempo mostra a taxa de casos favoráveis (procedentes, parcialmente procedentes e acordos) em ações anulatórias por ano. Apesar da pequena quantidade de dados, é possível observar que a proporção de decisões favoráveis caiu em 2021 e 2022. Lembrando que a proporção geral de decisões favoráveis em anulatórias é de 45%, como demarcado na linha pontilhada.
 
@@ -565,7 +568,7 @@ aux_anulacao |>
 
 ```
 
-#### Segunda instância
+### Segunda instância
 
 A taxa de recorribilidade estimada é de quase 20%. Isso ocorre porque foram encontrados 57 recursos nos 289 casos estudados. Dividindo as taxas por categoria de processo, encontra-se o resultado da @tbl-tx-recorr-categoria. É possível notar que as anulatórias são as que apresentam maior taxa de recorribilidade.
 
@@ -592,7 +595,7 @@ Com relação à Unimed, observa-se que 31 dos 57 (54%) dos casos com decisão t
 
 Finalmente, com relação à reforma da decisão arbitral nas anulatórias, foi identificada uma proporção de 85% (28 de 33 casos). Isso significa que, dos casos que chegaram à segunda instância, a decisão final sobre a sentença arbitral foi de reformar da decisão arbitral, pelo menos em parte.
 
-## Referências {.unnumbered}
+# Referências {.unnumbered}
 
 ::: {#refs}
 
