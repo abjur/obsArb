@@ -14,7 +14,7 @@ knitr:
 lang: pt
 toc: true
 format: 
-  # html: default
+  # html
   docx:
     reference-doc: template.docx
 bibliography: geral.bib
@@ -179,7 +179,9 @@ Depois de baixar e revisar as sentenças, procurou-se os números de processos o
 
 Dos 289 processos, 173 apresentaram algum recurso, sendo 126 (73%) com classe "Apelação Cível" e 47 (27%) com classe "Agravo de Instrumento". Nessa base, somente 132 (76%) possuem alguma decisão, sendo 98 apelações e 34 agravos. Os demais recursos ainda estavam em curso no momento da coleta de dados.
 
-Após o filtro inicial, a base passou por uma revisão manual. Dos 173 casos, 98 foram considerados como dentro do escopo, sendo que 57 tinham alguma decisão. Na nova análise, foram incluídas duas informações manualmente: se a decisão arbitral foi reformada e uma coluna identificando se o caso era relacionado com a Unimed.
+Após o filtro inicial, a base passou por uma revisão manual. Dos 173 casos, 98 foram considerados como dentro do escopo, sendo que 57 tinham alguma decisão[^explicacao-escopo]. Na nova análise, foram incluídas duas informações manualmente: se a decisão arbitral foi reformada e uma coluna identificando se o caso era relacionado com a Unimed.
+
+[^explicacao-escopo]: O critério de escopo procurou identificar recursos cujo objeto apresentavam relação com as matérias análisadas na pesquisa. Não foram considerados recursos voltados exclusivamente para pontos acidentais, como agravos contra outras decisões interlocutórias, que não liminares, e apelações voltadas contra aspectos laterais da sentença, como honorários advocatícios.
 
 A base de segunda instância foi considerada para calcular a taxa de recorribilidade e a taxa de decisões favoráveis na segunda instância. A taxa de reforma da decisão arbitral foi calculada a partir da análise manual.
 
@@ -570,7 +572,7 @@ aux_anulacao |>
 
 ### Segunda instância
 
-A taxa de recorribilidade estimada é de quase 20%. Isso ocorre porque foram encontrados 57 recursos nos 289 casos estudados. Dividindo as taxas por categoria de processo, encontra-se o resultado da @tbl-tx-recorr-categoria. É possível notar que as anulatórias são as que apresentam maior taxa de recorribilidade.
+A taxa de recorribilidade estimada é de quase 34%. Isso ocorre porque foram encontrados 98 recursos nos 289 casos estudados. Dividindo as taxas por categoria de processo, encontra-se o resultado da @tbl-tx-recorr-categoria. É possível notar que as anulatórias são as que apresentam maior taxa de recorribilidade.
 
 ```{r}
 #| label: tbl-tx-recorr-categoria
@@ -589,11 +591,24 @@ da_tidy |>
 ```
 
 
+```{r}
+da_cposg_tidy |> 
+  dplyr::filter(tem_decisao) |> 
+  dplyr::filter(
+    unimed == "Não",
+    categoria == "Anulacao",
+    !is.na(reformou_sentenca_arbitral)
+  ) |> 
+  dplyr::count(reformou_sentenca_arbitral) |> 
+  dplyr::mutate(prop= n/sum(n))
+```
+
+
 Já com relação à taxa de recursos providos, observa-se uma taxa geral de 77% de recursos totalmente providos ou providos em parte. Não foi apresentada uma taxa de recursos providos ou parcialmente providos por categoria por conta da pequena quantidade de dados, que aumenta a variabilidade nas proporções encontradas.
 
-Com relação à Unimed, observa-se que 31 dos 57 (54%) dos casos com decisão têm relação com a Unimed. A taxa de recursos providos nos casos que envolvem Unimed é de 94%, sendo que 74% dos recursos são providos em parte.
+Com relação à Unimed, observa-se que 31 dos 57 (54%) dos casos com decisão têm relação com a Unimed. A taxa de recursos providos (parcial ou totalmente) nos casos que envolvem Unimed é de 94% (29 de 31 casos), sendo que 74% (23 de 31) são providos em parte. Já nos casos que não envolvem Unimed, a taxa de recursos providos nos casos que envolvem Unimed é de 58% (15 de 26 casos), sendo que 23% (9 de 26) são providos em parte.
 
-Finalmente, com relação à reforma da decisão arbitral nas anulatórias, foi identificada uma proporção de 85% (28 de 33 casos). Isso significa que, dos casos que chegaram à segunda instância, a decisão final sobre a sentença arbitral foi de reformar da decisão arbitral, pelo menos em parte.
+Finalmente, com relação à reforma da decisão arbitral nas anulatórias, foi identificada uma proporção de 85% (28 de 33 casos). Isso significa que, dos casos que chegaram à segunda instância, a decisão final sobre a sentença arbitral foi de reformar da decisão arbitral, pelo menos em parte. Ao retirar as ações relacionadas à Unimed, sobram apenas 3 casos, sendo 1 reforma e 2 sem reforma.
 
 # Referências {.unnumbered}
 

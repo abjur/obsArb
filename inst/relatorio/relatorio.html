@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.340">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -18,14 +18,15 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -39,8 +40,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="relatorio_files/libs/clipboard/clipboard.min.js"></script>
@@ -57,10 +57,36 @@ div.csl-indent {
 
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice</h2>
+   
+  <ul>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução">Introdução</a></li>
+  <li><a href="#download" id="toc-download" class="nav-link" data-scroll-target="#download">Download</a></li>
+  <li><a href="#arrumação" id="toc-arrumação" class="nav-link" data-scroll-target="#arrumação">Arrumação</a>
+  <ul class="collapse">
+  <li><a href="#revisão-manual" id="toc-revisão-manual" class="nav-link" data-scroll-target="#revisão-manual">Revisão manual</a></li>
+  <li><a href="#segunda-instância" id="toc-segunda-instância" class="nav-link" data-scroll-target="#segunda-instância">Segunda instância</a></li>
+  </ul></li>
+  <li><a href="#análise" id="toc-análise" class="nav-link" data-scroll-target="#análise">Análise</a>
+  <ul class="collapse">
+  <li><a href="#questões-adicionais" id="toc-questões-adicionais" class="nav-link" data-scroll-target="#questões-adicionais">Questões adicionais</a>
+  <ul class="collapse">
+  <li><a href="#qual-a-proporção-de-resultado-para-a-categoria-anulação-envolvendo-ou-não-a-unimed" id="toc-qual-a-proporção-de-resultado-para-a-categoria-anulação-envolvendo-ou-não-a-unimed" class="nav-link" data-scroll-target="#qual-a-proporção-de-resultado-para-a-categoria-anulação-envolvendo-ou-não-a-unimed">Qual a proporção de resultado para a categoria anulação envolvendo ou não a Unimed?</a></li>
+  <li><a href="#qual-o-percentual-de-liminares-deferidas-na-categoria-de-ação-cautelar" id="toc-qual-o-percentual-de-liminares-deferidas-na-categoria-de-ação-cautelar" class="nav-link" data-scroll-target="#qual-o-percentual-de-liminares-deferidas-na-categoria-de-ação-cautelar">Qual o percentual de liminares deferidas na categoria de ação cautelar?</a></li>
+  <li><a href="#qual-a-média-e-mediana-de-valor-para-cada-categoria-de-ação" id="toc-qual-a-média-e-mediana-de-valor-para-cada-categoria-de-ação" class="nav-link" data-scroll-target="#qual-a-média-e-mediana-de-valor-para-cada-categoria-de-ação">Qual a média e mediana de valor para cada categoria de ação?</a></li>
+  <li><a href="#qual-é-a-taxa-de-favorabilidade-em-anulatórias-ao-longo-do-tempo" id="toc-qual-é-a-taxa-de-favorabilidade-em-anulatórias-ao-longo-do-tempo" class="nav-link" data-scroll-target="#qual-é-a-taxa-de-favorabilidade-em-anulatórias-ao-longo-do-tempo">Qual é a taxa de favorabilidade em anulatórias ao longo do tempo?</a></li>
+  <li><a href="#segunda-instância-1" id="toc-segunda-instância-1" class="nav-link" data-scroll-target="#segunda-instância-1">Segunda instância</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#referências" id="toc-referências" class="nav-link" data-scroll-target="#referências">Referências</a></li>
+  </ul>
+</nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -93,14 +119,14 @@ div.csl-indent {
 
 </header>
 
-<div class="cell">
-
-</div>
+<section id="introdução" class="level1">
+<h1>Introdução</h1>
 <p>O Observatório da Arbitragem é um projeto que visa compreender o reflexo do fenômeno jurídico da arbitragem nos tribunais. Em sua primeira fase, o projeto busca compreender o fluxo dos processos de i) anulação de decisão arbitral, ii) cumprimento de sentença / execução, iii) medida cautelar antecedente ao tribunal arbitral, iv) compromisso arbitral e v) ação de instauração da arbitragem.</p>
 <p>O objetivo do levantamento é realizar uma análise preliminar a partir do banco de sentenças do Tribunal de Justiça de São Paulo (TJSP). O levantamento terá como resultado algumas estatísticas básicas como volume de sentenças ao longo do tempo, proporção de decisões favoráveis ao autor e tempo mediano dos processos. O estudo pode ser utilizado como insumo para decidir sobre a viabilidade de uma pesquisa mais aprofundada – envolvendo análise de autos processuais – a partir dos dados disponibilizados no banco de sentenças.</p>
 <p>O presente levantamento descreve o fluxo de download, arrumação e análise dos dados de sentenças relacionadas à arbitragem. Na parte de download, descrevemos os termos utilizados para consulta e o procedimento de acesso aos dados, que são públicos, mas não são abertos. A parte de arrumação descreve todos os passos para chegar da base bruta até a base organizada, informando as colunas utilizadas. A análise mostra os resultados do levantamento, com estatísticas sobre o perfil dos processos, o volume de sentenças ao longo do tempo, a proporção de decisões favoráveis e o tempo médio das ações.</p>
-<section id="download" class="level2">
-<h2 class="anchored" data-anchor-id="download">Download</h2>
+</section>
+<section id="download" class="level1">
+<h1>Download</h1>
 <p>Os dados de processos do TJSP são públicos, mas não são abertos. Isso significa que não existe um meio fácil de obter uma lista de todos os processos que existem no tribunal a partir de um critério jurídico, geográfico ou temporal.</p>
 <p>O tribunal, no entanto, disponibiliza ferramentas de consulta. Na <a href="https://esaj.tjsp.jus.br/cjpg/pesquisar.do">Consulta de Julgados do Primeiro Grau (CJPG)</a> é possível acessar, manualmente, a lista de processos a partir de termos de busca (como palavras-chave, classes e assuntos). Cada processo, por sua vez, pode ser pesquisado manualmente em uma consulta de processos <a href="https://esaj.tjsp.jus.br/cpopg/open.do">Consulta de Processos do Primeiro Grau</a>.</p>
 <p>Por conta da necessidade de realizar pesquisas no Direito, a ABJ desenvolveu, ao longo de sua história, algumas ferramentas que automatizam o fluxo manual de obtenção de dados. Essas ferramentas utilizam técnicas de raspagem de dados <span class="citation" data-cites="zhaoWebScraping2017">(<a href="#ref-zhaoWebScraping2017" role="doc-biblioref">Zhao 2017</a>)</span> que, em poucas palavras, envolvem imitar o que um ser humano faria para acessar as páginas, mas de forma automática. Vale ressaltar que essa não é uma estratégia oficial nem desejável de ser utilizada ao acessar dados públicos. No entanto, por conta das limitações do tribunal, utilizar raspagem de dados acaba sendo necessário para tornar as pesquisas viáveis.</p>
@@ -111,13 +137,13 @@ div.csl-indent {
 <p>A pesquisa retornou um total de 348 decisões. Dentre esses casos, foram encontrados 338 números de processos únicos, já que um processo pode apresentar mais de uma decisão. A consulta desses processos individualmente retornou 337 casos (1 caso foi descartado por estar em segredo de justiça). A base bruta final, portanto, possui 337 processos.</p>
 <p>Neste ponto, uma discussão pode ser iniciada sobre o volume total de ações. Por envolver casos que potencialmente correm em segredo de justiça, é possível que uma parte dos casos não são acessíveis através do banco de sentenças. Além disso, por envolver apenas as varas empresariais, o recorte pode apresentar limitações de espaço (regiões) e tempo (criação das varas). Por último, por se tratar de um estudo retrospectivo (envolve apenas casos com sentença), pode ser que casos que ainda estão ativos fiquem de fora da lista. De qualquer forma, espera-se que a lista obtida, depois de limpa, possa ser utilizada como amostra aleatória da população de todos os processos relacionados a arbitragem.</p>
 </section>
-<section id="arrumação" class="level2">
-<h2 class="anchored" data-anchor-id="arrumação">Arrumação</h2>
+<section id="arrumação" class="level1">
+<h1>Arrumação</h1>
 <p>O primeiro passo da arrumação dos dados foi a classificação das categorias de processos e remoção de casos que não fazem parte do escopo. Para classificar as cinco categorias, foram utilizados os termos e expressões regulares da <a href="#tbl-rx-tipo">Tabela&nbsp;1</a>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-rx-tipo" class="anchored">
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <caption>Tabela&nbsp;1: Expressões regulares utilizadas para classificar a categoria de ação</caption>
 <thead>
 <tr class="header">
@@ -155,7 +181,7 @@ div.csl-indent {
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-tabela-tipo" class="anchored">
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <caption>Tabela&nbsp;2: Processos classificados por categoria</caption>
 <thead>
 <tr class="header">
@@ -209,7 +235,7 @@ div.csl-indent {
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-rx-resultado" class="anchored">
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <caption>Tabela&nbsp;3: Expressões regulares utilizadas para classificar o resultado</caption>
 <colgroup>
 <col style="width: 13%">
@@ -251,7 +277,7 @@ div.csl-indent {
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-tabela-resultado" class="anchored">
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <caption>Tabela&nbsp;4: Processos classificados por resultado</caption>
 <thead>
 <tr class="header">
@@ -302,15 +328,15 @@ div.csl-indent {
 </div>
 </div>
 <p>Por último, as colunas importantes de análise foram construídas. As colunas escolhidas foram: status (em andamento, extinto, em grau de recurso ou suspenso), classe, assunto, valor da causa, processo digital, data de disponibilização da sentença, vara, resultado e tempo (calculado pelo tempo entre a data de distribuição e data da disponibilização da decisão).</p>
-<section id="revisão-manual" class="level3">
-<h3 class="anchored" data-anchor-id="revisão-manual">Revisão manual</h3>
+<section id="revisão-manual" class="level2">
+<h2 class="anchored" data-anchor-id="revisão-manual">Revisão manual</h2>
 <p>A base de dados arrumada foi revisada manualmente a partir da leitura dos textos das decisões e outras características dos processos. A revisão foi realizada por profissionais do direito especializados no tema de arbitragem.</p>
 <p>A primeira mudança significativa foi com relação aos casos que fazem parte do escopo. Dos 338 casos iniciais, sobraram 289 que realmente faziam parte do escopo<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 <p>Com relação às colunas da base, as principais informações alteradas foram as de categoria e resultado. A informação de categoria foi a que mais sofreu alterações, especialmente em ações de anulação de decisão arbitral, que ficaram maiores. A <a href="#tbl-tabela-tipo-revisao">Tabela&nbsp;5</a> mostra as classificações depois da correção manual.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-tabela-tipo-revisao" class="anchored">
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <caption>Tabela&nbsp;5: Processos classificados por categoria, após revisão</caption>
 <thead>
 <tr class="header">
@@ -359,7 +385,7 @@ div.csl-indent {
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-tabela-resultado-revisao" class="anchored">
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <caption>Tabela&nbsp;6: Processos classificados por resultado, após revisão</caption>
 <thead>
 <tr class="header">
@@ -407,23 +433,23 @@ div.csl-indent {
 <p>Por último, duas colunas foram adicionadas após a classificação manual. A primeira é com relação à concessão de liminar em casos de medida cautelar. A segunda é que, na revisão manual, vários casos relacionados à Unimed foram detectados. Uma coluna <code>unimed</code> foi adicionada para permitir novos filtros de análise.</p>
 <p>No final, a base ficou com 289 linhas e 13 colunas, contendo todas as informações utilizadas na parte de análise. A base de dados em Excel pode ser baixada <a href="https://github.com/abjur/obsArb/raw/main/inst/da_arbitragem.xlsx">neste link</a>.</p>
 </section>
-<section id="segunda-instância" class="level3">
-<h3 class="anchored" data-anchor-id="segunda-instância">Segunda instância</h3>
+<section id="segunda-instância" class="level2">
+<h2 class="anchored" data-anchor-id="segunda-instância">Segunda instância</h2>
 <p>Depois de baixar e revisar as sentenças, procurou-se os números de processos obtidos na segunda instância. Foram considerados apenas casos com apenas um recurso (agravo de instrumento ou apelação). Por exemplo, processos que tiveram mais de um agravo de instrumento foram desconsiderados.</p>
 <p>Dos 289 processos, 173 apresentaram algum recurso, sendo 126 (73%) com classe “Apelação Cível” e 47 (27%) com classe “Agravo de Instrumento”. Nessa base, somente 132 (76%) possuem alguma decisão, sendo 98 apelações e 34 agravos. Os demais recursos ainda estavam em curso no momento da coleta de dados.</p>
-<p>Após o filtro inicial, a base passou por uma revisão manual. Dos 173 casos, 98 foram considerados como dentro do escopo, sendo que 57 tinham alguma decisão. Na nova análise, foram incluídas duas informações manualmente: se a decisão arbitral foi reformada e uma coluna identificando se o caso era relacionado com a Unimed.</p>
+<p>Após o filtro inicial, a base passou por uma revisão manual. Dos 173 casos, 98 foram considerados como dentro do escopo, sendo que 57 tinham alguma decisão<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Na nova análise, foram incluídas duas informações manualmente: se a decisão arbitral foi reformada e uma coluna identificando se o caso era relacionado com a Unimed.</p>
 <p>A base de segunda instância foi considerada para calcular a taxa de recorribilidade e a taxa de decisões favoráveis na segunda instância. A taxa de reforma da decisão arbitral foi calculada a partir da análise manual.</p>
 <p>A base considerada possui 98 linhas e 8 colunas. A base de dados em Excel pode ser baixada <a href="https://github.com/abjur/obsArb/raw/main/inst/da_cposg_tidy.xlsx">neste link</a>.</p>
 </section>
 </section>
-<section id="análise" class="level2">
-<h2 class="anchored" data-anchor-id="análise">Análise</h2>
+<section id="análise" class="level1">
+<h1>Análise</h1>
 <p>A base possui 289 casos, dentre os quais 226 são digitais ou digitalizados (78%). Em uma nova análise manual mais aprofundada, seriam considerados apenas processos digitais ou digitalizados.</p>
 <p>A <a href="#tbl-status">Tabela&nbsp;7</a> mostra os status dos processos no momento da coleta dos dados, em novembro/2022. A maioria dos casos está extinta e aproximadamente um quinto dos casos está em grau de recurso.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-status" class="anchored">
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <caption>Tabela&nbsp;7: Status dos processos no momento da coleta dos dados</caption>
 <thead>
 <tr class="header">
@@ -468,7 +494,7 @@ div.csl-indent {
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-classe" class="anchored">
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <caption>Tabela&nbsp;8: Classes mais comuns</caption>
 <thead>
 <tr class="header">
@@ -542,7 +568,7 @@ div.csl-indent {
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-assunto" class="anchored">
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <caption>Tabela&nbsp;9: Assuntos mais comuns</caption>
 <colgroup>
 <col style="width: 86%">
@@ -626,7 +652,7 @@ div.csl-indent {
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-valor" class="anchored">
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <caption>Tabela&nbsp;10: Faixas de valores</caption>
 <thead>
 <tr class="header">
@@ -680,7 +706,7 @@ div.csl-indent {
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-vara" class="anchored">
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <caption>Tabela&nbsp;11: Quantidade de processos por vara</caption>
 <colgroup>
 <col style="width: 88%">
@@ -731,7 +757,7 @@ div.csl-indent {
 <div id="fig-no-tempo" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="relatorio_files/figure-html/fig-no-tempo-1.png" class="img-fluid figure-img" width="2100"></p>
-<p></p><figcaption class="figure-caption">Figura&nbsp;1: Quantidade de decisões por ano</figcaption><p></p>
+<figcaption class="figure-caption">Figura&nbsp;1: Quantidade de decisões por ano</figcaption>
 </figure>
 </div>
 </div>
@@ -742,7 +768,7 @@ div.csl-indent {
 <div id="fig-no-tempo-categoria" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="relatorio_files/figure-html/fig-no-tempo-categoria-1.png" class="img-fluid figure-img" width="2100"></p>
-<p></p><figcaption class="figure-caption">Figura&nbsp;2: Quantidade de decisões por ano e categoria</figcaption><p></p>
+<figcaption class="figure-caption">Figura&nbsp;2: Quantidade de decisões por ano e categoria</figcaption>
 </figure>
 </div>
 </div>
@@ -751,7 +777,7 @@ div.csl-indent {
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-resultado" class="anchored">
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <caption>Tabela&nbsp;12: Resultados dos processos por categoria</caption>
 <colgroup>
 <col style="width: 16%">
@@ -839,7 +865,7 @@ div.csl-indent {
 <div id="fig-resultado-vara" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="relatorio_files/figure-html/fig-resultado-vara-1.png" class="img-fluid figure-img" width="2400"></p>
-<p></p><figcaption class="figure-caption">Figura&nbsp;3: Proporção dos resultados dos processos por categoria e vara</figcaption><p></p>
+<figcaption class="figure-caption">Figura&nbsp;3: Proporção dos resultados dos processos por categoria e vara</figcaption>
 </figure>
 </div>
 </div>
@@ -848,7 +874,7 @@ div.csl-indent {
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-tempo" class="anchored">
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <caption>Tabela&nbsp;13: Estatísticas descritivas dos tempos dos processos</caption>
 <thead>
 <tr class="header">
@@ -900,16 +926,16 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<section id="questões-adicionais" class="level3">
-<h3 class="anchored" data-anchor-id="questões-adicionais">Questões adicionais</h3>
+<section id="questões-adicionais" class="level2">
+<h2 class="anchored" data-anchor-id="questões-adicionais">Questões adicionais</h2>
 <p>Após a revisão das análises, um novo conjunto de perguntas foi gerado. As perguntas foram respondidas com os gráficos e tabelas que seguem.</p>
-<section id="qual-a-proporção-de-resultado-para-a-categoria-anulação-envolvendo-ou-não-a-unimed" class="level4">
-<h4 class="anchored" data-anchor-id="qual-a-proporção-de-resultado-para-a-categoria-anulação-envolvendo-ou-não-a-unimed">Qual a proporção de resultado para a categoria anulação envolvendo ou não a Unimed?</h4>
+<section id="qual-a-proporção-de-resultado-para-a-categoria-anulação-envolvendo-ou-não-a-unimed" class="level3">
+<h3 class="anchored" data-anchor-id="qual-a-proporção-de-resultado-para-a-categoria-anulação-envolvendo-ou-não-a-unimed">Qual a proporção de resultado para a categoria anulação envolvendo ou não a Unimed?</h3>
 <p>A <a href="#tbl-resultado-unimed">Tabela&nbsp;14</a> mostra as proporções de resultados em processos de anulação considerando ou não a Unimed como parte. A taxa de casos favoráveis (soma de acordos, procedentes e parcialmente procedentes) é significativamente maior em casos envolvendo a Unimed. Para os demais casos, a taxa de casos favoráveis é de apenas 22%.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-resultado-unimed" class="anchored">
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <caption>Tabela&nbsp;14: Resultados dos processos de anulação pela existência ou não da Unimed como parte</caption>
 <colgroup>
 <col style="width: 10%">
@@ -965,13 +991,13 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="qual-o-percentual-de-liminares-deferidas-na-categoria-de-ação-cautelar" class="level4">
-<h4 class="anchored" data-anchor-id="qual-o-percentual-de-liminares-deferidas-na-categoria-de-ação-cautelar">Qual o percentual de liminares deferidas na categoria de ação cautelar?</h4>
+<section id="qual-o-percentual-de-liminares-deferidas-na-categoria-de-ação-cautelar" class="level3">
+<h3 class="anchored" data-anchor-id="qual-o-percentual-de-liminares-deferidas-na-categoria-de-ação-cautelar">Qual o percentual de liminares deferidas na categoria de ação cautelar?</h3>
 <p>A base contem 63 ações cautelares, pouco mais de um quinto da base completa. A <a href="#tbl-cautelar-liminar">Tabela&nbsp;15</a> mostra os resultados das liminares nessas ações. É possível identificar que quase metade das liminares não são concedias. Importante destacar que, em 6 casos, a decisão liminar não foi encontrada.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-cautelar-liminar" class="anchored">
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <caption>Tabela&nbsp;15: Resultados das liminares em ações cautelares.</caption>
 <thead>
 <tr class="header">
@@ -1012,13 +1038,13 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="qual-a-média-e-mediana-de-valor-para-cada-categoria-de-ação" class="level4">
-<h4 class="anchored" data-anchor-id="qual-a-média-e-mediana-de-valor-para-cada-categoria-de-ação">Qual a média e mediana de valor para cada categoria de ação?</h4>
+<section id="qual-a-média-e-mediana-de-valor-para-cada-categoria-de-ação" class="level3">
+<h3 class="anchored" data-anchor-id="qual-a-média-e-mediana-de-valor-para-cada-categoria-de-ação">Qual a média e mediana de valor para cada categoria de ação?</h3>
 <p>Finalmente, a <a href="#tbl-valor-tipo">Tabela&nbsp;16</a> mostra os valores médios e medianos das causas, geral e por categoria. Os processos de maior valor são as anulatórias, com mediana de R$ 264.802,79. Já os processos de menor valor são as cautelares e instauração, com mediana de dez mil reais, provavelmente colocados apenas como valores de referência.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-valor-tipo" class="anchored">
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <caption>Tabela&nbsp;16: Estatísticas descritivas dos valores de causa dos processos</caption>
 <thead>
 <tr class="header">
@@ -1071,27 +1097,27 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="qual-é-a-taxa-de-favorabilidade-em-anulatórias-ao-longo-do-tempo" class="level4">
-<h4 class="anchored" data-anchor-id="qual-é-a-taxa-de-favorabilidade-em-anulatórias-ao-longo-do-tempo">Qual é a taxa de favorabilidade em anulatórias ao longo do tempo?</h4>
+<section id="qual-é-a-taxa-de-favorabilidade-em-anulatórias-ao-longo-do-tempo" class="level3">
+<h3 class="anchored" data-anchor-id="qual-é-a-taxa-de-favorabilidade-em-anulatórias-ao-longo-do-tempo">Qual é a taxa de favorabilidade em anulatórias ao longo do tempo?</h3>
 <p>A <a href="#fig-anulacao-no-tempo">Figura&nbsp;4</a> mostra a taxa de casos favoráveis (procedentes, parcialmente procedentes e acordos) em ações anulatórias por ano. Apesar da pequena quantidade de dados, é possível observar que a proporção de decisões favoráveis caiu em 2021 e 2022. Lembrando que a proporção geral de decisões favoráveis em anulatórias é de 45%, como demarcado na linha pontilhada.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-anulacao-no-tempo" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="relatorio_files/figure-html/fig-anulacao-no-tempo-1.png" class="img-fluid figure-img" width="2100"></p>
-<p></p><figcaption class="figure-caption">Figura&nbsp;4: Quantidade de decisões por ano</figcaption><p></p>
+<figcaption class="figure-caption">Figura&nbsp;4: Quantidade de decisões por ano</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="segunda-instância-1" class="level4">
-<h4 class="anchored" data-anchor-id="segunda-instância-1">Segunda instância</h4>
-<p>A taxa de recorribilidade estimada é de quase 20%. Isso ocorre porque foram encontrados 57 recursos nos 289 casos estudados. Dividindo as taxas por categoria de processo, encontra-se o resultado da <a href="#tbl-tx-recorr-categoria">Tabela&nbsp;17</a>. É possível notar que as anulatórias são as que apresentam maior taxa de recorribilidade.</p>
+<section id="segunda-instância-1" class="level3">
+<h3 class="anchored" data-anchor-id="segunda-instância-1">Segunda instância</h3>
+<p>A taxa de recorribilidade estimada é de quase 34%. Isso ocorre porque foram encontrados 98 recursos nos 289 casos estudados. Dividindo as taxas por categoria de processo, encontra-se o resultado da <a href="#tbl-tx-recorr-categoria">Tabela&nbsp;17</a>. É possível notar que as anulatórias são as que apresentam maior taxa de recorribilidade.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-tx-recorr-categoria" class="anchored">
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <caption>Tabela&nbsp;17: Quantidade e taxa de recorribilidade por categoria.</caption>
 <thead>
 <tr class="header">
@@ -1137,17 +1163,26 @@ div.csl-indent {
 </div>
 </div>
 </div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  reformou_sentenca_arbitral     n  prop
+  &lt;chr&gt;                      &lt;int&gt; &lt;dbl&gt;
+1 Não                            2 0.667
+2 Sim                            1 0.333</code></pre>
+</div>
+</div>
 <p>Já com relação à taxa de recursos providos, observa-se uma taxa geral de 77% de recursos totalmente providos ou providos em parte. Não foi apresentada uma taxa de recursos providos ou parcialmente providos por categoria por conta da pequena quantidade de dados, que aumenta a variabilidade nas proporções encontradas.</p>
-<p>Com relação à Unimed, observa-se que 31 dos 57 (54%) dos casos com decisão têm relação com a Unimed. A taxa de recursos providos nos casos que envolvem Unimed é de 94%, sendo que 74% dos recursos são providos em parte.</p>
-<p>Finalmente, com relação à reforma da decisão arbitral nas anulatórias, foi identificada uma proporção de 85% (28 de 33 casos). Isso significa que, dos casos que chegaram à segunda instância, a decisão final sobre a sentença arbitral foi de reformar da decisão arbitral, pelo menos em parte.</p>
+<p>Com relação à Unimed, observa-se que 31 dos 57 (54%) dos casos com decisão têm relação com a Unimed. A taxa de recursos providos (parcial ou totalmente) nos casos que envolvem Unimed é de 94% (29 de 31 casos), sendo que 74% (23 de 31) são providos em parte. Já nos casos que não envolvem Unimed, a taxa de recursos providos nos casos que envolvem Unimed é de 58% (15 de 26 casos), sendo que 23% (9 de 26) são providos em parte.</p>
+<p>Finalmente, com relação à reforma da decisão arbitral nas anulatórias, foi identificada uma proporção de 85% (28 de 33 casos). Isso significa que, dos casos que chegaram à segunda instância, a decisão final sobre a sentença arbitral foi de reformar da decisão arbitral, pelo menos em parte. Ao retirar as ações relacionadas à Unimed, sobram apenas 3 casos, sendo 1 reforma e 2 sem reforma.</p>
 </section>
 </section>
 </section>
-<section id="referências" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="referências">Referências</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-zhaoWebScraping2017" class="csl-entry" role="doc-biblioentry">
-Zhao, Bo. 2017. <span>"Web Scraping"</span>. <em>Encyclopedia of big data</em>, 1–3.
+<section id="referências" class="level1 unnumbered">
+<h1 class="unnumbered">Referências</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-zhaoWebScraping2017" class="csl-entry" role="listitem">
+Zhao, Bo. 2017. <span>«Web Scraping»</span>. <em>Encyclopedia of big data</em>, 1–3.
 </div>
 </div>
 </section>
@@ -1158,6 +1193,7 @@ Zhao, Bo. 2017. <span>"Web Scraping"</span>. <em>Encyclopedia of big data</em>, 
 <ol>
 <li id="fn1"><p>Classes e assuntos são listas de tipos de processos organizadas pelo Conselho Nacional de Justiça (CNJ), através das Tabelas Processuais Unificadas (TPU), Res. 46 CNJ.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Um caso foi identificado em uma nova categoria “Carta Arbitral” (1099760-61.2021.8.26.0100). O caso foi desconsiderado da análise.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>O critério de escopo procurou identificar recursos cujo objeto apresentavam relação com as matérias análisadas na pesquisa. Não foram considerados recursos voltados exclusivamente para pontos acidentais, como agravos contra outras decisões interlocutórias, que não liminares, e apelações voltadas contra aspectos laterais da sentença, como honorários advocatícios.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
@@ -1188,9 +1224,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1255,6 +1305,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
