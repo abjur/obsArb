@@ -14,7 +14,7 @@ knitr:
 lang: pt
 toc: true
 format: 
-  # html
+  html: default
   docx:
     reference-doc: template.docx
 bibliography: geral.bib
