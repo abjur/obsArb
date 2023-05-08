@@ -13,6 +13,7 @@ knitr:
     warning: false
 lang: pt
 toc: true
+self-contained: true
 format: 
   html: default
   docx:
