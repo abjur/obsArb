@@ -95,8 +95,6 @@ da_cposg_tidy <- da_cposg_filter |>
   ) |>
   dplyr::left_join(aux_decisoes, "id")
 
-
-
 # export ------------------------------------------------------------------
 
 # writexl::write_xlsx(da_cposg_tidy, "inst/da_cposg_tidy.xlsx")
@@ -145,10 +143,30 @@ da_cposg_tidy_com_decisao <- da_cposg_tidy_revisada |>
   ) |>
   dplyr::mutate(tem_decisao = TRUE)
 
+ids_unimed_1inst <- da_tidy |>
+  dplyr::filter(unimed == "Sim") |>
+  with(unique(id))
+
+da_cposg_tidy_improcedentes <- da_cposg_tidy |>
+  dplyr::filter(tem_decisao, dec == "Improvido") |>
+  dplyr::mutate(
+    reformou_sentenca_arbitral = "Não"
+  ) |>
+  dplyr::inner_join(dplyr::select(da_tidy, id, categoria, unimed), "id")
+
 da_cposg_tidy <- dplyr::bind_rows(
   da_cposg_tidy_com_decisao,
-  da_cposg_tidy_sem_decisao
-)
+  da_cposg_tidy_sem_decisao,
+  da_cposg_tidy_improcedentes
+) |>
+  # adicionando coluna status
+  dplyr::inner_join(
+    dplyr::select(da_cposg_filter, id, status),
+    "id"
+  ) |>
+  dplyr::mutate(
+    status = dplyr::if_else(status == "", "Ativo", status)
+  )
 
 
 writexl::write_xlsx(da_cposg_tidy, "inst/da_cposg_tidy.xlsx")

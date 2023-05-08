@@ -28,7 +28,7 @@ col_abj <- viridis::viridis(5, 1, .2, .8)
 
 # Introdução
 
-O Observatório da Arbitragem é um projeto que visa compreender o reflexo do fenômeno jurídico da arbitragem nos tribunais. Em sua primeira fase, o projeto busca compreender o fluxo dos processos de i) anulação de decisão arbitral, ii) cumprimento de sentença / execução, iii) medida cautelar antecedente ao tribunal arbitral, iv) compromisso arbitral e v) ação de instauração da arbitragem. 
+O Observatório da Arbitragem é um projeto que visa compreender o reflexo do fenômeno jurídico da arbitragem nos tribunais. Em sua primeira fase, o projeto busca compreender o fluxo dos processos de i) anulação de decisão arbitral, ii) cumprimento de sentença / execução, iii) medida cautelar antecedente ao tribunal arbitral, iv) existência, validade e eficácia da convenção de arbitragem e v) ação para instituição da arbitragem com base no art, 7º da Lei de Arbitragem. 
 
 O objetivo do levantamento é realizar uma análise preliminar a partir do banco de sentenças do Tribunal de Justiça de São Paulo (TJSP). O levantamento terá como resultado algumas estatísticas básicas como volume de sentenças ao longo do tempo, proporção de decisões favoráveis ao autor e tempo mediano dos processos. O estudo pode ser utilizado como insumo para decidir sobre a viabilidade de uma pesquisa mais aprofundada -- envolvendo análise de autos processuais -- a partir dos dados disponibilizados no banco de sentenças.
 
@@ -52,9 +52,11 @@ O termo de busca utilizado para realizar a pesquisa foi `"arbitral" OU "lei de a
 
 Outro filtro realizado foi o das varas. Foram consideradas 4 varas no total: 1ª vara empresarial e conflitos de arbitragem, 2ª vara empresarial e conflitos de arbitragem, 1ª vara regional de competência empresarial e de conflitos relacionados à arbitragem e 2ª vara regional de competência empresarial e de conflitos relacionados à arbitragem.
 
-A pesquisa retornou um total de 348 decisões. Dentre esses casos, foram encontrados 338 números de processos únicos, já que um processo pode apresentar mais de uma decisão. A consulta desses processos individualmente retornou 337 casos (1 caso foi descartado por estar em segredo de justiça). A base bruta final, portanto, possui 337 processos.
+A pesquisa retornou um total de 348 decisões, disponibilizadas entre março de 2018 e novembro de 2022. Dentre esses casos, foram encontrados 338 números de processos únicos, já que um processo pode apresentar mais de uma decisão. A consulta desses processos individualmente retornou 337 casos (1 caso foi descartado por estar em segredo de justiça). A base bruta final, portanto, possui 337 processos.
 
-Neste ponto, uma discussão pode ser iniciada sobre o volume total de ações. Por envolver casos que potencialmente correm em segredo de justiça, é possível que uma parte dos casos não são acessíveis através do banco de sentenças. Além disso, por envolver apenas as varas empresariais, o recorte pode apresentar limitações de espaço (regiões) e tempo (criação das varas). Por último, por se tratar de um estudo retrospectivo (envolve apenas casos com sentença), pode ser que casos que ainda estão ativos fiquem de fora da lista. De qualquer forma, espera-se que a lista obtida, depois de limpa, possa ser utilizada como amostra aleatória da população de todos os processos relacionados a arbitragem.
+Neste ponto, uma discussão pode ser iniciada sobre o volume total de ações. Por envolver casos que potencialmente correm em segredo de justiça, é possível que uma parte dos casos não são acessíveis através do banco de sentenças. Além disso, por envolver apenas as varas empresariais, o recorte pode apresentar limitações de espaço (regiões) e tempo (criação das varas)[^comentario-varas]. Por último, por se tratar de um estudo retrospectivo (envolve apenas casos com sentença), pode ser que casos que ainda estão ativos fiquem de fora da lista. De qualquer forma, espera-se que a lista obtida, depois de limpa, possa ser utilizada como amostra aleatória da população de todos os processos relacionados a arbitragem.
+
+[^comentario-varas]: As três primeiras varas empresariais tiveram sua criação autorizada no dia 14 de dezembro por deliberação unânime do Órgão Especial do Tribunal de Justiça do Estado de São Paulo. Link para o parecer em <https://bit.ly/parecer-varas>. Acesso em 03 de maio de 2023.
 
 # Arrumação
 
@@ -77,7 +79,7 @@ rx_tipo() |>
   knitr::kable(col.names = c("Categoria", "Expressões regulares"))
 ```
 
-A @tbl-tabela-tipo mostra a quantidade de processos que caiu em cada categoria. É importante destacar que toda classificação automática pode incorrer em erros, ou seja, pode ser que as categorias finais fiquem incorretas. Os casos vazios foram retirados.
+A @tbl-tabela-tipo mostra a quantidade de processos detectada em cada categoria. É importante destacar que toda classificação automática pode incorrer em erros, ou seja, pode ser que as categorias finais fiquem incorretas. Os casos vazios foram retirados.
 
 ```{r}
 #| label: tbl-tabela-tipo
@@ -111,7 +113,7 @@ rx_resultado() |>
   knitr::kable(col.names = c("Categoria", "Expressões regulares"))
 ```
 
-A @tbl-tabela-resultado mostra a quantidade de processos que caiu em cada categoria de resultado. Novamente, a classificação automática pode incorrer em erros, ou seja, pode ser que os resultados finais estejam incorretos. Os casos vazios foram retirados da análise.
+A @tbl-tabela-resultado mostra a quantidade de processos detectada em cada categoria de resultado. Novamente, a classificação automática pode incorrer em erros, ou seja, pode ser que os resultados estejam incorretos. Os casos vazios foram retirados da análise.
 
 ```{r}
 #| label: tbl-tabela-resultado
@@ -133,9 +135,9 @@ Por último, as colunas importantes de análise foram construídas. As colunas e
 
 A base de dados arrumada foi revisada manualmente a partir da leitura dos textos das decisões e outras características dos processos. A revisão foi realizada por profissionais do direito especializados no tema de arbitragem.
 
-A primeira mudança significativa foi com relação aos casos que fazem parte do escopo. Dos 338 casos iniciais, sobraram 289 que realmente faziam parte do escopo[^carta-arbitral].
+A primeira mudança significativa foi com relação aos casos que fazem parte do escopo. Dos 338 casos iniciais, sobraram 289 que faziam parte do escopo[^carta-arbitral].
 
-[^carta-arbitral]: Um caso foi identificado em uma nova categoria "Carta Arbitral" (1099760-61.2021.8.26.0100). O caso foi desconsiderado da análise.
+[^carta-arbitral]: O critério de exclusão dizia respeito à pertinência do caso ao objeto da pesquisa. Assim, casos nos quais as expressões apresentavam significados distintos (falsos cognatos) foram excluídos. Por exemplo, arbitragem no sentido de arbitragem de preço e não como método de resolução de disputas. Um caso foi identificado em uma nova categoria "Carta Arbitral" (1099760-61.2021.8.26.0100). O caso foi desconsiderado da análise.
 
 Com relação às colunas da base, as principais informações alteradas foram as de categoria e resultado. A informação de categoria foi a que mais sofreu alterações, especialmente em ações de anulação de decisão arbitral, que ficaram maiores. A @tbl-tabela-tipo-revisao mostra as classificações depois da correção manual.
 
@@ -153,7 +155,7 @@ da_tidy |>
   knitr::kable(col.names = c("Resultado", "N", "%"))
 ```
 
-Com relação aos resultados, não houve mudanças tão significativas. A categoria que mais mudou foi a de acordos, que costumam ser difíceis de mapear apenas por palavras-chave. A @tbl-tabela-resultado-revisao mostra as classificações depois da correção manual.
+Com relação aos resultados, não houve mudanças significativas. A categoria que mais mudou foi a de acordos, que costumam ser difíceis de mapear apenas por palavras-chave. A @tbl-tabela-resultado-revisao mostra as classificações depois da correção manual. Os resultados completos são apresentados na próxima seção.
 
 ```{r}
 #| label: tbl-tabela-resultado-revisao
@@ -177,15 +179,14 @@ No final, a base ficou com 289 linhas e 13 colunas, contendo todas as informaç�
 
 Depois de baixar e revisar as sentenças, procurou-se os números de processos obtidos na segunda instância. Foram considerados apenas casos com apenas um recurso (agravo de instrumento ou apelação). Por exemplo, processos que tiveram mais de um agravo de instrumento foram desconsiderados.
 
-Dos 289 processos, 173 apresentaram algum recurso, sendo 126 (73%) com classe "Apelação Cível" e 47 (27%) com classe "Agravo de Instrumento". Nessa base, somente 132 (76%) possuem alguma decisão, sendo 98 apelações e 34 agravos. Os demais recursos ainda estavam em curso no momento da coleta de dados.
+Dos 289 processos, 173 apresentaram algum recurso, sendo 126 (73%) com classe "Apelação Cível" e 47 (27%) com classe "Agravo de Instrumento". Nessa base, somente 132 (76%) possuem alguma decisão, sendo 98 apelações e 34 agravos. Os demais recursos não apresentavam uma tabela de decisões na consulta processual. 
+Além da informação da decisão, também foi coletada a informação do status dos processos no momento da coleta. Essa informação foi extraída diretamente da consulta processual do TJSP, sem nenhum tratamento posterior.
 
-Após o filtro inicial, a base passou por uma revisão manual. Dos 173 casos, 98 foram considerados como dentro do escopo, sendo que 57 tinham alguma decisão[^explicacao-escopo]. Na nova análise, foram incluídas duas informações manualmente: se a decisão arbitral foi reformada e uma coluna identificando se o caso era relacionado com a Unimed.
-
-[^explicacao-escopo]: O critério de escopo procurou identificar recursos cujo objeto apresentavam relação com as matérias análisadas na pesquisa. Não foram considerados recursos voltados exclusivamente para pontos acidentais, como agravos contra outras decisões interlocutórias, que não liminares, e apelações voltadas contra aspectos laterais da sentença, como honorários advocatícios.
+Após o filtro inicial, a base passou por uma revisão manual. A revisão foi realizada nos 57 casos que tinham alguma decisão diferente de improcedente. Na nova análise, foram incluídas duas informações manualmente: se a decisão arbitral foi reformada e uma coluna identificando se o caso era relacionado com a Unimed.
 
 A base de segunda instância foi considerada para calcular a taxa de recorribilidade e a taxa de decisões favoráveis na segunda instância. A taxa de reforma da decisão arbitral foi calculada a partir da análise manual.
 
-A base considerada possui 98 linhas e 8 colunas. A base de dados em Excel pode ser baixada [neste link](https://github.com/abjur/obsArb/raw/main/inst/da_cposg_tidy.xlsx).
+A base considerada possui 173 linhas e 8 colunas. A base de dados em Excel pode ser baixada [neste link](https://github.com/abjur/obsArb/raw/main/inst/da_cposg_tidy.xlsx).
 
 # Análise
 
@@ -522,7 +523,7 @@ da_tidy |>
 
 ### Qual é a taxa de favorabilidade em anulatórias ao longo do tempo?
 
-A @fig-anulacao-no-tempo mostra a taxa de casos favoráveis (procedentes, parcialmente procedentes e acordos) em ações anulatórias por ano. Apesar da pequena quantidade de dados, é possível observar que a proporção de decisões favoráveis caiu em 2021 e 2022. Lembrando que a proporção geral de decisões favoráveis em anulatórias é de 45%, como demarcado na linha pontilhada.
+A @fig-anulacao-no-tempo mostra a taxa de casos favoráveis (procedentes, parcialmente procedentes e acordos) em ações anulatórias por ano. Apesar da pequena quantidade de dados, é possível observar que a proporção de decisões favoráveis detectada em 2021 e 2022 é menor.
 
 ```{r}
 #| label: fig-anulacao-no-tempo
@@ -572,7 +573,24 @@ aux_anulacao |>
 
 ### Segunda instância
 
-A taxa de recorribilidade estimada é de quase 34%. Isso ocorre porque foram encontrados 98 recursos nos 289 casos estudados. Dividindo as taxas por categoria de processo, encontra-se o resultado da @tbl-tx-recorr-categoria. É possível notar que as anulatórias são as que apresentam maior taxa de recorribilidade.
+A Tabela @tbl-2inst-status mostra os status dos processos de acordo com as categorias fornecidas pelo TJSP no momento de coleta. Quase 41% dos recursos foram encerrados e 26% foram arquivados administrativamente.
+
+```{r}
+#| label: tbl-2inst-status
+#| tbl-cap: "Status dos processos na segunda instância de acordo com as categorias fornecidas pelo TJSP"
+
+da_cposg_tidy |> 
+  dplyr::group_by(status) |> 
+  dplyr::summarise(
+    total = dplyr::n(), 
+  ) |> 
+  dplyr::mutate(prop = formattable::percent(total/sum(total), 1)) |> 
+  dplyr::arrange(dplyr::desc(total)) |> 
+  knitr::kable(col.names = c("Staus", "N", "%"), digits = 1)
+
+```
+
+A taxa de recorribilidade estimada é de quase 60%. Isso ocorre porque foram encontrados 173 recursos nos 289 casos estudados. Dividindo as taxas por categoria de processo, encontra-se o resultado da @tbl-tx-recorr-categoria. É possível notar que as anulatórias são as que apresentam maior taxa de recorribilidade.
 
 ```{r}
 #| label: tbl-tx-recorr-categoria
@@ -590,25 +608,71 @@ da_tidy |>
 
 ```
 
-
 ```{r}
-da_cposg_tidy |> 
+#| eval: false
+
+provido <- da_cposg_tidy |> 
   dplyr::filter(tem_decisao) |> 
+  dplyr::count(dec, sort = TRUE) |> 
+  dplyr::mutate(prop = n/sum(n))
+
+provido_por_categoria <- da_cposg_tidy |> 
+  dplyr::filter(tem_decisao) |>
+  dplyr::mutate(dec = dec %in% c("Provido", "Provido em parte")) |> 
+  dplyr::group_by(categoria) |> 
+  dplyr::summarise(
+    n = dplyr::n(),
+    prop = mean(dec)
+  )
+
+unimed_decisao <- da_cposg_tidy |> 
+  dplyr::filter(tem_decisao) |> 
+  dplyr::mutate(dec = dec %in% c("Provido", "Provido em parte")) |> 
+  dplyr::group_by(unimed) |> 
+  dplyr::summarise(
+    n = dplyr::n(),
+    prop_favoravel = mean(dec),
+    n_favoravel = sum(dec)
+  ) |> 
+  dplyr::mutate(prop = n/sum(n))
+
+unimed_decisao_parcial <- da_cposg_tidy |> 
+  dplyr::filter(tem_decisao) |> 
+  dplyr::mutate(dec = dec %in% c("Provido em parte")) |> 
+  dplyr::group_by(unimed) |> 
+  dplyr::summarise(
+    n = dplyr::n(),
+    prop_favoravel = mean(dec),
+    n_favoravel = sum(dec)
+  ) |> 
+  dplyr::mutate(prop = n/sum(n))
+
+reforma <- da_cposg_tidy |> 
   dplyr::filter(
-    unimed == "Não",
-    categoria == "Anulacao",
-    !is.na(reformou_sentenca_arbitral)
+    tem_decisao, 
+    reformou_sentenca_arbitral %in% c("Sim", "Não")
   ) |> 
   dplyr::count(reformou_sentenca_arbitral) |> 
-  dplyr::mutate(prop= n/sum(n))
+  dplyr::mutate(prop = n/sum(n))
+
+reforma_sem_unimed <- da_cposg_tidy |> 
+  dplyr::filter(
+    tem_decisao, 
+    reformou_sentenca_arbitral %in% c("Sim", "Não"),
+    unimed == "Não"
+  ) |> 
+  dplyr::count(reformou_sentenca_arbitral) |> 
+  dplyr::mutate(prop = n/sum(n))
+
+
 ```
 
 
-Já com relação à taxa de recursos providos, observa-se uma taxa geral de 77% de recursos totalmente providos ou providos em parte. Não foi apresentada uma taxa de recursos providos ou parcialmente providos por categoria por conta da pequena quantidade de dados, que aumenta a variabilidade nas proporções encontradas.
+Já com relação à taxa de recursos providos ou providos em parte, observa-se que, dos 132 casos com alguma decisão, 44 (33%) foram totalmente providos ou providos em parte. Considerando apenas os processos com categoria de anulatória, a taxa de recursos providos ou providos em parte é de 41% (32 de 78 casos).
 
-Com relação à Unimed, observa-se que 31 dos 57 (54%) dos casos com decisão têm relação com a Unimed. A taxa de recursos providos (parcial ou totalmente) nos casos que envolvem Unimed é de 94% (29 de 31 casos), sendo que 74% (23 de 31) são providos em parte. Já nos casos que não envolvem Unimed, a taxa de recursos providos nos casos que envolvem Unimed é de 58% (15 de 26 casos), sendo que 23% (9 de 26) são providos em parte.
+Com relação à Unimed, observa-se que 56 dos 132 (42%) dos recursos com decisão têm relação com a Unimed. A taxa de recursos providos (parcial ou totalmente) nos casos que envolvem Unimed é de 52% (29 de 56 casos), sendo que 41% (23 de 56) são providos em parte. Já nos casos que não envolvem Unimed, a taxa de recursos providos é de 20% (15 de 76 casos), sendo que 8% (6 de 76) são providos em parte.
 
-Finalmente, com relação à reforma da decisão arbitral nas anulatórias, foi identificada uma proporção de 85% (28 de 33 casos). Isso significa que, dos casos que chegaram à segunda instância, a decisão final sobre a sentença arbitral foi de reformar da decisão arbitral, pelo menos em parte. Ao retirar as ações relacionadas à Unimed, sobram apenas 3 casos, sendo 1 reforma e 2 sem reforma.
+Finalmente, com relação à reforma da decisão arbitral nas anulatórias, foi identificada uma proporção de 26% (28 de 108 casos). Isso significa que, dos casos que chegaram à segunda instância e tiveram alguma decisão de mérito (108 dos 132 casos), a decisão final sobre a sentença arbitral foi de reformar da decisão arbitral, pelo menos em parte. Ao retirar as ações relacionadas à Unimed, no entanto, sobram apenas 59 casos, sendo 1 reforma e 58 sem reforma.
 
 # Referências {.unnumbered}
 
