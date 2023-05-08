@@ -2,7 +2,7 @@
 title: "Processos relacionados à Arbitragem"
 subtitle: "Um levantamento preliminar no banco de sentenças do TJSP"
 author: Associação Brasileira de Jurimetria
-date: "2022-12-02"
+date: "2023-05-03"
 execute: 
   echo: false
   freeze: true
