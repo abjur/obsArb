@@ -169,6 +169,11 @@ da_cposg_tidy <- dplyr::bind_rows(
   )
 
 
+da_cposg_tidy <- da_cposg_tidy |>
+  dplyr::mutate(
+    categoria = dplyr::if_else(categoria == "Compromisso", "Convencao", categoria)
+  )
+
 writexl::write_xlsx(da_cposg_tidy, "inst/da_cposg_tidy.xlsx")
 usethis::use_data(da_cposg_tidy, overwrite = TRUE)
 
