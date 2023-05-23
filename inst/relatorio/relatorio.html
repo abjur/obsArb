@@ -3257,8 +3257,8 @@ vertical-align: -.125em;
 </div>
 </div>
 <p>Com relação aos resultados, não houve mudanças significativas. A categoria que mais mudou foi a de acordos, que costumam ser difíceis de mapear apenas por palavras-chave. Os resultados completos são apresentados na próxima seção.</p>
-<p>Por último, duas colunas foram adicionadas após a classificação manual. A primeira é com relação à concessão de liminar em casos de medida cautelar. A segunda é que, na revisão manual, vários casos relacionados à Unimed foram detectados. Uma coluna <code>unimed</code> foi adicionada para permitir novos filtros de análise.</p>
-<p>No final, a base ficou com 289 linhas e 13 colunas, contendo todas as informações utilizadas na parte de análise. A base de dados em Excel pode ser baixada <a href="https://github.com/abjur/obsArb/raw/main/inst/da_arbitragem.xlsx">neste link</a>.</p>
+<p>Por último, três colunas foram adicionadas após a classificação manual. A primeira é com relação à concessão de liminar em casos de medida cautelar. A segunda é que, na revisão manual, vários casos relacionados à Unimed foram detectados. Uma coluna <code>unimed</code> foi adicionada para permitir novos filtros de análise. A terceira é a câmara arbitral de origem do processo.</p>
+<p>No final, a base ficou com 289 linhas e 14 colunas, contendo todas as informações utilizadas na parte de análise. A base de dados em Excel pode ser baixada <a href="https://github.com/abjur/obsArb/raw/main/inst/da_arbitragem.xlsx">neste link</a>.</p>
 </section>
 <section id="segunda-instância" class="level2">
 <h2 class="anchored" data-anchor-id="segunda-instância">Segunda instância</h2>
@@ -3547,7 +3547,7 @@ vertical-align: -.125em;
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Faixa</th>
+<th style="text-align: left;">Vara</th>
 <th style="text-align: right;">N</th>
 <th style="text-align: right;">%</th>
 </tr>
@@ -3583,6 +3583,135 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
+<p>A <a href="#tbl-camara-origem">Tabela 10</a> mostra a contagem e proporção de processos por câmara arbitral de origem. Em 65% dos casos, a câmara não foi identificada na sentença do processo. Com exceção dos casos da Unimed, os demais processos encontram-se distribuídos em várias câmaras arbitrais.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-camara-origem" class="anchored">
+<table class="table table-sm table-striped small">
+<caption>Tabela 10: Quantidade de processos por câmara arbitral de origem</caption>
+<colgroup>
+<col style="width: 88%">
+<col style="width: 4%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Câmara</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Não identificado</td>
+<td style="text-align: right;">188</td>
+<td style="text-align: right;">65.1%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Câmara Arbitral do Fórum Unimed</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">22.1%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Centro de Arbitragem e Mediação da Câmara de Comércio Brasil-Canadá CAM-CCBC</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">3.1%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Conselho Arbitral do Estado de São Paulo - CAESP</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1.7%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Centro de Mediação e Arbitragem de São Paulo – TASP</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1.4%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Câmara de Conciliação, Mediação e Arbitragem CIESP/FIESP</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1.4%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Câmara de Arbitragem do Mercado</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.7%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ARBITRIUM – Câmarade Conciliação Mediação, e Arbitragem</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCI</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Centro Brasileiro de Mediação e Arbitragem –CBMA</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Centro de Arbitragem EIRELI</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Conselho Arbitral da ASSOHONDA - Associação Brasileira de distribuidores Honda</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Corte Internacional de Mediação Conciliação e Arbitragem Extrajudicial -ARBITRARE</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Câmara Arbitral CAMVALE - Câmara de Arbitragem e Mediação do Vale do Paraíba</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Câmara da Bolsa Brasileira de Mercadorias</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Câmara de Mediação, Conciliação e Arbitragem de Osasco</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">IMAESP – Instituto de Mediação do Estado de São Paulo</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Instituto Brasileiro deMediação e Arbitragem</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TNA – Tribunal Nacional de Mediação e Arbitragem</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tribunal Arbitral e Mediação de São Paulo</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total</td>
+<td style="text-align: right;">289</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 <p>A <a href="#fig-no-tempo">Figura 1</a> mostra o volume de decisões ao longo do tempo, considerando como base a data de disponibilização das sentenças. É possível notar um aumento na quantidade de decisões nos anos de 2021 e 2022 (que ainda não acabou).</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -3605,12 +3734,12 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<p>A <a href="#tbl-resultado">Tabela 10</a> mostra os resultados dos processos por categoria, excluindo os acordos. Nas últimas linha e coluna, são apresentadas as contagens e proporções marginais. A proporção de casos extintos observada é mais alta do que o comum em análises de processos do TJSP. A taxa de procedência em anulatórias (considerando casos procedentes e parcialmente procedentes e excluindo acordos do denominador) é de 44% quando considerados os casos da Unimed. Excluídos os casos da Unimed, a taxa de procedência cai para 17%, conforme indicado na <a href="#tbl-resultado-unimed">Tabela 13</a>.</p>
+<p>A <a href="#tbl-resultado">Tabela 11</a> mostra os resultados dos processos por categoria, excluindo os acordos. Nas últimas linha e coluna, são apresentadas as contagens e proporções marginais. A proporção de casos extintos observada é mais alta do que o comum em análises de processos do TJSP. A taxa de procedência em anulatórias (considerando casos procedentes e parcialmente procedentes e excluindo acordos do denominador) é de 44% quando considerados os casos da Unimed. Excluídos os casos da Unimed, a taxa de procedência cai para 17%, conforme indicado na <a href="#tbl-resultado-unimed">Tabela 14</a>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-resultado" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>Tabela 10: Resultados dos processos por categoria, excluindo acordos</caption>
+<caption>Tabela 11: Resultados dos processos por categoria, excluindo acordos</caption>
 <colgroup>
 <col style="width: 18%">
 <col style="width: 15%">
@@ -3683,7 +3812,7 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<p>A partir da <a href="#tbl-resultado">Tabela 10</a>, é importante colocar um comentário sobre o <strong>viés de seleção em decisões judiciais</strong> <span class="citation" data-cites="priest1984selection">(<a href="#ref-priest1984selection" role="doc-biblioref">Priest e Klein 1984</a>)</span>. Os processos que se manifestam no judiciário (por exemplo, ações de anulação de decisão arbitral) são uma amostra de todos os conflitos arbitrais, já que apenas uma parte dos casos vai para o judiciário. No entanto, essa amostra não é aleatória, já que a as probabilidades de dois caso irem ao judiciário após decisão arbitral não são as mesmas. Um caso tem maior probabilidade de se manifestar no judiciário se i) as partes têm grandes divergências sobre suas visões individuais da discussão e ii) se, do ponto de vista monetário, continuar a disputa vale à pena.</p>
+<p>A partir da <a href="#tbl-resultado">Tabela 11</a>, é importante colocar um comentário sobre o <strong>viés de seleção em decisões judiciais</strong> <span class="citation" data-cites="priest1984selection">(<a href="#ref-priest1984selection" role="doc-biblioref">Priest e Klein 1984</a>)</span>. Os processos que se manifestam no judiciário (por exemplo, ações de anulação de decisão arbitral) são uma amostra de todos os conflitos arbitrais, já que apenas uma parte dos casos vai para o judiciário. No entanto, essa amostra não é aleatória, já que a as probabilidades de dois caso irem ao judiciário após decisão arbitral não são as mesmas. Um caso tem maior probabilidade de se manifestar no judiciário se i) as partes têm grandes divergências sobre suas visões individuais da discussão e ii) se, do ponto de vista monetário, continuar a disputa vale à pena.</p>
 <p>A existência de um mecanismo de seleção na criação de novos casos no judiciário serve para relativizar as análises de taxas de favorabilidade. Um importante resultado de <span class="citation" data-cites="priest1984selection">Priest e Klein (<a href="#ref-priest1984selection" role="doc-biblioref">1984</a>)</span> é que, considerando algumas premissas do sistema judiciário (como simetria de informação e existência de custas judiciais), <strong>a taxa de decisões favoráveis no judiciário é diferente da probabilidade de reforma da decisão arbitral</strong>. Ou seja, as taxas de 44% e 17% (retirando Unimed) não devem ser interpretadas como a probabilidade de reverter uma decisão arbitral no judiciário.</p>
 <!-- A intensidade da seleção pode ser medida a partir de estatísticas da quantidade de decisões arbitrais no mesmo período do estudo. Entre 2018 e 2022, foram identificadas 10.000 decisões [^selma] -->
 <!-- [^selma]: Levantamento realizado por  -->
@@ -3698,12 +3827,12 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<p>Finalmente, a <a href="#tbl-tempo">Tabela 11</a> mostra os tempos médios e medianos, geral e por categoria. Os processos mais longos são os de convenção arbitral, com mediana de quase um ano. Já os processos mais curtos são os de anulação, com mediana de aproximadamente seis meses.</p>
+<p>Finalmente, a <a href="#tbl-tempo">Tabela 12</a> mostra os tempos médios e medianos, geral e por categoria. Os processos mais longos são os de convenção arbitral, com mediana de quase um ano. Já os processos mais curtos são os de anulação, com mediana de aproximadamente seis meses.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-tempo" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>Tabela 11: Estatísticas descritivas dos tempos dos processos</caption>
+<caption>Tabela 12: Estatísticas descritivas dos tempos dos processos</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Categoria</th>
@@ -3760,12 +3889,12 @@ vertical-align: -.125em;
 <section id="como-ficam-as-estatísticas-retirando-casos-envolvendo-a-unimed" class="level3">
 <h3 class="anchored" data-anchor-id="como-ficam-as-estatísticas-retirando-casos-envolvendo-a-unimed">Como ficam as estatísticas retirando casos envolvendo a Unimed?</h3>
 <p>Quando analisamos processos relacionados à arbitragem no judiciário, é importante levar em conta a câmara arbitral de origem no processo. Infelizmente, essa informação não é pública, porém, em alguns casos, é possível identificar a câmara de origem através do nome da parte. Esse é o caso da Unimed, que segue um rito arbitral muito diferente das câmaras de arbitragem comuns. Por seguir um fluxo diferente, é de interesse recalcular as principais estatísticas do estudo retirando os 58 casos da Unimed.</p>
-<p>A <a href="#tbl-valor-anulatoria-unimed">Tabela 12</a> mostra a contagem de processos por faixa de valores de causa nas anulatórias, retirando casos da Unimed. Quase um terço dos processos estão na faixa de 100 mil reais a 10 milhões, uma concentração parecida quando comparada <a href="#tbl-valor">Tabela 7</a>.</p>
+<p>A <a href="#tbl-valor-anulatoria-unimed">Tabela 13</a> mostra a contagem de processos por faixa de valores de causa nas anulatórias, retirando casos da Unimed. Quase um terço dos processos estão na faixa de 100 mil reais a 10 milhões, uma concentração parecida quando comparada <a href="#tbl-valor">Tabela 7</a>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-valor-anulatoria-unimed" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>Tabela 12: Faixas de valores nas anulatórias retirando casos da Unimed</caption>
+<caption>Tabela 13: Faixas de valores nas anulatórias retirando casos da Unimed</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Faixa</th>
@@ -3809,12 +3938,12 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<p>A <a href="#tbl-resultado-unimed">Tabela 13</a> mostra as proporções de resultados em processos de anulação retirando os casos da Unimed. A taxa de casos favoráveis (soma de procedentes e parcialmente procedentes excluindo acordos) é significativamente menor, de 17%.</p>
+<p>A <a href="#tbl-resultado-unimed">Tabela 14</a> mostra as proporções de resultados em processos de anulação retirando os casos da Unimed. A taxa de casos favoráveis (soma de procedentes e parcialmente procedentes excluindo acordos) é significativamente menor, de 17%.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-resultado-unimed" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>Tabela 13: Resultados dos processos por categoria, excluindo acordos e casos da Unimed</caption>
+<caption>Tabela 14: Resultados dos processos por categoria, excluindo acordos e casos da Unimed</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Categoria</th>
@@ -3890,12 +4019,12 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<p>A <a href="#tbl-tempo-unimed">Tabela 14</a> mostra os tempos médios e medianos, geral e por categoria, retirando os casos da Unimed. Ao excluir os casos, os tempos médio e mediano das anulatórias aumentam em mais de 100 dias.</p>
+<p>A <a href="#tbl-tempo-unimed">Tabela 15</a> mostra os tempos médios e medianos, geral e por categoria, retirando os casos da Unimed. Ao excluir os casos, os tempos médio e mediano das anulatórias aumentam em mais de 100 dias.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-tempo-unimed" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>Tabela 14: Estatísticas descritivas dos tempos dos processos, retirando casos da Unimed</caption>
+<caption>Tabela 15: Estatísticas descritivas dos tempos dos processos, retirando casos da Unimed</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Categoria</th>
@@ -3949,12 +4078,12 @@ vertical-align: -.125em;
 </section>
 <section id="qual-o-percentual-de-liminares-deferidas-na-categoria-de-ação-cautelar" class="level3">
 <h3 class="anchored" data-anchor-id="qual-o-percentual-de-liminares-deferidas-na-categoria-de-ação-cautelar">Qual o percentual de liminares deferidas na categoria de ação cautelar?</h3>
-<p>A base contém 63 ações cautelares, pouco mais de um quinto da base completa. A <a href="#tbl-cautelar-liminar">Tabela 15</a> mostra os resultados das liminares nessas ações. É possível identificar que mais da metade dos casos, as liminares não são concedias. Importante destacar que, em 6 casos, a decisão liminar não foi encontrada.</p>
+<p>A base contém 63 ações cautelares, pouco mais de um quinto da base completa. A <a href="#tbl-cautelar-liminar">Tabela 16</a> mostra os resultados das liminares nessas ações. É possível identificar que mais da metade dos casos, as liminares não são concedias. Importante destacar que, em 6 casos, a decisão liminar não foi encontrada.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-cautelar-liminar" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>Tabela 15: Resultados das liminares em ações cautelares.</caption>
+<caption>Tabela 16: Resultados das liminares em ações cautelares.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Resultado</th>
@@ -3991,12 +4120,12 @@ vertical-align: -.125em;
 </section>
 <section id="qual-a-média-e-mediana-de-valor-para-cada-categoria-de-ação" class="level3">
 <h3 class="anchored" data-anchor-id="qual-a-média-e-mediana-de-valor-para-cada-categoria-de-ação">Qual a média e mediana de valor para cada categoria de ação?</h3>
-<p>A <a href="#tbl-valor-tipo">Tabela 16</a> mostra os valores médios e medianos das causas, geral e por categoria. Os processos de maior valor são as anulatórias, com mediana de R$ 264.802,79. Já os processos de menor valor são as cautelares e instauração, com mediana de dez mil reais, provavelmente colocados apenas como valores de referência.</p>
+<p>A <a href="#tbl-valor-tipo">Tabela 17</a> mostra os valores médios e medianos das causas, geral e por categoria. Os processos de maior valor são as anulatórias, com mediana de R$ 264.802,79. Já os processos de menor valor são as cautelares e instauração, com mediana de dez mil reais, provavelmente colocados apenas como valores de referência.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-valor-tipo" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>Tabela 16: Estatísticas descritivas dos valores de causa dos processos</caption>
+<caption>Tabela 17: Estatísticas descritivas dos valores de causa dos processos</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Categoria</th>
@@ -4047,12 +4176,12 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<p>A <a href="#tbl-valor-tipo-unimed">Tabela 17</a> mostra as mesmas informações anteriores, mas retirando os casos da Unimed. É interessante notar que, no caso das anulatórias, o valor mediano é menor, mas o valor médio é maior que na <a href="#tbl-valor-tipo">Tabela 16</a>. Isso indica que na amostra de anulatórias sem Unimed, a assimetria nos valores de causa é maior.</p>
+<p>A <a href="#tbl-valor-tipo-unimed">Tabela 18</a> mostra as mesmas informações anteriores, mas retirando os casos da Unimed. É interessante notar que, no caso das anulatórias, o valor mediano é menor, mas o valor médio é maior que na <a href="#tbl-valor-tipo">Tabela 17</a>. Isso indica que na amostra de anulatórias sem Unimed, a assimetria nos valores de causa é maior.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-valor-tipo-unimed" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>Tabela 17: Estatísticas descritivas dos valores de causa dos processos, retirando casos da Unimed</caption>
+<caption>Tabela 18: Estatísticas descritivas dos valores de causa dos processos, retirando casos da Unimed</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Categoria</th>
@@ -4120,12 +4249,12 @@ vertical-align: -.125em;
 </section>
 <section id="segunda-instância-1" class="level3">
 <h3 class="anchored" data-anchor-id="segunda-instância-1">Segunda instância</h3>
-<p>A Tabela <a href="#tbl-2inst-status">Tabela 18</a> mostra os status dos processos de acordo com as categorias fornecidas pelo TJSP no momento de coleta. Quase 41% dos recursos foram encerrados e 26% foram arquivados administrativamente.</p>
+<p>A Tabela <a href="#tbl-2inst-status">Tabela 19</a> mostra os status dos processos de acordo com as categorias fornecidas pelo TJSP no momento de coleta. Quase 41% dos recursos foram encerrados e 26% foram arquivados administrativamente.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-2inst-status" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>Tabela 18: Status dos processos na segunda instância de acordo com as categorias fornecidas pelo TJSP</caption>
+<caption>Tabela 19: Status dos processos na segunda instância de acordo com as categorias fornecidas pelo TJSP</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Staus</th>
@@ -4169,12 +4298,12 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<p>A taxa de recorribilidade estimada é de quase 60% (173 de 289 casos). Dividindo as taxas por categoria de processo, encontra-se o resultado da <a href="#tbl-tx-recorr-categoria">Tabela 19</a>. A tabela também apresenta a quantidade de casos com alguma decisão (os demais continuam ativos, aguardando decisão). É possível notar que as anulatórias são as que apresentam maior taxa de recorribilidade.</p>
+<p>A taxa de recorribilidade estimada é de quase 60% (173 de 289 casos). Dividindo as taxas por categoria de processo, encontra-se o resultado da <a href="#tbl-tx-recorr-categoria">Tabela 20</a>. A tabela também apresenta a quantidade de casos com alguma decisão (os demais continuam ativos, aguardando decisão). É possível notar que as anulatórias são as que apresentam maior taxa de recorribilidade.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-tx-recorr-categoria" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>Tabela 19: Quantidade e taxa de recorribilidade por categoria.</caption>
+<caption>Tabela 20: Quantidade e taxa de recorribilidade por categoria.</caption>
 <colgroup>
 <col style="width: 17%">
 <col style="width: 11%">
@@ -4239,12 +4368,12 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<p>A <a href="#tbl-tx-recorr-categoria-unimed">Tabela 20</a> mostra as mesmas estatísticas excluindo os casos da Unimed. A taxa de recorribilidade estimada é de 50% (116 de 231 casos). Dividindo as taxas por categoria de processo, é possível notar que as anulatórias permanecem com maior taxa de recorribilidade.</p>
+<p>A <a href="#tbl-tx-recorr-categoria-unimed">Tabela 21</a> mostra as mesmas estatísticas excluindo os casos da Unimed. A taxa de recorribilidade estimada é de 50% (116 de 231 casos). Dividindo as taxas por categoria de processo, é possível notar que as anulatórias permanecem com maior taxa de recorribilidade.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-tx-recorr-categoria-unimed" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>Tabela 20: Quantidade e taxa de recorribilidade por categoria, retirando casos da Unimed</caption>
+<caption>Tabela 21: Quantidade e taxa de recorribilidade por categoria, retirando casos da Unimed</caption>
 <colgroup>
 <col style="width: 17%">
 <col style="width: 11%">
@@ -4309,13 +4438,13 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<p>Como mostrado na <a href="#tbl-tx-recorr-categoria">Tabela 19</a>, 173 casos com algum recurso, 132 (76%) apresentam alguma decisão. Os demais 41 casos (24%) ainda estavam ativos no momento de coleta dos dados, aguardando julgamento no segundo grau. Dos 132 casos que apresentam alguma decisão, 78 são anulatórias.</p>
-<p>A <a href="#tbl-tx-provido">Tabela 21</a> apresenta a taxa de recursos providos ou providos em parte por tipo de recurso. Considerando apenas as anulatórias com alguma decisão (78 casos), a taxa de recursos providos ou providos em parte é de 41% (32 de 78 casos).</p>
+<p>Como mostrado na <a href="#tbl-tx-recorr-categoria">Tabela 20</a>, 173 casos com algum recurso, 132 (76%) apresentam alguma decisão. Os demais 41 casos (24%) ainda estavam ativos no momento de coleta dos dados, aguardando julgamento no segundo grau. Dos 132 casos que apresentam alguma decisão, 78 são anulatórias.</p>
+<p>A <a href="#tbl-tx-provido">Tabela 22</a> apresenta a taxa de recursos providos ou providos em parte por tipo de recurso. Considerando apenas as anulatórias com alguma decisão (78 casos), a taxa de recursos providos ou providos em parte é de 41% (32 de 78 casos).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-tx-provido" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>Tabela 21: Taxa de recursos provido ou providos em parte por categoria</caption>
+<caption>Tabela 22: Taxa de recursos provido ou providos em parte por categoria</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Categoria</th>
@@ -4354,12 +4483,12 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<p>A <a href="#tbl-tx-provido-unimed">Tabela 22</a> apresenta as mesmas taxas da <a href="#tbl-tx-provido">Tabela 21</a> excluindo casos da Unimed. Considerando apenas as anulatórias com alguma decisão (22 casos), a taxa de recursos providos ou providos em parte é de 14% (3 de 22 casos).</p>
+<p>A <a href="#tbl-tx-provido-unimed">Tabela 23</a> apresenta as mesmas taxas da <a href="#tbl-tx-provido">Tabela 22</a> excluindo casos da Unimed. Considerando apenas as anulatórias com alguma decisão (22 casos), a taxa de recursos providos ou providos em parte é de 14% (3 de 22 casos).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-tx-provido-unimed" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>Tabela 22: Taxa de recursos provido ou providos em parte por categoria, excluindo casos da Unimed.</caption>
+<caption>Tabela 23: Taxa de recursos provido ou providos em parte por categoria, excluindo casos da Unimed.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Categoria</th>

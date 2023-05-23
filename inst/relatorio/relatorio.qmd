@@ -146,9 +146,9 @@ da_tidy |>
 
 Com relação aos resultados, não houve mudanças significativas. A categoria que mais mudou foi a de acordos, que costumam ser difíceis de mapear apenas por palavras-chave. Os resultados completos são apresentados na próxima seção.
 
-Por último, duas colunas foram adicionadas após a classificação manual. A primeira é com relação à concessão de liminar em casos de medida cautelar. A segunda é que, na revisão manual, vários casos relacionados à Unimed foram detectados. Uma coluna `unimed` foi adicionada para permitir novos filtros de análise.
+Por último, três colunas foram adicionadas após a classificação manual. A primeira é com relação à concessão de liminar em casos de medida cautelar. A segunda é que, na revisão manual, vários casos relacionados à Unimed foram detectados. Uma coluna `unimed` foi adicionada para permitir novos filtros de análise. A terceira é a câmara arbitral de origem do processo.
 
-No final, a base ficou com 289 linhas e 13 colunas, contendo todas as informações utilizadas na parte de análise. A base de dados em Excel pode ser baixada [neste link](https://github.com/abjur/obsArb/raw/main/inst/da_arbitragem.xlsx).
+No final, a base ficou com 289 linhas e 14 colunas, contendo todas as informações utilizadas na parte de análise. A base de dados em Excel pode ser baixada [neste link](https://github.com/abjur/obsArb/raw/main/inst/da_arbitragem.xlsx).
 
 ## Segunda instância
 
@@ -227,7 +227,6 @@ da_tidy |>
 
 ```
 
-
 A @tbl-valor-anulatoria mostra a contagem de processos por faixa de valores de causa nas anulatórias. Mais da metade dos processos estão na faixa de 100 mil reais a 10 milhões. Ou seja, os valores são maiores nas anulatórias do que na amostra geral.
 
 ```{r}
@@ -255,7 +254,6 @@ da_tidy |>
 
 ```
 
-
 A @tbl-vara mostra a contagem de processos por vara. As varas empresariais do foro central cível concentram a maior parte dos casos. Por conta do pequeno número de informações, as análises de contagem de resultados e categorias por vara vão desconsiderar as RAJs.
 
 ```{r}
@@ -265,7 +263,19 @@ da_tidy |>
   dplyr::count(vara, sort = TRUE) |> 
   dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |> 
   janitor::adorn_totals() |> 
-  knitr::kable(col.names = c("Faixa", "N", "%"))
+  knitr::kable(col.names = c("Vara", "N", "%"))
+```
+
+A @tbl-camara-origem mostra a contagem e proporção de processos por câmara arbitral de origem. Em 65% dos casos, a câmara não foi identificada na sentença do processo. Com exceção dos casos da Unimed, os demais processos encontram-se distribuídos em várias câmaras arbitrais.
+
+```{r}
+#| label: tbl-camara-origem
+#| tbl-cap: "Quantidade de processos por câmara arbitral de origem"
+da_tidy |> 
+  dplyr::count(camara_arbitral, sort = TRUE) |> 
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |> 
+  janitor::adorn_totals() |> 
+  knitr::kable(col.names = c("Câmara", "N", "%"))
 ```
 
 A @fig-no-tempo mostra o volume de decisões ao longo do tempo, considerando como base a data de disponibilização das sentenças. É possível notar um aumento na quantidade de decisões nos anos de 2021 e 2022 (que ainda não acabou).

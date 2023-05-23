@@ -130,3 +130,25 @@ piggyback::pb_upload("data-raw/PLANILHA VALIDADA Versão Final.xlsx", tag = "rel
 #   unlist() |>
 #   cat(sep = "\n")
 
+
+# câmara arbitral ---------------------------------------------------------
+
+aux_camara_arbitral <- readxl::read_excel("data-raw/camaras_arbitrais.xlsx") |>
+  janitor::clean_names() |>
+  dplyr::select(id, camara_arbitral) |>
+  dplyr::semi_join(da_tidy, "id") |>
+  dplyr::select(id, camara_arbitral) |>
+  dplyr::mutate(
+    camara_arbitral = dplyr::na_if(camara_arbitral, "Um dos pedidos foi"),
+    camara_arbitral = tidyr::replace_na(camara_arbitral, "Não identificado"),
+    camara_arbitral = dplyr::case_when(
+      stringr::str_detect(camara_arbitral, "CAESP") ~ "Conselho Arbitral do Estado de São Paulo - CAESP",
+      stringr::str_detect(camara_arbitral, "CIESP") ~ "Câmara de Conciliação, Mediação e Arbitragem CIESP/FIESP",
+      .default = camara_arbitral
+    )
+  )
+
+da_tidy <- da_tidy |>
+  dplyr::inner_join(aux_camara_arbitral, "id")
+
+usethis::use_data(da_tidy, overwrite = TRUE)
