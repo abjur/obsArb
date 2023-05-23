@@ -13,8 +13,8 @@ get_category <- function(text, rx) {
 
 rx_tipo <- function() {
   list(
-    compromisso = list(c(
-      "compromisso arbitral"
+    convencao = list(c(
+      "convenção arbitral"
     )),
     instauracao = list(c(
       "instauracao"

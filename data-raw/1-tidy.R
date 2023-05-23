@@ -8,7 +8,7 @@ da_cpopg <- readr::read_rds("data-raw/da_cpopg.rds")
 # ii) cumprimento de sentença / execução,
 # iii) medida cautelar antecedente ao tribunal arbitral
 # iv) ação de instauração da arbitragem
-# v) compromisso arbitral.
+# v) compromisso arbitral. (substituído por convençõ)
 
 da_cjpg_tidy <- da_cjpg |>
   dplyr::mutate(
@@ -29,6 +29,9 @@ da_cjpg_tidy <- da_cjpg |>
   ) |>
   dplyr::arrange(dplyr::desc(dt_disp)) |>
   dplyr::distinct(id, .keep_all = TRUE)
+
+da_cjpg_tidy <- da_cjpg_tidy |>
+  dplyr::mutate(categoria = dplyr::if_else(categoria == "compromisso", "convencao", categoria))
 
 da_cpopg_tidy <- da_cpopg |>
   dplyr::mutate(id = fs::path_ext_remove(fs::path_file(file))) |>
@@ -85,6 +88,11 @@ da_tidy <- da_tidy_auto |>
     unimed = dplyr::if_else(is.na(unimed), "Não", "Sim")
   ) |>
   dplyr::select(-categoria_validada, -resultado_validado)
+
+da_tidy <- da_tidy |>
+  dplyr::mutate(categoria = dplyr::if_else(
+    categoria == "Compromisso", "Convencao", categoria
+  ))
 
 # export ------------------------------------------------------------------
 

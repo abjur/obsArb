@@ -2,7 +2,7 @@
 title: "Processos relacionados à Arbitragem"
 subtitle: "Um levantamento preliminar no banco de sentenças do TJSP"
 author: Associação Brasileira de Jurimetria
-date: "2023-05-03"
+date: "2023-05-23"
 execute: 
   echo: false
   freeze: true
@@ -29,7 +29,7 @@ col_abj <- viridis::viridis(5, 1, .2, .8)
 
 # Introdução
 
-O Observatório da Arbitragem é um projeto que visa compreender o reflexo do fenômeno jurídico da arbitragem nos tribunais. Em sua primeira fase, o projeto busca compreender o fluxo dos processos de i) anulação de decisão arbitral, ii) cumprimento de sentença / execução, iii) medida cautelar antecedente ao tribunal arbitral, iv) existência, validade e eficácia da convenção de arbitragem e v) ação para instituição da arbitragem com base no art, 7º da Lei de Arbitragem. 
+O Observatório da Arbitragem é um projeto que visa compreender o reflexo do fenômeno jurídico da arbitragem nos tribunais. Em sua primeira fase, o projeto busca compreender o fluxo dos processos de i) anulação de decisão arbitral, ii) cumprimento de sentença / execução, iii) medida cautelar antecedente ao tribunal arbitral, iv) existência, validade e eficácia da convenção de arbitragem e v) ação para instituição da arbitragem com base no art, 7º da Lei de Arbitragem.
 
 O objetivo do levantamento é realizar uma análise preliminar a partir do banco de sentenças do Tribunal de Justiça de São Paulo (TJSP). O levantamento terá como resultado algumas estatísticas básicas como volume de sentenças ao longo do tempo, proporção de decisões favoráveis ao autor e tempo mediano dos processos. O estudo pode ser utilizado como insumo para decidir sobre a viabilidade de uma pesquisa mais aprofundada -- envolvendo análise de autos processuais -- a partir dos dados disponibilizados no banco de sentenças.
 
@@ -37,15 +37,19 @@ O presente levantamento descreve o fluxo de download, arrumação e análise dos
 
 # Download
 
+Antes de descrever o processo de coleta, é importante ressaltar que o TJSP não forneceu acesso aos processos mantidos sob sigilo, nem forneceu uma lista de processos distribuídos no período. O pedido de dados foi realizado ainda em 2021 e, mesmo após muitas tentativas de contato, os dados não foram fornecidos.
+
+Como consequência, a amostra da nossa análise a totalidade dos processos existentes no tribunal. Apesar desta limitação, acredita-se que os dados coletados e analisados ainda são valiosos e oferecem resultados significativos sobre o tema. É importante levar essa limitação em consideração ao interpretar os resultados apresentados.
+
 Os dados de processos do TJSP são públicos, mas não são abertos. Isso significa que não existe um meio fácil de obter uma lista de todos os processos que existem no tribunal a partir de um critério jurídico, geográfico ou temporal.
 
 O tribunal, no entanto, disponibiliza ferramentas de consulta. Na [Consulta de Julgados do Primeiro Grau (CJPG)](https://esaj.tjsp.jus.br/cjpg/pesquisar.do) é possível acessar, manualmente, a lista de processos a partir de termos de busca (como palavras-chave, classes e assuntos). Cada processo, por sua vez, pode ser pesquisado manualmente em uma consulta de processos [Consulta de Processos do Primeiro Grau](https://esaj.tjsp.jus.br/cpopg/open.do).
 
 Por conta da necessidade de realizar pesquisas no Direito, a ABJ desenvolveu, ao longo de sua história, algumas ferramentas que automatizam o fluxo manual de obtenção de dados. Essas ferramentas utilizam técnicas de raspagem de dados [@zhaoWebScraping2017] que, em poucas palavras, envolvem imitar o que um ser humano faria para acessar as páginas, mas de forma automática. Vale ressaltar que essa não é uma estratégia oficial nem desejável de ser utilizada ao acessar dados públicos. No entanto, por conta das limitações do tribunal, utilizar raspagem de dados acaba sendo necessário para tornar as pesquisas viáveis.
 
-Ao acessar os dados via raspagem do CJPG, a primeira limitação que aparece são os campos disponíveis. Processos de arbitragem podem aparecer com classes e assuntos processuais[^classe] que não identificam corretamente os casos. Por exemplo, é comum encontrar como classe "procedimento ordinário" ou como assunto "anulação". Por isso, a única forma de listar os processos relacionados à arbitragem é através das palavras-chave.
+Ao acessar os dados via raspagem do CJPG, a primeira limitação que aparece são os campos disponíveis. Processos de arbitragem podem aparecer com classes e assuntos processuais[^1] que não identificam corretamente os casos. Por exemplo, é comum encontrar como classe "procedimento ordinário" ou como assunto "anulação". Por isso, a única forma de listar os processos relacionados à arbitragem é através das palavras-chave.
 
-[^classe]: Classes e assuntos são listas de tipos de processos organizadas pelo Conselho Nacional de Justiça (CNJ), através das Tabelas Processuais Unificadas (TPU), Res. 46 CNJ.
+[^1]: Classes e assuntos são listas de tipos de processos organizadas pelo Conselho Nacional de Justiça (CNJ), através das Tabelas Processuais Unificadas (TPU), Res. 46 CNJ.
 
 A desvantagem em utilizar palavras-chave é que as pesquisas se limitam ao que as ferramentas de pesquisa disponibilizam. Se a ferramenta de busca é falha, o resultado é falho. De qualquer forma, por falta de outros meios, essa foi a decisão tomada para acessar os processos relacionados à arbitragem.
 
@@ -55,13 +59,13 @@ Outro filtro realizado foi o das varas. Foram consideradas 4 varas no total: 1ª
 
 A pesquisa retornou um total de 348 decisões, disponibilizadas entre março de 2018 e novembro de 2022. Dentre esses casos, foram encontrados 338 números de processos únicos, já que um processo pode apresentar mais de uma decisão. A consulta desses processos individualmente retornou 337 casos (1 caso foi descartado por estar em segredo de justiça). A base bruta final, portanto, possui 337 processos.
 
-Neste ponto, uma discussão pode ser iniciada sobre o volume total de ações. Por envolver casos que potencialmente correm em segredo de justiça, é possível que uma parte dos casos não são acessíveis através do banco de sentenças. Além disso, por envolver apenas as varas empresariais, o recorte pode apresentar limitações de espaço (regiões) e tempo (criação das varas)[^comentario-varas]. Por último, por se tratar de um estudo retrospectivo (envolve apenas casos com sentença), pode ser que casos que ainda estão ativos fiquem de fora da lista. De qualquer forma, espera-se que a lista obtida, depois de limpa, possa ser utilizada como amostra aleatória da população de todos os processos relacionados a arbitragem.
+Neste ponto, uma discussão pode ser iniciada sobre o volume total de ações. Por envolver casos que potencialmente correm em segredo de justiça, é possível que uma parte dos casos não são acessíveis através do banco de sentenças. Além disso, por envolver apenas as varas empresariais, o recorte pode apresentar limitações de espaço (regiões) e tempo (criação das varas)[^2]. Por último, por se tratar de um estudo retrospectivo (envolve apenas casos com sentença), pode ser que casos que ainda estão ativos fiquem de fora da lista. De qualquer forma, espera-se que a lista obtida, depois de limpa, possa ser utilizada como amostra aleatória da população de todos os processos relacionados a arbitragem.
 
-[^comentario-varas]: As três primeiras varas empresariais tiveram sua criação autorizada no dia 14 de dezembro por deliberação unânime do Órgão Especial do Tribunal de Justiça do Estado de São Paulo. Link para o parecer em <https://bit.ly/parecer-varas>. Acesso em 03 de maio de 2023.
+[^2]: As três primeiras varas empresariais tiveram sua criação autorizada no dia 14 de dezembro por deliberação unânime do Órgão Especial do Tribunal de Justiça do Estado de São Paulo. Link para o parecer em <https://bit.ly/parecer-varas>. Acesso em 03 de maio de 2023.
 
 # Arrumação
 
-O primeiro passo da arrumação dos dados foi a classificação das categorias de processos e remoção de casos que não fazem parte do escopo. Para classificar as cinco categorias, foram utilizados os termos e expressões regulares da @tbl-rx-tipo. 
+O primeiro passo da arrumação dos dados foi a classificação das categorias de processos e remoção de casos que não fazem parte do escopo. Para classificar as cinco categorias, foram utilizados os termos e expressões regulares da @tbl-rx-tipo.
 
 ```{r}
 #| label: tbl-rx-tipo
@@ -96,7 +100,7 @@ da_cjpg_tidy |>
   knitr::kable(col.names = c("Resultado", "N", "%"))
 ```
 
-O passo seguinte foi a obtenção dos resultados dos processos. Para classificar as categorias de resultados, foram utilizados os termos e expressões regulares da @tbl-rx-resultado. 
+O passo seguinte foi a obtenção dos resultados dos processos. Para classificar as categorias de resultados, foram utilizados os termos e expressões regulares da @tbl-rx-resultado.
 
 ```{r}
 #| label: tbl-rx-resultado
@@ -114,31 +118,15 @@ rx_resultado() |>
   knitr::kable(col.names = c("Categoria", "Expressões regulares"))
 ```
 
-A @tbl-tabela-resultado mostra a quantidade de processos detectada em cada categoria de resultado. Novamente, a classificação automática pode incorrer em erros, ou seja, pode ser que os resultados estejam incorretos. Os casos vazios foram retirados da análise.
-
-```{r}
-#| label: tbl-tabela-resultado
-#| tbl-cap: "Processos classificados por resultado"
-da_cjpg_tidy |>
-  dplyr::count(resultado, sort = TRUE) |> 
-  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
-  dplyr::mutate(
-    resultado = tidyr::replace_na(resultado, "(vazio)"),
-    resultado = stringr::str_to_title(resultado)
-  ) |> 
-  janitor::adorn_totals() |> 
-  knitr::kable(col.names = c("Resultado", "N", "%"))
-```
-
 Por último, as colunas importantes de análise foram construídas. As colunas escolhidas foram: status (em andamento, extinto, em grau de recurso ou suspenso), classe, assunto, valor da causa, processo digital, data de disponibilização da sentença, vara, resultado e tempo (calculado pelo tempo entre a data de distribuição e data da disponibilização da decisão).
 
 ## Revisão manual
 
 A base de dados arrumada foi revisada manualmente a partir da leitura dos textos das decisões e outras características dos processos. A revisão foi realizada por profissionais do direito especializados no tema de arbitragem.
 
-A primeira mudança significativa foi com relação aos casos que fazem parte do escopo. Dos 338 casos iniciais, sobraram 289 que faziam parte do escopo[^carta-arbitral].
+A primeira mudança significativa foi com relação aos casos que fazem parte do escopo. Dos 338 casos iniciais, sobraram 289 que faziam parte do escopo[^3].
 
-[^carta-arbitral]: O critério de exclusão dizia respeito à pertinência do caso ao objeto da pesquisa. Assim, casos nos quais as expressões apresentavam significados distintos (falsos cognatos) foram excluídos. Por exemplo, arbitragem no sentido de arbitragem de preço e não como método de resolução de disputas. Um caso foi identificado em uma nova categoria "Carta Arbitral" (1099760-61.2021.8.26.0100). O caso foi desconsiderado da análise.
+[^3]: O critério de exclusão dizia respeito à pertinência do caso ao objeto da pesquisa. Assim, casos nos quais as expressões apresentavam significados distintos (falsos cognatos) foram excluídos. Por exemplo, arbitragem no sentido de arbitragem de preço e não como método de resolução de disputas. Um caso foi identificado em uma nova categoria "Carta Arbitral" (1099760-61.2021.8.26.0100). O caso foi desconsiderado da análise.
 
 Com relação às colunas da base, as principais informações alteradas foram as de categoria e resultado. A informação de categoria foi a que mais sofreu alterações, especialmente em ações de anulação de decisão arbitral, que ficaram maiores. A @tbl-tabela-tipo-revisao mostra as classificações depois da correção manual.
 
@@ -156,21 +144,7 @@ da_tidy |>
   knitr::kable(col.names = c("Resultado", "N", "%"))
 ```
 
-Com relação aos resultados, não houve mudanças significativas. A categoria que mais mudou foi a de acordos, que costumam ser difíceis de mapear apenas por palavras-chave. A @tbl-tabela-resultado-revisao mostra as classificações depois da correção manual. Os resultados completos são apresentados na próxima seção.
-
-```{r}
-#| label: tbl-tabela-resultado-revisao
-#| tbl-cap: "Processos classificados por resultado, após revisão"
-da_tidy |>
-  dplyr::count(resultado, sort = TRUE) |> 
-  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
-  dplyr::mutate(
-    resultado = tidyr::replace_na(resultado, "(vazio)"),
-    resultado = stringr::str_to_title(resultado)
-  ) |> 
-  janitor::adorn_totals() |> 
-  knitr::kable(col.names = c("Resultado", "N", "%"))
-```
+Com relação aos resultados, não houve mudanças significativas. A categoria que mais mudou foi a de acordos, que costumam ser difíceis de mapear apenas por palavras-chave. Os resultados completos são apresentados na próxima seção.
 
 Por último, duas colunas foram adicionadas após a classificação manual. A primeira é com relação à concessão de liminar em casos de medida cautelar. A segunda é que, na revisão manual, vários casos relacionados à Unimed foram detectados. Uma coluna `unimed` foi adicionada para permitir novos filtros de análise.
 
@@ -180,10 +154,9 @@ No final, a base ficou com 289 linhas e 13 colunas, contendo todas as informaç�
 
 Depois de baixar e revisar as sentenças, procurou-se os números de processos obtidos na segunda instância. Foram considerados apenas casos com apenas um recurso (agravo de instrumento ou apelação). Por exemplo, processos que tiveram mais de um agravo de instrumento foram desconsiderados.
 
-Dos 289 processos, 173 apresentaram algum recurso, sendo 126 (73%) com classe "Apelação Cível" e 47 (27%) com classe "Agravo de Instrumento". Nessa base, somente 132 (76%) possuem alguma decisão, sendo 98 apelações e 34 agravos. Os demais recursos não apresentavam uma tabela de decisões na consulta processual. 
-Além da informação da decisão, também foi coletada a informação do status dos processos no momento da coleta. Essa informação foi extraída diretamente da consulta processual do TJSP, sem nenhum tratamento posterior.
+Dos 289 processos, 173 apresentaram algum recurso, sendo 126 (73%) com classe "Apelação Cível" e 47 (27%) com classe "Agravo de Instrumento". Nessa base, somente 132 (76%) possuem alguma decisão, sendo 98 apelações e 34 agravos. Os demais recursos não apresentavam uma tabela de decisões na consulta processual. Além da informação da decisão, também foi coletada a informação do status dos processos no momento da coleta. Essa informação foi extraída diretamente da consulta processual do TJSP, sem nenhum tratamento posterior.
 
-Após o filtro inicial, a base passou por uma revisão manual. A revisão foi realizada nos 57 casos que tinham alguma decisão diferente de improcedente. Na nova análise, foram incluídas duas informações manualmente: se a decisão arbitral foi reformada e uma coluna identificando se o caso era relacionado com a Unimed.
+Após o filtro inicial, a base passou por uma revisão manual. A revisão foi realizada nos 57 casos que tinham alguma decisão diferente de não provimento Na nova análise, foram incluídas duas informações manualmente: se a decisão arbitral foi reformada e uma coluna identificando se o caso era relacionado com a Unimed.
 
 A base de segunda instância foi considerada para calcular a taxa de recorribilidade e a taxa de decisões favoráveis na segunda instância. A taxa de reforma da decisão arbitral foi calculada a partir da análise manual.
 
@@ -192,18 +165,6 @@ A base considerada possui 173 linhas e 8 colunas. A base de dados em Excel pode 
 # Análise
 
 A base possui 289 casos, dentre os quais 226 são digitais ou digitalizados (78%). Em uma nova análise manual mais aprofundada, seriam considerados apenas processos digitais ou digitalizados.
-
-A @tbl-status mostra os status dos processos no momento da coleta dos dados, em novembro/2022. A maioria dos casos está extinta e aproximadamente um quinto dos casos está em grau de recurso.
-
-```{r}
-#| label: tbl-status
-#| tbl-cap: "Status dos processos no momento da coleta dos dados"
-da_tidy |> 
-  dplyr::count(status, sort = TRUE) |> 
-  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |> 
-  janitor::adorn_totals() |> 
-  knitr::kable(col.names = c("Status", "N", "%"))
-```
 
 Em seguida, são apresentadas tabelas das classes e assuntos mais comuns nos processos encontrados. É importante destacar que classes e assuntos nem sempre identificam corretamente o tipo de ação, tanto por motivos de taxonomia (o tipo de processo não existe na classificação do CNJ) quanto por motivos de má classificação (a pessoa que protocolou a ação colocou uma classe/assunto inadequada). Por isso, a classe e assunto não está sendo usada para classificar os tipos de processo.
 
@@ -217,6 +178,9 @@ da_tidy |>
     classe = forcats::fct_lump_n(classe, 10, other_level = "Outros")
   ) |> 
   dplyr::count(classe, sort = TRUE) |> 
+  dplyr::mutate(classe = dplyr::if_else(
+    classe == "Compromisso Arbitral", "Convenção Arbitral", classe
+  )) |> 
   dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |> 
   janitor::adorn_totals() |> 
   knitr::kable(col.names = c("Classe", "N", "%"))
@@ -262,6 +226,35 @@ da_tidy |>
   knitr::kable(col.names = c("Faixa", "N", "%"))
 
 ```
+
+
+A @tbl-valor-anulatoria mostra a contagem de processos por faixa de valores de causa nas anulatórias. Mais da metade dos processos estão na faixa de 100 mil reais a 10 milhões. Ou seja, os valores são maiores nas anulatórias do que na amostra geral.
+
+```{r}
+#| label: tbl-valor-anulatoria
+#| tbl-cap: "Faixas de valores nas anulatórias"
+da_tidy |> 
+  dplyr::filter(categoria == "Anulacao") |> 
+  dplyr::mutate(
+    faixa = cut(
+      valor, c(0, 1e4, 1e5, 1e6, 1e7, Inf), 
+      labels = c(
+        "Até R$ 10.000", 
+        "Entre R$ 10.000 e R$ 100.000",
+        "Entre R$ 100.000 e R$ 1 milhão",
+        "Entre R$ 1 milhão e R$ 10 milhões",
+        "R$ 10 milhões ou mais"
+      )
+    )
+  ) |> 
+  dplyr::count(faixa) |> 
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |> 
+  dplyr::mutate(faixa = forcats::fct_explicit_na(faixa, "(Vazio)")) |> 
+  janitor::adorn_totals() |> 
+  knitr::kable(col.names = c("Faixa", "N", "%"))
+
+```
+
 
 A @tbl-vara mostra a contagem de processos por vara. As varas empresariais do foro central cível concentram a maior parte dos casos. Por conta do pequeno número de informações, as análises de contagem de resultados e categorias por vara vão desconsiderar as RAJs.
 
@@ -317,13 +310,14 @@ da_tidy |>
   ggthemes::theme_hc(12)
 ```
 
-A @tbl-resultado mostra os resultados dos processos por categoria. Nas últimas linha e coluna, são apresentadas as contagens e proporções marginais. A proporção de casos extintos observada é mais alta do que o comum em análises de processos do TJSP. A taxa de procedência em anulatórias (considerando casos procedentes, parcialmente procedentes e acordos) é de 45%.
+A @tbl-resultado mostra os resultados dos processos por categoria, excluindo os acordos. Nas últimas linha e coluna, são apresentadas as contagens e proporções marginais. A proporção de casos extintos observada é mais alta do que o comum em análises de processos do TJSP. A taxa de procedência em anulatórias (considerando casos procedentes e parcialmente procedentes e excluindo acordos do denominador) é de 44% quando considerados os casos da Unimed. Excluídos os casos da Unimed, a taxa de procedência cai para 17%, conforme indicado na @tbl-resultado-unimed.
 
 ```{r}
 #| label: tbl-resultado
-#| tbl-cap: "Resultados dos processos por categoria"
+#| tbl-cap: "Resultados dos processos por categoria, excluindo acordos"
 
 tab_geral <- da_tidy |> 
+  dplyr::filter(resultado != "Acordo") |> 
   dplyr::count(categoria, resultado) |> 
   dplyr::group_by(categoria) |> 
   dplyr::mutate(prop = n/sum(n)) |>
@@ -331,12 +325,14 @@ tab_geral <- da_tidy |>
   dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, 1)})")) 
 
 tab_total_col <- da_tidy |> 
+  dplyr::filter(resultado != "Acordo") |> 
   dplyr::count(categoria) |> 
   dplyr::mutate(prop = n/sum(n)) |> 
   dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, 1)})")) |> 
   dplyr::select(Total = lab)
 
 tab_total_row <- da_tidy |> 
+  dplyr::filter(resultado != "Acordo") |> 
   dplyr::count(resultado) |> 
   dplyr::mutate(prop = n/sum(n)) |> 
   dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, 1)})")) |> 
@@ -360,6 +356,14 @@ tab_geral |>
   knitr::kable()
 
 ```
+
+A partir da @tbl-resultado, é importante colocar um comentário sobre o **viés de seleção em decisões judiciais** [@priest1984selection]. Os processos que se manifestam no judiciário (por exemplo, ações de anulação de decisão arbitral) são uma amostra de todos os conflitos arbitrais, já que apenas uma parte dos casos vai para o judiciário. No entanto, essa amostra não é aleatória, já que a as probabilidades de dois caso irem ao judiciário após decisão arbitral não são as mesmas. Um caso tem maior probabilidade de se manifestar no judiciário se i) as partes têm grandes divergências sobre suas visões individuais da discussão e ii) se, do ponto de vista monetário, continuar a disputa vale à pena.
+
+A existência de um mecanismo de seleção na criação de novos casos no judiciário serve para relativizar as análises de taxas de favorabilidade. Um importante resultado de @priest1984selection é que, considerando algumas premissas do sistema judiciário (como simetria de informação e existência de custas judiciais), **a taxa de decisões favoráveis no judiciário é diferente da probabilidade de reforma da decisão arbitral**. Ou seja, as taxas de 44% e 17% (retirando Unimed) não devem ser interpretadas como a probabilidade de reverter uma decisão arbitral no judiciário. 
+
+<!-- A intensidade da seleção pode ser medida a partir de estatísticas da quantidade de decisões arbitrais no mesmo período do estudo. Entre 2018 e 2022, foram identificadas 10.000 decisões [^selma] -->
+
+<!-- [^selma]: Levantamento realizado por  -->
 
 A @fig-resultado-vara mostra os resultados dos processos por categoria e vara, considerando apenas as duas varas empresariais. A quantidade de processos é muito pequena para obter resultados conclusivos, mas aparentemente a segunda vara tende a dar mais resultados procedentes ou parcialmente procedentes nas ações anulatórias.
 
@@ -389,7 +393,7 @@ da_tidy |>
 
 ```
 
-Finalmente, a @tbl-tempo mostra os tempos médios e medianos, geral e por categoria. Os processos mais longos são os de compromisso arbitral, com mediana de quase um ano. Já os processos mais curtos são os de anulação, com mediana de aproximadamente seis meses.
+Finalmente, a @tbl-tempo mostra os tempos médios e medianos, geral e por categoria. Os processos mais longos são os de convenção arbitral, com mediana de quase um ano. Já os processos mais curtos são os de anulação, com mediana de aproximadamente seis meses.
 
 ```{r}
 #| label: tbl-tempo
@@ -418,31 +422,60 @@ da_tidy |>
 
 Após a revisão das análises, um novo conjunto de perguntas foi gerado. As perguntas foram respondidas com os gráficos e tabelas que seguem.
 
-### Qual a proporção de resultado para a categoria anulação envolvendo ou não a Unimed?
+### Como ficam as estatísticas retirando casos envolvendo a Unimed?
 
-A @tbl-resultado-unimed mostra as proporções de resultados em processos de anulação considerando ou não a Unimed como parte. A taxa de casos favoráveis (soma de acordos, procedentes e parcialmente procedentes) é significativamente maior em casos envolvendo a Unimed. Para os demais casos, a taxa de casos favoráveis é de apenas 22%.
+Quando analisamos processos relacionados à arbitragem no judiciário, é importante levar em conta a câmara arbitral de origem no processo. Infelizmente, essa informação não é pública, porém, em alguns casos, é possível identificar a câmara de origem através do nome da parte. Esse é o caso da Unimed, que segue um rito arbitral muito diferente das câmaras de arbitragem comuns. Por seguir um fluxo diferente, é de interesse recalcular as principais estatísticas do estudo retirando os 58 casos da Unimed.
+
+A @tbl-valor-anulatoria-unimed mostra a contagem de processos por faixa de valores de causa nas anulatórias, retirando casos da Unimed. Quase um terço dos processos estão na faixa de 100 mil reais a 10 milhões, uma concentração parecida quando comparada @tbl-valor.
+
+```{r}
+#| label: tbl-valor-anulatoria-unimed
+#| tbl-cap: "Faixas de valores nas anulatórias retirando casos da Unimed"
+da_tidy |> 
+  dplyr::filter(categoria == "Anulacao", unimed == "Não") |> 
+  dplyr::mutate(
+    faixa = cut(
+      valor, c(0, 1e4, 1e5, 1e6, 1e7, Inf), 
+      labels = c(
+        "Até R$ 10.000", 
+        "Entre R$ 10.000 e R$ 100.000",
+        "Entre R$ 100.000 e R$ 1 milhão",
+        "Entre R$ 1 milhão e R$ 10 milhões",
+        "R$ 10 milhões ou mais"
+      )
+    )
+  ) |> 
+  dplyr::count(faixa) |> 
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |> 
+  dplyr::mutate(faixa = forcats::fct_explicit_na(faixa, "(Vazio)")) |> 
+  janitor::adorn_totals() |> 
+  knitr::kable(col.names = c("Faixa", "N", "%"))
+
+```
+
+A @tbl-resultado-unimed mostra as proporções de resultados em processos de anulação retirando os casos da Unimed. A taxa de casos favoráveis (soma de procedentes e parcialmente procedentes excluindo acordos) é significativamente menor, de 17%.
 
 ```{r}
 #| label: tbl-resultado-unimed
-#| tbl-cap: "Resultados dos processos de anulação pela existência ou não da Unimed como parte"
- 
-da_anulacao <- da_tidy |> 
-  dplyr::filter(categoria == "Anulacao")
+#| tbl-cap: "Resultados dos processos por categoria, excluindo acordos e casos da Unimed"
 
-tab_geral <- da_anulacao |> 
-  dplyr::count(unimed, resultado) |> 
-  dplyr::group_by(unimed) |> 
+tab_geral <- da_tidy |> 
+  dplyr::filter(resultado != "Acordo", unimed == "Não") |> 
+  dplyr::count(categoria, resultado) |> 
+  dplyr::group_by(categoria) |> 
   dplyr::mutate(prop = n/sum(n)) |>
   dplyr::ungroup() |> 
   dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, 1)})")) 
 
-tab_total_col <- da_anulacao |> 
-  dplyr::count(unimed) |> 
+tab_total_col <- da_tidy |> 
+  dplyr::filter(resultado != "Acordo", unimed == "Não") |> 
+  dplyr::count(categoria) |> 
   dplyr::mutate(prop = n/sum(n)) |> 
   dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, 1)})")) |> 
   dplyr::select(Total = lab)
 
-tab_total_row <- da_anulacao |> 
+tab_total_row <- da_tidy |> 
+  dplyr::filter(resultado != "Acordo", unimed == "Não") |> 
   dplyr::count(resultado) |> 
   dplyr::mutate(prop = n/sum(n)) |> 
   dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, 1)})")) |> 
@@ -451,10 +484,10 @@ tab_total_row <- da_anulacao |>
     value = lab
   ) |> 
   tidyr::pivot_wider() |> 
-  dplyr::mutate(unimed = "Total", Total = stringr::str_glue("{nrow(da_anulacao)} (100%)"))
+  dplyr::mutate(categoria = "Total", Total = stringr::str_glue("{nrow(da_tidy)} (100%)"))
 
 tab_geral |> 
-  dplyr::select(resultado, unimed, lab) |> 
+  dplyr::select(resultado, categoria, lab) |> 
   tidyr::pivot_wider(
     names_from = resultado, 
     values_from = lab, 
@@ -462,21 +495,76 @@ tab_geral |>
   ) |> 
   dplyr::bind_cols(tab_total_col) |> 
   dplyr::bind_rows(tab_total_row) |> 
-  dplyr::rename(Unimed = unimed) |> 
+  dplyr::rename(Categoria = categoria) |> 
   knitr::kable()
 
 ```
 
+A @fig-resultado-vara-unimed mostra os resultados dos processos por categoria e vara, considerando apenas as duas varas empresariais e retirando casos da Unimed. Novamente, a quantidade de processos é muito pequena para obter resultados conclusivos.
 
-### Qual o percentual de liminares deferidas na categoria de ação cautelar? 
+```{r}
+#| label: fig-resultado-vara-unimed
+#| fig-cap: "Proporção dos resultados dos processos por categoria e vara, retirando casos da Unimed"
+#| fig-width: 8
+#| fig-height: 4
+da_tidy |> 
+  dplyr::filter(unimed == "Não") |> 
+  dplyr::count(vara, categoria, resultado) |> 
+  dplyr::mutate(
+    vara = stringr::str_extract(vara, "[12]ª VARA"),
+    vara = stringr::str_to_title(vara)
+  ) |> 
+  dplyr::filter(!is.na(vara)) |> 
+  dplyr::group_by(vara, categoria) |> 
+  dplyr::mutate(prop = n/sum(n), total = sum(n)) |>
+  dplyr::ungroup() |> 
+  dplyr::mutate(vara = paste0(vara, "\n(N=", total, ")")) |> 
+  ggplot2::ggplot(ggplot2::aes(x = vara, y = prop, fill = resultado)) +
+  ggplot2::geom_col() +
+  ggplot2::facet_wrap(~categoria, nrow = 1, scales = "free_x") +
+  ggplot2::scale_fill_manual(values = col_abj) +
+  ggplot2::scale_y_continuous(labels = scales::percent) +
+  ggthemes::theme_hc() +
+  ggplot2::labs(x = "", y = "Proporção", fill = "Resultado")
 
-A base contem 63 ações cautelares, pouco mais de um quinto da base completa. A @tbl-cautelar-liminar mostra os resultados das liminares nessas ações. É possível identificar que quase metade das liminares não são concedias. Importante destacar que, em 6 casos, a decisão liminar não foi encontrada.
+```
+
+A @tbl-tempo-unimed mostra os tempos médios e medianos, geral e por categoria, retirando os casos da Unimed. Ao excluir os casos, os tempos médio e mediano das anulatórias aumentam em mais de 100 dias.
+
+```{r}
+#| label: tbl-tempo-unimed
+#| tbl-cap: "Estatísticas descritivas dos tempos dos processos, retirando casos da Unimed"
+geral <- da_tidy |> 
+  dplyr::filter(unimed == "Não") |> 
+  dplyr::summarise(
+    categoria = "Total",
+    n = dplyr::n(),
+    media = mean(tempo),
+    mediana = median(tempo)
+  )
+
+da_tidy |> 
+  dplyr::filter(unimed == "Não") |>
+  dplyr::group_by(categoria) |> 
+  dplyr::summarise(
+    n = dplyr::n(),
+    media = mean(tempo),
+    mediana = median(tempo)
+  ) |> 
+  dplyr::arrange(dplyr::desc(mediana)) |> 
+  dplyr::bind_rows(geral) |> 
+  knitr::kable(col.names = c("Categoria", "N", "Média", "Mediana"), digits = 1)
+```
+
+### Qual o percentual de liminares deferidas na categoria de ação cautelar?
+
+A base contém 63 ações cautelares, pouco mais de um quinto da base completa. A @tbl-cautelar-liminar mostra os resultados das liminares nessas ações. É possível identificar que mais da metade dos casos, as liminares não são concedias. Importante destacar que, em 6 casos, a decisão liminar não foi encontrada.
 
 ```{r}
 #| label: tbl-cautelar-liminar
 #| tbl-cap: Resultados das liminares em ações cautelares.
 da_cautelar <- da_tidy |> 
-  dplyr::filter(categoria == "Cautelar")
+  dplyr::filter(categoria == "Cautelar", !is.na(liminar))
 
 da_cautelar |> 
   dplyr::count(liminar, sort = TRUE) |> 
@@ -489,10 +577,9 @@ da_cautelar |>
   knitr::kable(col.names = c("Resultado", "N", "%"))
 ```
 
-
 ### Qual a média e mediana de valor para cada categoria de ação?
 
-Finalmente, a @tbl-valor-tipo mostra os valores médios e medianos das causas, geral e por categoria. Os processos de maior valor são as anulatórias, com mediana de R$ 264.802,79. Já os processos de menor valor são as cautelares e instauração, com mediana de dez mil reais, provavelmente colocados apenas como valores de referência.
+A @tbl-valor-tipo mostra os valores médios e medianos das causas, geral e por categoria. Os processos de maior valor são as anulatórias, com mediana de R\$ 264.802,79. Já os processos de menor valor são as cautelares e instauração, com mediana de dez mil reais, provavelmente colocados apenas como valores de referência.
 
 ```{r}
 #| label: tbl-valor-tipo
@@ -522,18 +609,51 @@ da_tidy |>
   knitr::kable(col.names = c("Categoria", "N", "Média", "Mediana"), digits = 1)
 ```
 
+A @tbl-valor-tipo-unimed mostra as mesmas informações anteriores, mas retirando os casos da Unimed. É interessante notar que, no caso das anulatórias, o valor mediano é menor, mas o valor médio é maior que na @tbl-valor-tipo. Isso indica que na amostra de anulatórias sem Unimed, a assimetria nos valores de causa é maior.
+
+```{r}
+#| label: tbl-valor-tipo-unimed
+#| tbl-cap: "Estatísticas descritivas dos valores de causa dos processos, retirando casos da Unimed"
+geral <- da_tidy |> 
+  dplyr::filter(unimed == "Não") |> 
+  dplyr::summarise(
+    categoria = "Total",
+    n = dplyr::n(),
+    media = mean(valor, na.rm = TRUE),
+    mediana = median(valor, na.rm = TRUE)
+  )
+
+da_tidy |> 
+  dplyr::filter(unimed == "Não") |> 
+  dplyr::group_by(categoria) |> 
+  dplyr::summarise(
+    n = dplyr::n(),
+    media = mean(valor, na.rm = TRUE),
+    mediana = median(valor, na.rm = TRUE)
+  ) |> 
+  dplyr::arrange(dplyr::desc(mediana)) |> 
+  dplyr::bind_rows(geral) |> 
+  dplyr::mutate(dplyr::across(
+    c(3,4), 
+    scales::dollar, 
+    prefix = "R$ ", accuracy = .01, big.mark = ".", decimal.mark = ","
+  )) |> 
+  knitr::kable(col.names = c("Categoria", "N", "Média", "Mediana"), digits = 1)
+```
+
+
 ### Qual é a taxa de favorabilidade em anulatórias ao longo do tempo?
 
-A @fig-anulacao-no-tempo mostra a taxa de casos favoráveis (procedentes, parcialmente procedentes e acordos) em ações anulatórias por ano. Apesar da pequena quantidade de dados, é possível observar que a proporção de decisões favoráveis detectada em 2021 e 2022 é menor.
+A @fig-anulacao-no-tempo mostra a taxa de casos favoráveis (procedentes e parcialmente procedentes) em ações anulatórias por ano, retirando casos de acordo. Apesar da pequena quantidade de dados, é possível observar que a proporção de decisões favoráveis detectada em 2021 e 2022 é menor.
 
 ```{r}
 #| label: fig-anulacao-no-tempo
-#| fig-cap: "Quantidade de decisões por ano"
+#| fig-cap: "Proporção de decisões favoráveis por ano, retirando acordos"
 #| fig-width: 7
 #| fig-height: 4
 
 aux_anulacao <- da_tidy |> 
-  dplyr::filter(categoria == "Anulacao") |> 
+  dplyr::filter(categoria == "Anulacao", resultado != "Acordo") |> 
   dplyr::mutate(
     favoravel = resultado %in% c("Acordo", "Parcial", "Procedente"),
     ano = lubridate::year(dt_disp)
@@ -552,7 +672,7 @@ aux_anulacao |>
   ggplot2::aes(ano, prop) +
   ggplot2::geom_col(fill = col_abj[1], width = .7) +
   ggplot2::geom_hline(
-    yintercept = prop_geral, colour = 2, linetype = 2, size = 1
+    yintercept = prop_geral, colour = 2, linetype = 2, linewidth = 1
   ) +
   ggplot2::annotate(
     "text",
@@ -591,7 +711,7 @@ da_cposg_tidy |>
 
 ```
 
-A taxa de recorribilidade estimada é de quase 60%. Isso ocorre porque foram encontrados 173 recursos nos 289 casos estudados. Dividindo as taxas por categoria de processo, encontra-se o resultado da @tbl-tx-recorr-categoria. É possível notar que as anulatórias são as que apresentam maior taxa de recorribilidade.
+A taxa de recorribilidade estimada é de quase 60% (173 de 289 casos). Dividindo as taxas por categoria de processo, encontra-se o resultado da @tbl-tx-recorr-categoria. A tabela também apresenta a quantidade de casos com alguma decisão (os demais continuam ativos, aguardando decisão). É possível notar que as anulatórias são as que apresentam maior taxa de recorribilidade.
 
 ```{r}
 #| label: tbl-tx-recorr-categoria
@@ -602,11 +722,46 @@ da_tidy |>
   dplyr::group_by(categoria.x) |> 
   dplyr::summarise(
     total = dplyr::n(), 
-    n = sum(!is.na(tem_decisao))
+    n = sum(!is.na(tem_decisao)),
+    n_decisao = sum(tem_decisao, na.rm = TRUE)
   ) |> 
   dplyr::mutate(prop = formattable::percent(n/total, 1)) |> 
-  knitr::kable(col.names = c("Categoria", "N total", "N com recursos", "%"), digits = 1)
+  janitor::adorn_totals() |> 
+  dplyr::mutate(
+    prop = dplyr::if_else(
+      categoria.x == "Total", 
+      formattable::percent(n/total, 1),
+      prop
+    )
+  ) |> 
+  knitr::kable(col.names = c("Categoria", "N total", "N com recursos", "N com decisão", "Taxa recorribilidade"), digits = 1)
+```
 
+A @tbl-tx-recorr-categoria-unimed mostra as mesmas estatísticas excluindo os casos da Unimed. A taxa de recorribilidade estimada é de 50% (116 de 231 casos). Dividindo as taxas por categoria de processo, é possível notar que as anulatórias permanecem com maior taxa de recorribilidade.
+
+```{r}
+#| label: tbl-tx-recorr-categoria-unimed
+#| tbl-cap: "Quantidade e taxa de recorribilidade por categoria, retirando casos da Unimed"
+
+da_tidy |> 
+  dplyr::filter(unimed == "Não") |> 
+  dplyr::left_join(da_cposg_tidy, "id") |> 
+  dplyr::group_by(categoria.x) |> 
+  dplyr::summarise(
+    total = dplyr::n(), 
+    n = sum(!is.na(tem_decisao)),
+    n_decisao = sum(tem_decisao, na.rm = TRUE)
+  ) |> 
+  dplyr::mutate(prop = formattable::percent(n/total, 1)) |> 
+  janitor::adorn_totals() |> 
+  dplyr::mutate(
+    prop = dplyr::if_else(
+      categoria.x == "Total", 
+      formattable::percent(n/total, 1),
+      prop
+    )
+  ) |> 
+  knitr::kable(col.names = c("Categoria", "N total", "N com recursos", "N com decisão", "Taxa recorribilidade"), digits = 1)
 ```
 
 ```{r}
@@ -615,7 +770,8 @@ da_tidy |>
 provido <- da_cposg_tidy |> 
   dplyr::filter(tem_decisao) |> 
   dplyr::count(dec, sort = TRUE) |> 
-  dplyr::mutate(prop = n/sum(n))
+  dplyr::mutate(prop = n/sum(n)) |> 
+  janitor::adorn_totals()
 
 provido_por_categoria <- da_cposg_tidy |> 
   dplyr::filter(tem_decisao) |>
@@ -664,19 +820,80 @@ reforma_sem_unimed <- da_cposg_tidy |>
   ) |> 
   dplyr::count(reformou_sentenca_arbitral) |> 
   dplyr::mutate(prop = n/sum(n))
+```
+
+Como mostrado na @tbl-tx-recorr-categoria, 173 casos com algum recurso, 132 (76%) apresentam alguma decisão. Os demais 41 casos (24%) ainda estavam ativos no momento de coleta dos dados, aguardando julgamento no segundo grau. Dos 132 casos que apresentam alguma decisão, 78 são anulatórias.
+
+A @tbl-tx-provido apresenta a taxa de recursos providos ou providos em parte por tipo de recurso. Considerando apenas as anulatórias com alguma decisão (78 casos), a taxa de recursos providos ou providos em parte é de 41% (32 de 78 casos).
 
 
+```{r}
+#| label: tbl-tx-provido
+#| tbl-cap: Taxa de recursos provido ou providos em parte por categoria
+
+da_cposg_tidy |> 
+  dplyr::filter(tem_decisao) |>
+  dplyr::mutate(dec = dec %in% c("Provido", "Provido em parte")) |> 
+  dplyr::group_by(categoria) |> 
+  dplyr::summarise(
+    n = dplyr::n(),
+    prop = formattable::percent(mean(dec), 1)
+  ) |> 
+  knitr::kable(col.names = c("Categoria", "N decisões", "% Provido"))
 ```
 
 
-Já com relação à taxa de recursos providos ou providos em parte, observa-se que, dos 132 casos com alguma decisão, 44 (33%) foram totalmente providos ou providos em parte. Considerando apenas os processos com categoria de anulatória, a taxa de recursos providos ou providos em parte é de 41% (32 de 78 casos).
+A @tbl-tx-provido-unimed apresenta as mesmas taxas da @tbl-tx-provido excluindo casos da Unimed. Considerando apenas as anulatórias com alguma decisão (22 casos), a taxa de recursos providos ou providos em parte é de 14% (3 de 22 casos).
 
-Com relação à Unimed, observa-se que 56 dos 132 (42%) dos recursos com decisão têm relação com a Unimed. A taxa de recursos providos (parcial ou totalmente) nos casos que envolvem Unimed é de 52% (29 de 56 casos), sendo que 41% (23 de 56) são providos em parte. Já nos casos que não envolvem Unimed, a taxa de recursos providos é de 20% (15 de 76 casos), sendo que 8% (6 de 76) são providos em parte.
+```{r}
+#| label: tbl-tx-provido-unimed
+#| tbl-cap: Taxa de recursos provido ou providos em parte por categoria, excluindo casos da Unimed.
 
-Finalmente, com relação à reforma da decisão arbitral nas anulatórias, foi identificada uma proporção de 26% (28 de 108 casos). Isso significa que, dos casos que chegaram à segunda instância e tiveram alguma decisão de mérito (108 dos 132 casos), a decisão final sobre a sentença arbitral foi de reformar da decisão arbitral, pelo menos em parte. Ao retirar as ações relacionadas à Unimed, no entanto, sobram apenas 59 casos, sendo 1 reforma e 58 sem reforma.
+da_cposg_tidy |> 
+  dplyr::filter(tem_decisao, unimed == "Não") |>
+  dplyr::mutate(dec = dec %in% c("Provido", "Provido em parte")) |> 
+  dplyr::group_by(categoria) |> 
+  dplyr::summarise(
+    n = dplyr::n(),
+    prop = formattable::percent(mean(dec), 1)
+  ) |> 
+  knitr::kable(col.names = c("Categoria", "N decisões", "% Provido"))
+```
+
+### Reforma da decisão arbitral em segunda instância
+
+Uma possível análise de interesse é a **reforma da decisão arbitral em segunda instância**. Quando se observa um recurso provido, isso não significa, necessariamente, que a decisão artbitral em si foi reformada, já que o recurso pode reverter uma sentença de procedência da anulatória, o que mantém a decisão tomada em foro arbitral. É importante destacar que essa análise está sendo feita em segunda instância, ou seja, aqui existem dois mecanismos de seleção: um da decisão arbitral para a sentença da anulatória, e outra da sentença judicial até o acórdão. Por isso, destaca-se, novamente, que a taxa apresentada não deve ser interpretada como a probabilidade de reverter uma decisão arbitral.
+
+A análise da reforma foi realizada considerando as anulatórias. Dos 78 recursos em anulatórias que apresentam alguma decisão, 75 são decisões de mérito. Ou seja, são 75 os casos que tiveram alguma decisão que poderiam reformar a sentença arbitral.
+
+```{r}
+reforma <- da_cposg_tidy |> 
+  dplyr::filter(
+    tem_decisao, 
+    categoria == "Anulacao",
+    reformou_sentenca_arbitral %in% c("Sim", "Não")
+  ) |> 
+  dplyr::count(reformou_sentenca_arbitral) |> 
+  dplyr::mutate(prop = n/sum(n))
+```
+
+Dos 75 casos com decisão de mérito, foi identificado que 28 (37%) reformaram a decisão arbitral. Isso signfica que, após todos os mecanismos de seleção, ou seja, da decisão arbitral para a entrada do processo em primeira instância, e da sentença em primeira instância para o recurso, os poucos casos que sobram apresentam uma taxa de reforma de 37%. 
+
+```{r}
+reforma_unimed <- da_cposg_tidy |> 
+  dplyr::filter(
+    tem_decisao, 
+    categoria == "Anulacao",
+    reformou_sentenca_arbitral %in% c("Sim", "Não"),
+    unimed == "Não"
+  ) |> 
+  dplyr::count(reformou_sentenca_arbitral) |> 
+  dplyr::mutate(prop = n/sum(n))
+```
+
+Finalmente, retirando as decisões envolvendo a Unimed, observam-se 22 anulatórias, sendo que 20 delas apresentam decisão de mérito. Desses 20 recursos, apenas 1 caso apresentou reforma da decisão arbitral. Ou seja, mesmo após todos os mecanismos de seleção, ao retirar a Unimed, a reforma da decisão arbitral a partir de ações anulatórias na fase recursal é bastante rara.
 
 # Referências {.unnumbered}
 
 ::: {#refs}
-
 :::
