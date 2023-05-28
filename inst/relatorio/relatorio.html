@@ -3019,7 +3019,7 @@ vertical-align: -.125em;
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Processos relacionados à Arbitragem</h1>
-<p class="subtitle lead">Um levantamento preliminar no banco de sentenças do TJSP</p>
+<p class="subtitle lead">Um levantamento no banco de sentenças do TJSP</p>
 </div>
 
 
@@ -3036,7 +3036,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Data de Publicação</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">23 de maio de 2023</p>
+      <p class="date">28 de maio de 2023</p>
     </div>
   </div>
   
@@ -3048,23 +3048,27 @@ vertical-align: -.125em;
 
 <section id="introdução" class="level1">
 <h1>Introdução</h1>
-<p>O Observatório da Arbitragem é um projeto que visa compreender o reflexo do fenômeno jurídico da arbitragem nos tribunais. Em sua primeira fase, o projeto busca compreender o fluxo dos processos de i) anulação de decisão arbitral, ii) cumprimento de sentença / execução, iii) medida cautelar antecedente ao tribunal arbitral, iv) existência, validade e eficácia da convenção de arbitragem e v) ação para instituição da arbitragem com base no art, 7º da Lei de Arbitragem.</p>
+<p>O Observatório da Arbitragem é um projeto que visa compreender o fenômeno jurídico da arbitragem nos tribunais estaduais. Em sua primeira fase, o projeto busca compreender o fluxo dos processos de i) anulação de decisão arbitral, ii) cumprimento de sentença / execução, iii) medida cautelar antecedente ao tribunal arbitral, iv) existência, validade e eficácia da convenção de arbitragem e v) ação para instituição da arbitragem com base no art, 7º da Lei de Arbitragem.</p>
 <p>O objetivo do levantamento é realizar uma análise preliminar a partir do banco de sentenças do Tribunal de Justiça de São Paulo (TJSP). O levantamento terá como resultado algumas estatísticas básicas como volume de sentenças ao longo do tempo, proporção de decisões favoráveis ao autor e tempo mediano dos processos. O estudo pode ser utilizado como insumo para decidir sobre a viabilidade de uma pesquisa mais aprofundada – envolvendo análise de autos processuais – a partir dos dados disponibilizados no banco de sentenças.</p>
 <p>O presente levantamento descreve o fluxo de download, arrumação e análise dos dados de sentenças relacionadas à arbitragem. Na parte de download, descrevemos os termos utilizados para consulta e o procedimento de acesso aos dados, que são públicos, mas não são abertos. A parte de arrumação descreve todos os passos para chegar da base bruta até a base organizada, informando as colunas utilizadas. A análise mostra os resultados do levantamento, com estatísticas sobre o perfil dos processos, o volume de sentenças ao longo do tempo, a proporção de decisões favoráveis e o tempo médio das ações.</p>
 </section>
 <section id="download" class="level1">
 <h1>Download</h1>
-<p>Antes de descrever o processo de coleta, é importante ressaltar que o TJSP não forneceu acesso aos processos mantidos sob sigilo, nem forneceu uma lista de processos distribuídos no período. O pedido de dados foi realizado ainda em 2021 e, mesmo após muitas tentativas de contato, os dados não foram fornecidos.</p>
-<p>Como consequência, a amostra da nossa análise a totalidade dos processos existentes no tribunal. Apesar desta limitação, acredita-se que os dados coletados e analisados ainda são valiosos e oferecem resultados significativos sobre o tema. É importante levar essa limitação em consideração ao interpretar os resultados apresentados.</p>
+<p>Antes de descrever o processo de coleta, é importante ressaltar que o TJSP não forneceu acesso aos processos mantidos sob sigilo, nem forneceu uma lista de processos distribuídos no período. O pedido de dados foi realizado ainda em 2021 e reiterado por diversas vezes. Mesmo após muitas tentativas de contato, os dados não foram fornecidos.</p>
+<p>Como consequência, a pesquisa recorreu ao banco de sentenças públicas, o que implicou na obtenção de uma amostra que não abarca a totalidade dos processos existentes no TJSP. Apesar desta limitação, acredita-se que os dados coletados e analisados ainda são valiosos e oferecem resultados significativos sobre o tema. Além de uma quantidade significativa de casos ser pública, as sentenças analisadas apareceram em quantidades muito próximas nas duas principais varas especializadas, indicando um grau de aleatorização.</p>
+<p>É, no entanto, importante levar essa limitação na quantidade de sentenças em consideração ao interpretar os resultados apresentados, em especial no que serefere à quantidade de casos observada, que pode ser de duas ou três vezes menor do que o total geral, bem como nos cuidados em generalizar interpretações ou conclusões a partir dos números.</p>
+<p>Feita essa ressalva, passa-se à metodologia de pesquisa.</p>
 <p>Os dados de processos do TJSP são públicos, mas não são abertos. Isso significa que não existe um meio fácil de obter uma lista de todos os processos que existem no tribunal a partir de um critério jurídico, geográfico ou temporal.</p>
-<p>O tribunal, no entanto, disponibiliza ferramentas de consulta. Na <a href="https://esaj.tjsp.jus.br/cjpg/pesquisar.do">Consulta de Julgados do Primeiro Grau (CJPG)</a> é possível acessar, manualmente, a lista de processos a partir de termos de busca (como palavras-chave, classes e assuntos). Cada processo, por sua vez, pode ser pesquisado manualmente em uma consulta de processos <a href="https://esaj.tjsp.jus.br/cpopg/open.do">Consulta de Processos do Primeiro Grau</a>.</p>
-<p>Por conta da necessidade de realizar pesquisas no Direito, a ABJ desenvolveu, ao longo de sua história, algumas ferramentas que automatizam o fluxo manual de obtenção de dados. Essas ferramentas utilizam técnicas de raspagem de dados <span class="citation" data-cites="zhaoWebScraping2017">(<a href="#ref-zhaoWebScraping2017" role="doc-biblioref">Zhao 2017</a>)</span> que, em poucas palavras, envolvem imitar o que um ser humano faria para acessar as páginas, mas de forma automática. Vale ressaltar que essa não é uma estratégia oficial nem desejável de ser utilizada ao acessar dados públicos. No entanto, por conta das limitações do tribunal, utilizar raspagem de dados acaba sendo necessário para tornar as pesquisas viáveis.</p>
+<p>O TJSP, no entanto, disponibiliza ferramentas de consulta. Na <a href="https://esaj.tjsp.jus.br/cjpg/pesquisar.do">Consulta de Julgados do Primeiro Grau (CJPG)</a> é possível acessar, manualmente, a lista de processos a partir de termos de busca (como palavras-chave, classes e assuntos). Cada processo, por sua vez, pode ser pesquisado manualmente em uma consulta de processos <a href="https://esaj.tjsp.jus.br/cpopg/open.do">Consulta de Processos do Primeiro Grau</a>.</p>
+<p>Por conta da necessidade de realizar pesquisas no direito, a ABJ desenvolveu, ao longo de sua história, algumas ferramentas que automatizam o fluxo manual de obtenção de dados. Essas ferramentas utilizam técnicas de raspagem de dados <span class="citation" data-cites="zhaoWebScraping2017">(<a href="#ref-zhaoWebScraping2017" role="doc-biblioref">Zhao 2017</a>)</span> que, em poucas palavras, envolvem imitar o que um ser humano faria para acessar as páginas, mas de forma automática. Vale ressaltar que essa não é uma estratégia oficial nem desejável de ser utilizada ao acessar dados públicos. No entanto, por conta das limitações do tribunal, utilizar raspagem de dados acaba sendo necessário para tornar as pesquisas viáveis.</p>
 <p>Ao acessar os dados via raspagem do CJPG, a primeira limitação que aparece são os campos disponíveis. Processos de arbitragem podem aparecer com classes e assuntos processuais<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> que não identificam corretamente os casos. Por exemplo, é comum encontrar como classe “procedimento ordinário” ou como assunto “anulação”. Por isso, a única forma de listar os processos relacionados à arbitragem é através das palavras-chave.</p>
 <p>A desvantagem em utilizar palavras-chave é que as pesquisas se limitam ao que as ferramentas de pesquisa disponibilizam. Se a ferramenta de busca é falha, o resultado é falho. De qualquer forma, por falta de outros meios, essa foi a decisão tomada para acessar os processos relacionados à arbitragem.</p>
 <p>O termo de busca utilizado para realizar a pesquisa foi <code>&quot;arbitral&quot; OU &quot;lei de arbitragem&quot; OU &quot;9307&quot; OU &quot;9.307&quot;</code>. A ideia da pesquisa foi realizar a busca mais genérica possível relacionada à arbitragem, sem incluir o termo “arbitragem”, já que este aparece no nome das varas, o que implicaria em uma lista com todos os processos da vara.</p>
 <p>Outro filtro realizado foi o das varas. Foram consideradas 4 varas no total: 1ª vara empresarial e conflitos de arbitragem, 2ª vara empresarial e conflitos de arbitragem, 1ª vara regional de competência empresarial e de conflitos relacionados à arbitragem e 2ª vara regional de competência empresarial e de conflitos relacionados à arbitragem.</p>
 <p>A pesquisa retornou um total de 348 decisões, disponibilizadas entre março de 2018 e novembro de 2022. Dentre esses casos, foram encontrados 338 números de processos únicos, já que um processo pode apresentar mais de uma decisão. A consulta desses processos individualmente retornou 337 casos (1 caso foi descartado por estar em segredo de justiça). A base bruta final, portanto, possui 337 processos.</p>
-<p>Neste ponto, uma discussão pode ser iniciada sobre o volume total de ações. Por envolver casos que potencialmente correm em segredo de justiça, é possível que uma parte dos casos não são acessíveis através do banco de sentenças. Além disso, por envolver apenas as varas empresariais, o recorte pode apresentar limitações de espaço (regiões) e tempo (criação das varas)<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Por último, por se tratar de um estudo retrospectivo (envolve apenas casos com sentença), pode ser que casos que ainda estão ativos fiquem de fora da lista. De qualquer forma, espera-se que a lista obtida, depois de limpa, possa ser utilizada como amostra aleatória da população de todos os processos relacionados a arbitragem.</p>
+<p>Neste ponto, algumas ressalvas devem ser apresentadas sobre o volume total de ações.</p>
+<p>Por envolver casos que potencialmente correm em segredo de justiça, é possível que uma parte dos casos não seja acessível através do banco de sentenças. Além disso, por envolver apenas as varas empresariais, o recorte pode apresentar limitações de espaço (regiões) e tempo (criação das varas)<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Por último, por se tratar de um estudo retrospectivo (envolve apenas casos com sentença), casos ainda ativos ficaram fora da lista, que pode não detectar tendências ou mudanças mais recentes no perfil desses conflitos.</p>
+<p>De qualquer forma, espera-se que a lista obtida, depois de limpa, possa ser utilizada como amostra aleatória da população de todos os processos relacionados a arbitragem.</p>
 </section>
 <section id="arrumação" class="level1">
 <h1>Arrumação</h1>
@@ -3257,21 +3261,20 @@ vertical-align: -.125em;
 </div>
 </div>
 <p>Com relação aos resultados, não houve mudanças significativas. A categoria que mais mudou foi a de acordos, que costumam ser difíceis de mapear apenas por palavras-chave. Os resultados completos são apresentados na próxima seção.</p>
-<p>Por último, três colunas foram adicionadas após a classificação manual. A primeira é com relação à concessão de liminar em casos de medida cautelar. A segunda é que, na revisão manual, vários casos relacionados à Unimed foram detectados. Uma coluna <code>unimed</code> foi adicionada para permitir novos filtros de análise. A terceira é a câmara arbitral de origem do processo.</p>
+<p>Por último, três colunas foram adicionadas após a classificação manual. A primeira é com relação à concessão de liminar em casos de medida cautelar. A segunda decorreu do fato de, na revisão manual, vários casos relacionados à Unimed terem sido detectados. Assim, uma coluna <code>unimed</code> foi adicionada para permitir novos filtros de análise. A terceira é a câmara arbitral de origem do processo.</p>
 <p>No final, a base ficou com 289 linhas e 14 colunas, contendo todas as informações utilizadas na parte de análise. A base de dados em Excel pode ser baixada <a href="https://github.com/abjur/obsArb/raw/main/inst/da_arbitragem.xlsx">neste link</a>.</p>
 </section>
 <section id="segunda-instância" class="level2">
 <h2 class="anchored" data-anchor-id="segunda-instância">Segunda instância</h2>
-<p>Depois de baixar e revisar as sentenças, procurou-se os números de processos obtidos na segunda instância. Foram considerados apenas casos com apenas um recurso (agravo de instrumento ou apelação). Por exemplo, processos que tiveram mais de um agravo de instrumento foram desconsiderados.</p>
+<p>Depois de baixar e revisar as sentenças, procuraram-se os números de processos obtidos na segunda instância. Foram considerados casos com apenas um recurso (agravo de instrumento ou apelação). Por exemplo, processos que tiveram mais de um agravo de instrumento foram desconsiderados.</p>
 <p>Dos 289 processos, 173 apresentaram algum recurso, sendo 126 (73%) com classe “Apelação Cível” e 47 (27%) com classe “Agravo de Instrumento”. Nessa base, somente 132 (76%) possuem alguma decisão, sendo 98 apelações e 34 agravos. Os demais recursos não apresentavam uma tabela de decisões na consulta processual. Além da informação da decisão, também foi coletada a informação do status dos processos no momento da coleta. Essa informação foi extraída diretamente da consulta processual do TJSP, sem nenhum tratamento posterior.</p>
-<p>Após o filtro inicial, a base passou por uma revisão manual. A revisão foi realizada nos 57 casos que tinham alguma decisão diferente de não provimento Na nova análise, foram incluídas duas informações manualmente: se a decisão arbitral foi reformada e uma coluna identificando se o caso era relacionado com a Unimed.</p>
+<p>Após o filtro inicial, a base passou por uma revisão manual. A revisão foi realizada nos 57 casos que tinham alguma decisão diferente de não provimento. Na nova análise, foram incluídas duas informações manualmente: se a decisão arbitral foi reformada e uma coluna identificando se o caso era relacionado com a Unimed.</p>
 <p>A base de segunda instância foi considerada para calcular a taxa de recorribilidade e a taxa de decisões favoráveis na segunda instância. A taxa de reforma da decisão arbitral foi calculada a partir da análise manual.</p>
 <p>A base considerada possui 173 linhas e 8 colunas. A base de dados em Excel pode ser baixada <a href="https://github.com/abjur/obsArb/raw/main/inst/da_cposg_tidy.xlsx">neste link</a>.</p>
 </section>
 </section>
 <section id="análise" class="level1">
 <h1>Análise</h1>
-<p>A base possui 289 casos, dentre os quais 226 são digitais ou digitalizados (78%). Em uma nova análise manual mais aprofundada, seriam considerados apenas processos digitais ou digitalizados.</p>
 <p>Em seguida, são apresentadas tabelas das classes e assuntos mais comuns nos processos encontrados. É importante destacar que classes e assuntos nem sempre identificam corretamente o tipo de ação, tanto por motivos de taxonomia (o tipo de processo não existe na classificação do CNJ) quanto por motivos de má classificação (a pessoa que protocolou a ação colocou uma classe/assunto inadequada). Por isso, a classe e assunto não está sendo usada para classificar os tipos de processo.</p>
 <p>A <a href="#tbl-classe">Tabela 5</a> mostra as classes processuais mais comuns encontradas. É possível notar que existem muitas classes que não são relacionadas diretamente a arbitragem.</p>
 <div class="cell">
@@ -3583,15 +3586,15 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<p>A <a href="#tbl-camara-origem">Tabela 10</a> mostra a contagem e proporção de processos por câmara arbitral de origem. Em 65% dos casos, a câmara não foi identificada na sentença do processo. Com exceção dos casos da Unimed, os demais processos encontram-se distribuídos em várias câmaras arbitrais.</p>
+<p>A <a href="#tbl-camara-origem">Tabela 10</a> mostra a contagem e proporção de processos por câmara arbitral de origem nas anulatórias. Com exceção dos casos da Unimed, os demais processos encontram-se distribuídos em várias câmaras arbitrais.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-camara-origem" class="anchored">
 <table class="table table-sm table-striped small">
 <caption>Tabela 10: Quantidade de processos por câmara arbitral de origem</caption>
 <colgroup>
-<col style="width: 88%">
-<col style="width: 4%">
+<col style="width: 89%">
+<col style="width: 3%">
 <col style="width: 7%">
 </colgroup>
 <thead>
@@ -3603,108 +3606,103 @@ vertical-align: -.125em;
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Não identificado</td>
-<td style="text-align: right;">188</td>
-<td style="text-align: right;">65.1%</td>
+<td style="text-align: left;">Câmara Arbitral do Fórum Unimed</td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">61.1%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Câmara Arbitral do Fórum Unimed</td>
-<td style="text-align: right;">64</td>
-<td style="text-align: right;">22.1%</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">Centro de Arbitragem e Mediação da Câmara de Comércio Brasil-Canadá CAM-CCBC</td>
 <td style="text-align: right;">9</td>
-<td style="text-align: right;">3.1%</td>
+<td style="text-align: right;">9.5%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Conselho Arbitral do Estado de São Paulo - CAESP</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">1.7%</td>
+<td style="text-align: right;">5.3%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Centro de Mediação e Arbitragem de São Paulo – TASP</td>
 <td style="text-align: right;">4</td>
-<td style="text-align: right;">1.4%</td>
+<td style="text-align: right;">4.2%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Câmara de Conciliação, Mediação e Arbitragem CIESP/FIESP</td>
 <td style="text-align: right;">4</td>
-<td style="text-align: right;">1.4%</td>
+<td style="text-align: right;">4.2%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Câmara de Arbitragem do Mercado</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">0.7%</td>
+<td style="text-align: right;">2.1%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ARBITRIUM – Câmarade Conciliação Mediação, e Arbitragem</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">0.3%</td>
+<td style="text-align: right;">1.1%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">CCI</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">0.3%</td>
+<td style="text-align: right;">1.1%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Centro Brasileiro de Mediação e Arbitragem –CBMA</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">0.3%</td>
+<td style="text-align: right;">1.1%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Centro de Arbitragem EIRELI</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">0.3%</td>
+<td style="text-align: right;">1.1%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Conselho Arbitral da ASSOHONDA - Associação Brasileira de distribuidores Honda</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">0.3%</td>
+<td style="text-align: right;">1.1%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Corte Internacional de Mediação Conciliação e Arbitragem Extrajudicial -ARBITRARE</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">0.3%</td>
+<td style="text-align: right;">1.1%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Câmara Arbitral CAMVALE - Câmara de Arbitragem e Mediação do Vale do Paraíba</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">0.3%</td>
+<td style="text-align: right;">1.1%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Câmara da Bolsa Brasileira de Mercadorias</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">0.3%</td>
+<td style="text-align: right;">1.1%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Câmara de Mediação, Conciliação e Arbitragem de Osasco</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">0.3%</td>
+<td style="text-align: right;">1.1%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">IMAESP – Instituto de Mediação do Estado de São Paulo</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">0.3%</td>
+<td style="text-align: right;">1.1%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Instituto Brasileiro deMediação e Arbitragem</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">0.3%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">TNA – Tribunal Nacional de Mediação e Arbitragem</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">0.3%</td>
+<td style="text-align: right;">1.1%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Tribunal Arbitral e Mediação de São Paulo</td>
+<td style="text-align: left;">TNA – Tribunal Nacional de Mediação e Arbitragem</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">0.3%</td>
+<td style="text-align: right;">1.1%</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">Tribunal Arbitral e Mediação de São Paulo</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.1%</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">Total</td>
-<td style="text-align: right;">289</td>
+<td style="text-align: right;">95</td>
 <td style="text-align: right;">100.0%</td>
 </tr>
 </tbody>
@@ -3734,7 +3732,7 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<p>A <a href="#tbl-resultado">Tabela 11</a> mostra os resultados dos processos por categoria, excluindo os acordos. Nas últimas linha e coluna, são apresentadas as contagens e proporções marginais. A proporção de casos extintos observada é mais alta do que o comum em análises de processos do TJSP. A taxa de procedência em anulatórias (considerando casos procedentes e parcialmente procedentes e excluindo acordos do denominador) é de 44% quando considerados os casos da Unimed. Excluídos os casos da Unimed, a taxa de procedência cai para 17%, conforme indicado na <a href="#tbl-resultado-unimed">Tabela 14</a>.</p>
+<p>A <a href="#tbl-resultado">Tabela 11</a> mostra os resultados dos processos por categoria, excluindo os acordos. Nas últimas linha e coluna, são apresentadas as contagens e proporções marginais. A proporção de casos extintos observada é mais alta do que o comum em análises de processos do TJSP. A taxa de procedência em anulatórias (considerando casos procedentes e parcialmente procedentes e excluindo acordos do denominador) é de 44%, quando considerados os casos da Unimed. Excluídos os casos da Unimed, a taxa de procedência cai para 17%, conforme indicado na <a href="#tbl-resultado-unimed">Tabela 14</a>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-resultado" class="anchored">
@@ -3812,8 +3810,11 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<p>A partir da <a href="#tbl-resultado">Tabela 11</a>, é importante colocar um comentário sobre o <strong>viés de seleção em decisões judiciais</strong> <span class="citation" data-cites="priest1984selection">(<a href="#ref-priest1984selection" role="doc-biblioref">Priest e Klein 1984</a>)</span>. Os processos que se manifestam no judiciário (por exemplo, ações de anulação de decisão arbitral) são uma amostra de todos os conflitos arbitrais, já que apenas uma parte dos casos vai para o judiciário. No entanto, essa amostra não é aleatória, já que a as probabilidades de dois caso irem ao judiciário após decisão arbitral não são as mesmas. Um caso tem maior probabilidade de se manifestar no judiciário se i) as partes têm grandes divergências sobre suas visões individuais da discussão e ii) se, do ponto de vista monetário, continuar a disputa vale à pena.</p>
-<p>A existência de um mecanismo de seleção na criação de novos casos no judiciário serve para relativizar as análises de taxas de favorabilidade. Um importante resultado de <span class="citation" data-cites="priest1984selection">Priest e Klein (<a href="#ref-priest1984selection" role="doc-biblioref">1984</a>)</span> é que, considerando algumas premissas do sistema judiciário (como simetria de informação e existência de custas judiciais), <strong>a taxa de decisões favoráveis no judiciário é diferente da probabilidade de reforma da decisão arbitral</strong>. Ou seja, as taxas de 44% e 17% (retirando Unimed) não devem ser interpretadas como a probabilidade de reverter uma decisão arbitral no judiciário.</p>
+<p>A partir da <a href="#tbl-resultado">Tabela 11</a>, é importante colocar um comentário sobre o <strong>viés de seleção em decisões judiciais</strong> <span class="citation" data-cites="priest1984selection">(<a href="#ref-priest1984selection" role="doc-biblioref">Priest e Klein 1984</a>)</span>. Os processos que se manifestam no judiciário (por exemplo, ações de anulação de decisão arbitral) são uma amostra de todos os conflitos arbitrais, já que apenas uma parte dos casos vai para o judiciário. No entanto, essa amostra não é aleatória, já que a as probabilidades de dois casos irem ao judiciário após decisão arbitral não são as mesmas.</p>
+<p>Os casos selecionados para serem judicializados são avaliados pelas partes e advogados de ambos os polos de acordo com suas características, em especial se i) há uma probabilidade ponderável do caso ser julgado favoravelmente sob sua perspectiva e ii) o montante do benefício econômico, considerada a probabilidade de êxito, compensa os custos de litigar, incluindo taxas, honorários com advogados, tempo, esforço e verbas sucumbenciais.</p>
+<p>Como o caso é selecionado para ser judicializado quando tanto autor como réu consideram suas chances de êxito relevantes, ambos em média tendem a acertar, uma vez que não há elementos para considerar que um dos polos seria sistematicamente mais competente na avaliação de suas chances do que o outro. Por essa razão, as taxas de procedência de ações judiciais tendem, dadas certas condições (acesso a precedentes, custos para litigar e possibilidade de as partes transigirem), a 50%.</p>
+<p>Nas discussões sobre a relação entre Poder Judiciário e arbitragem, a comunidade apresentou uma tendência a superestimar a importância das taxas de procedência como medida para a funcionalidade do sistema: quanto menor a taxa, mais funcional a relação. No entanto, esse mecanismo de seleção de casos serve para relativizar a importância das análises de taxas de procedência nesse contexto.</p>
+<p>Assim, um importante resultado de <span class="citation" data-cites="priest1984selection">Priest e Klein (<a href="#ref-priest1984selection" role="doc-biblioref">1984</a>)</span> é que, considerando algumas premissas do sistema judiciário (como simetria de informação e existência de custos para litigar), <strong>a taxa de decisões favoráveis no judiciário é diferente da probabilidade de reforma da decisão arbitral, compondo duas grandezas que não podem ser confundidas</strong>. Falando especificamente dos resultados dessa pesquisa, as taxas de 44% e 17% (com e sem Unimed, respectivamente) não devem ser interpretadas como a probabilidade geral para se reverter uma decisão arbitral no judiciário.</p>
 <!-- A intensidade da seleção pode ser medida a partir de estatísticas da quantidade de decisões arbitrais no mesmo período do estudo. Entre 2018 e 2022, foram identificadas 10.000 decisões [^selma] -->
 <!-- [^selma]: Levantamento realizado por  -->
 <p>A <a href="#fig-resultado-vara">Figura 3</a> mostra os resultados dos processos por categoria e vara, considerando apenas as duas varas empresariais. A quantidade de processos é muito pequena para obter resultados conclusivos, mas aparentemente a segunda vara tende a dar mais resultados procedentes ou parcialmente procedentes nas ações anulatórias.</p>
@@ -3827,12 +3828,12 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<p>Finalmente, a <a href="#tbl-tempo">Tabela 12</a> mostra os tempos médios e medianos, geral e por categoria. Os processos mais longos são os de convenção arbitral, com mediana de quase um ano. Já os processos mais curtos são os de anulação, com mediana de aproximadamente seis meses.</p>
+<p>Finalmente, a <a href="#tbl-tempo">Tabela 12</a> mostra os tempos médios e medianos, geral e por categoria, em dias. Os processos mais longos são os de convenção arbitral, com mediana de quase um ano. Já os processos mais curtos são os de anulação, com mediana de aproximadamente seis meses.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-tempo" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>Tabela 12: Estatísticas descritivas dos tempos dos processos</caption>
+<caption>Tabela 12: Estatísticas descritivas dos tempos dos processos em dias</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Categoria</th>
@@ -3888,7 +3889,7 @@ vertical-align: -.125em;
 <p>Após a revisão das análises, um novo conjunto de perguntas foi gerado. As perguntas foram respondidas com os gráficos e tabelas que seguem.</p>
 <section id="como-ficam-as-estatísticas-retirando-casos-envolvendo-a-unimed" class="level3">
 <h3 class="anchored" data-anchor-id="como-ficam-as-estatísticas-retirando-casos-envolvendo-a-unimed">Como ficam as estatísticas retirando casos envolvendo a Unimed?</h3>
-<p>Quando analisamos processos relacionados à arbitragem no judiciário, é importante levar em conta a câmara arbitral de origem no processo. Infelizmente, essa informação não é pública, porém, em alguns casos, é possível identificar a câmara de origem através do nome da parte. Esse é o caso da Unimed, que segue um rito arbitral muito diferente das câmaras de arbitragem comuns. Por seguir um fluxo diferente, é de interesse recalcular as principais estatísticas do estudo retirando os 58 casos da Unimed.</p>
+<p>A Unimed aparenta ser um caso de endemia processual (uma concentração grande de casos em torno de uma questão específica ou parte), que leva a um aumento na quantidade de casos de uma população de interesse. Por seguir um fluxo diferente, é de interesse recalcular as principais estatísticas do estudo retirando os 58 casos da Unimed.</p>
 <p>A <a href="#tbl-valor-anulatoria-unimed">Tabela 13</a> mostra a contagem de processos por faixa de valores de causa nas anulatórias, retirando casos da Unimed. Quase um terço dos processos estão na faixa de 100 mil reais a 10 milhões, uma concentração parecida quando comparada <a href="#tbl-valor">Tabela 7</a>.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -4530,9 +4531,9 @@ vertical-align: -.125em;
 </section>
 <section id="reforma-da-decisão-arbitral-em-segunda-instância" class="level3">
 <h3 class="anchored" data-anchor-id="reforma-da-decisão-arbitral-em-segunda-instância">Reforma da decisão arbitral em segunda instância</h3>
-<p>Uma possível análise de interesse é a <strong>reforma da decisão arbitral em segunda instância</strong>. Quando se observa um recurso provido, isso não significa, necessariamente, que a decisão artbitral em si foi reformada, já que o recurso pode reverter uma sentença de procedência da anulatória, o que mantém a decisão tomada em foro arbitral. É importante destacar que essa análise está sendo feita em segunda instância, ou seja, aqui existem dois mecanismos de seleção: um da decisão arbitral para a sentença da anulatória, e outra da sentença judicial até o acórdão. Por isso, destaca-se, novamente, que a taxa apresentada não deve ser interpretada como a probabilidade de reverter uma decisão arbitral.</p>
+<p>Uma possível análise de interesse é a <strong>reforma da decisão arbitral em segunda instância</strong>. Quando se observa um recurso provido, isso não significa, necessariamente, que a decisão arbitral em si foi reformada, já que o recurso pode reverter uma sentença de procedência da anulatória, o que mantém a decisão tomada em foro arbitral. É importante destacar que essa análise está sendo feita em segunda instância, ou seja, aqui existem dois mecanismos de seleção: um da decisão arbitral para a sentença da anulatória, e outra da sentença judicial até o acórdão. Por isso, destaca-se, novamente, que a taxa apresentada não deve ser interpretada como a probabilidade de reverter uma decisão arbitral.</p>
 <p>A análise da reforma foi realizada considerando as anulatórias. Dos 78 recursos em anulatórias que apresentam alguma decisão, 75 são decisões de mérito. Ou seja, são 75 os casos que tiveram alguma decisão que poderiam reformar a sentença arbitral.</p>
-<p>Dos 75 casos com decisão de mérito, foi identificado que 28 (37%) reformaram a decisão arbitral. Isso signfica que, após todos os mecanismos de seleção, ou seja, da decisão arbitral para a entrada do processo em primeira instância, e da sentença em primeira instância para o recurso, os poucos casos que sobram apresentam uma taxa de reforma de 37%.</p>
+<p>Dos 75 casos com decisão de mérito, foi identificado que 28 (37%) reformaram a decisão arbitral. Isso significa que, após todos os mecanismos de seleção, ou seja, da decisão arbitral para a entrada do processo em primeira instância, e da sentença em primeira instância para o recurso, os poucos casos que sobram apresentam uma taxa de reforma de 37%.</p>
 <p>Finalmente, retirando as decisões envolvendo a Unimed, observam-se 22 anulatórias, sendo que 20 delas apresentam decisão de mérito. Desses 20 recursos, apenas 1 caso apresentou reforma da decisão arbitral. Ou seja, mesmo após todos os mecanismos de seleção, ao retirar a Unimed, a reforma da decisão arbitral a partir de ações anulatórias na fase recursal é bastante rara.</p>
 </section>
 </section>
@@ -4555,7 +4556,7 @@ Zhao, Bo. 2017. <span>«Web Scraping»</span>. <em>Encyclopedia of big data</em>
 <ol>
 <li id="fn1"><p>Classes e assuntos são listas de tipos de processos organizadas pelo Conselho Nacional de Justiça (CNJ), através das Tabelas Processuais Unificadas (TPU), Res. 46 CNJ.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>As três primeiras varas empresariais tiveram sua criação autorizada no dia 14 de dezembro por deliberação unânime do Órgão Especial do Tribunal de Justiça do Estado de São Paulo. Link para o parecer em <a href="https://bit.ly/parecer-varas" class="uri">https://bit.ly/parecer-varas</a>. Acesso em 03 de maio de 2023.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>O critério de exclusão dizia respeito à pertinência do caso ao objeto da pesquisa. Assim, casos nos quais as expressões apresentavam significados distintos (falsos cognatos) foram excluídos. Por exemplo, arbitragem no sentido de arbitragem de preço e não como método de resolução de disputas. Um caso foi identificado em uma nova categoria “Carta Arbitral” (1099760-61.2021.8.26.0100). O caso foi desconsiderado da análise.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>O critério de exclusão dizia respeito à pertinência do caso ao objeto da pesquisa. Assim, casos nos quais as expressões apresentavam significados distintos (falsos cognatos) foram excluídos. Por exemplo, arbitragem no sentido de arbitragem de preço e não como método de resolução de disputas. Em outros as expressões apareciam por conta de citações acidentais em precedentes e excertos de doutrina, a despeito do caso em si não tratar do tema de interesse. Por fim, um caso identificado em uma nova categoria “Carta Arbitral” (1099760-61.2021.8.26.0100) também foi desconsiderado da análise.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
