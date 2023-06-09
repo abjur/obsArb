@@ -2,19 +2,19 @@
 title: "Processos relacionados à Arbitragem"
 subtitle: "Um levantamento no banco de sentenças do TJSP"
 author: Associação Brasileira de Jurimetria
-date: "2023-05-28"
-execute: 
+date: "2023-06-09"
+execute:
   echo: false
   freeze: true
-knitr: 
-  opts_chunk: 
+knitr:
+  opts_chunk:
     dpi: 300
     message: false
     warning: false
 lang: pt
 toc: true
 self-contained: true
-format: 
+format:
   html: default
   docx:
     reference-doc: template.docx
@@ -37,7 +37,9 @@ O presente levantamento descreve o fluxo de download, arrumação e análise dos
 
 # Download
 
-Antes de descrever o processo de coleta, é importante ressaltar que o TJSP não forneceu acesso aos processos mantidos sob sigilo, nem forneceu uma lista de processos distribuídos no período. O pedido de dados foi realizado ainda em 2021 e reiterado por diversas vezes. Mesmo após muitas tentativas de contato, os dados não foram fornecidos.
+Antes de descrever o processo de coleta, é importante ressaltar que o TJSP não forneceu acesso aos processos mantidos sob sigilo, nem forneceu uma lista de processos distribuídos no período. O pedido de dados foi realizado ainda em 2021 e reiterado por diversas vezes.
+
+Em 30 de maio de 2023, seis meses depois da finalização da coleta dos dados, o TJSP enviou um link para acesso à lista. Infelizmente, no entanto, os dados não são acessíveis, pois o link não funcionava. Em resumo, mesmo após muitas tentativas de contato, não foi possível acessar os dados através de ofícios enviados ao TJSP.
 
 Como consequência, a pesquisa recorreu ao banco de sentenças públicas, o que implicou na obtenção de uma amostra que não abarca a totalidade dos processos existentes no TJSP. Apesar desta limitação, acredita-se que os dados coletados e analisados ainda são valiosos e oferecem resultados significativos sobre o tema. Além de uma quantidade significativa de casos ser pública, as sentenças analisadas apareceram em quantidades muito próximas nas duas principais varas especializadas, indicando um grau de aleatorização.
 
@@ -63,13 +65,13 @@ Outro filtro realizado foi o das varas. Foram consideradas 4 varas no total: 1ª
 
 A pesquisa retornou um total de 348 decisões, disponibilizadas entre março de 2018 e novembro de 2022. Dentre esses casos, foram encontrados 338 números de processos únicos, já que um processo pode apresentar mais de uma decisão. A consulta desses processos individualmente retornou 337 casos (1 caso foi descartado por estar em segredo de justiça). A base bruta final, portanto, possui 337 processos.
 
-Neste ponto, algumas ressalvas devem ser apresentadas sobre o volume total de ações. 
+Neste ponto, algumas ressalvas devem ser apresentadas sobre o volume total de ações.
 
 Por envolver casos que potencialmente correm em segredo de justiça, é possível que uma parte dos casos não seja acessível através do banco de sentenças. Além disso, por envolver apenas as varas empresariais, o recorte pode apresentar limitações de espaço (regiões) e tempo (criação das varas)[^2]. Por último, por se tratar de um estudo retrospectivo (envolve apenas casos com sentença), casos ainda ativos ficaram fora da lista, que pode não detectar tendências ou mudanças mais recentes no perfil desses conflitos.
 
-De qualquer forma, espera-se que a lista obtida, depois de limpa, possa ser utilizada como amostra aleatória da população de todos os processos relacionados a arbitragem.
-
 [^2]: As três primeiras varas empresariais tiveram sua criação autorizada no dia 14 de dezembro por deliberação unânime do Órgão Especial do Tribunal de Justiça do Estado de São Paulo. Link para o parecer em <https://bit.ly/parecer-varas>. Acesso em 03 de maio de 2023.
+
+De qualquer forma, espera-se que a lista obtida, depois de limpa, possa ser utilizada como amostra aleatória da população de todos os processos relacionados a arbitragem.
 
 # Arrumação
 
@@ -78,17 +80,17 @@ O primeiro passo da arrumação dos dados foi a classificação das categorias d
 ```{r}
 #| label: tbl-rx-tipo
 #| tbl-cap: "Expressões regulares utilizadas para classificar a categoria de ação"
-rx_tipo() |> 
-  tibble::enframe() |> 
+rx_tipo() |>
+  tibble::enframe() |>
   tidyr::unnest(value) |>
-  dplyr::mutate(value = paste0("(", purrr::map_chr(value, paste, collapse = " OU "), ")")) |> 
-  dplyr::group_by(name) |> 
-  dplyr::summarise(value = paste(value, collapse = " E ")) |> 
+  dplyr::mutate(value = paste0("(", purrr::map_chr(value, paste, collapse = " OU "), ")")) |>
+  dplyr::group_by(name) |>
+  dplyr::summarise(value = paste(value, collapse = " E ")) |>
   dplyr::transmute(
     name = stringr::str_to_title(name),
     value = purrr::map_chr(value, paste, collapse = ", ")
-  ) |> 
-  dplyr::arrange(dplyr::desc(name)) |> 
+  ) |>
+  dplyr::arrange(dplyr::desc(name)) |>
   knitr::kable(col.names = c("Categoria", "Expressões regulares"))
 ```
 
@@ -98,13 +100,13 @@ A @tbl-tabela-tipo mostra a quantidade de processos detectada em cada categoria.
 #| label: tbl-tabela-tipo
 #| tbl-cap: "Processos classificados por categoria"
 da_cjpg_tidy |>
-  dplyr::count(categoria, sort = TRUE) |> 
-  dplyr::mutate(prop = formattable::percent(n/sum(n))) |>
+  dplyr::count(categoria, sort = TRUE) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
   dplyr::mutate(
     categoria = tidyr::replace_na(categoria, "(vazio)"),
     categoria = stringr::str_to_title(categoria)
-  ) |> 
-  janitor::adorn_totals() |> 
+  ) |>
+  janitor::adorn_totals() |>
   knitr::kable(col.names = c("Resultado", "N", "%"))
 ```
 
@@ -113,16 +115,16 @@ O passo seguinte foi a obtenção dos resultados dos processos. Para classificar
 ```{r}
 #| label: tbl-rx-resultado
 #| tbl-cap: "Expressões regulares utilizadas para classificar o resultado"
-rx_resultado() |> 
-  tibble::enframe() |> 
+rx_resultado() |>
+  tibble::enframe() |>
   tidyr::unnest(value) |>
-  dplyr::mutate(value = paste0("(", purrr::map_chr(value, paste, collapse = " OU "), ")")) |> 
-  dplyr::group_by(name) |> 
-  dplyr::summarise(value = paste(value, collapse = " E ")) |> 
+  dplyr::mutate(value = paste0("(", purrr::map_chr(value, paste, collapse = " OU "), ")")) |>
+  dplyr::group_by(name) |>
+  dplyr::summarise(value = paste(value, collapse = " E ")) |>
   dplyr::transmute(
     name = stringr::str_to_title(name),
     value = purrr::map_chr(value, paste, collapse = ", ")
-  ) |> 
+  ) |>
   knitr::kable(col.names = c("Categoria", "Expressões regulares"))
 ```
 
@@ -141,14 +143,14 @@ Com relação às colunas da base, as principais informações alteradas foram a
 ```{r}
 #| label: tbl-tabela-tipo-revisao
 #| tbl-cap: "Processos classificados por categoria, após revisão"
-da_tidy |> 
-  dplyr::count(categoria, sort = TRUE) |> 
-  dplyr::mutate(prop = formattable::percent(n/sum(n))) |>
+da_tidy |>
+  dplyr::count(categoria, sort = TRUE) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
   dplyr::mutate(
     categoria = tidyr::replace_na(categoria, "(vazio)"),
     categoria = stringr::str_to_title(categoria)
-  ) |> 
-  janitor::adorn_totals() |> 
+  ) |>
+  janitor::adorn_totals() |>
   knitr::kable(col.names = c("Resultado", "N", "%"))
 ```
 
@@ -179,16 +181,16 @@ A @tbl-classe mostra as classes processuais mais comuns encontradas. É possíve
 ```{r}
 #| label: tbl-classe
 #| tbl-cap: "Classes mais comuns"
-da_tidy |> 
+da_tidy |>
   dplyr::mutate(
     classe = forcats::fct_lump_n(classe, 10, other_level = "Outros")
-  ) |> 
-  dplyr::count(classe, sort = TRUE) |> 
+  ) |>
+  dplyr::count(classe, sort = TRUE) |>
   dplyr::mutate(classe = dplyr::if_else(
     classe == "Compromisso Arbitral", "Convenção Arbitral", classe
-  )) |> 
-  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |> 
-  janitor::adorn_totals() |> 
+  )) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  janitor::adorn_totals() |>
   knitr::kable(col.names = c("Classe", "N", "%"))
 ```
 
@@ -197,13 +199,13 @@ A @tbl-assunto mostra os dez assuntos processuais mais comuns encontrados. Assim
 ```{r}
 #| label: tbl-assunto
 #| tbl-cap: "Assuntos mais comuns"
-da_tidy |> 
+da_tidy |>
   dplyr::mutate(
     assunto = forcats::fct_lump_n(assunto, 10, other_level = "Outros")
-  ) |> 
-  dplyr::count(assunto, sort = TRUE) |> 
-  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |> 
-  janitor::adorn_totals() |> 
+  ) |>
+  dplyr::count(assunto, sort = TRUE) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  janitor::adorn_totals() |>
   knitr::kable(col.names = c("Assunto", "N", "%"))
 ```
 
@@ -212,23 +214,23 @@ A @tbl-valor mostra a contagem de processos por faixa de valores de causa. É po
 ```{r}
 #| label: tbl-valor
 #| tbl-cap: "Faixas de valores"
-da_tidy |> 
+da_tidy |>
   dplyr::mutate(
     faixa = cut(
-      valor, c(0, 1e4, 1e5, 1e6, 1e7, Inf), 
+      valor, c(0, 1e4, 1e5, 1e6, 1e7, Inf),
       labels = c(
-        "Até R$ 10.000", 
+        "Até R$ 10.000",
         "Entre R$ 10.000 e R$ 100.000",
         "Entre R$ 100.000 e R$ 1 milhão",
         "Entre R$ 1 milhão e R$ 10 milhões",
         "R$ 10 milhões ou mais"
       )
     )
-  ) |> 
-  dplyr::count(faixa) |> 
-  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |> 
-  dplyr::mutate(faixa = forcats::fct_explicit_na(faixa, "(Vazio)")) |> 
-  janitor::adorn_totals() |> 
+  ) |>
+  dplyr::count(faixa) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  dplyr::mutate(faixa = forcats::fct_explicit_na(faixa, "(Vazio)")) |>
+  janitor::adorn_totals() |>
   knitr::kable(col.names = c("Faixa", "N", "%"))
 
 ```
@@ -238,24 +240,24 @@ A @tbl-valor-anulatoria mostra a contagem de processos por faixa de valores de c
 ```{r}
 #| label: tbl-valor-anulatoria
 #| tbl-cap: "Faixas de valores nas anulatórias"
-da_tidy |> 
-  dplyr::filter(categoria == "Anulacao") |> 
+da_tidy |>
+  dplyr::filter(categoria == "Anulacao") |>
   dplyr::mutate(
     faixa = cut(
-      valor, c(0, 1e4, 1e5, 1e6, 1e7, Inf), 
+      valor, c(0, 1e4, 1e5, 1e6, 1e7, Inf),
       labels = c(
-        "Até R$ 10.000", 
+        "Até R$ 10.000",
         "Entre R$ 10.000 e R$ 100.000",
         "Entre R$ 100.000 e R$ 1 milhão",
         "Entre R$ 1 milhão e R$ 10 milhões",
         "R$ 10 milhões ou mais"
       )
     )
-  ) |> 
-  dplyr::count(faixa) |> 
-  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |> 
-  dplyr::mutate(faixa = forcats::fct_explicit_na(faixa, "(Vazio)")) |> 
-  janitor::adorn_totals() |> 
+  ) |>
+  dplyr::count(faixa) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  dplyr::mutate(faixa = forcats::fct_explicit_na(faixa, "(Vazio)")) |>
+  janitor::adorn_totals() |>
   knitr::kable(col.names = c("Faixa", "N", "%"))
 
 ```
@@ -265,10 +267,10 @@ A @tbl-vara mostra a contagem de processos por vara. As varas empresariais do fo
 ```{r}
 #| label: tbl-vara
 #| tbl-cap: "Quantidade de processos por vara"
-da_tidy |> 
-  dplyr::count(vara, sort = TRUE) |> 
-  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |> 
-  janitor::adorn_totals() |> 
+da_tidy |>
+  dplyr::count(vara, sort = TRUE) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  janitor::adorn_totals() |>
   knitr::kable(col.names = c("Vara", "N", "%"))
 ```
 
@@ -277,13 +279,51 @@ A @tbl-camara-origem mostra a contagem e proporção de processos por câmara ar
 ```{r}
 #| label: tbl-camara-origem
 #| tbl-cap: "Quantidade de processos por câmara arbitral de origem"
-da_tidy |> 
-  dplyr::filter(categoria == "Anulacao") |> 
-  dplyr::count(camara_arbitral, sort = TRUE) |> 
-  dplyr::filter(camara_arbitral != "Não identificado") |> 
-  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |> 
-  janitor::adorn_totals() |> 
+da_tidy |>
+  dplyr::filter(categoria == "Anulacao") |>
+  dplyr::count(camara_arbitral, sort = TRUE) |>
+  dplyr::filter(camara_arbitral != "Não identificado") |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  janitor::adorn_totals() |>
   knitr::kable(col.names = c("Câmara", "N", "%"))
+```
+
+Em seguida, apresentam-se comparações entre a quantidade de sentenças realizadas no âmbito arbitral e a quantidade de anulatórias. Os dados de sentenças arbitrais foram levantados pela Dra Vera Cecília Monteiro de Barros e gentilmente fornecidos à equipe de pesquisa. Os dados revelam um total de `r sum(sentencas_camaras$n)` sentenças arbitrais no mesmo período que os dados levantados no TJSP.
+
+Antes de seguir com as comparações, cabe um detalhamento das limitações do estudo. Primeiro, as contagens disponíveis na base de sentenças arbitrais e na base de processos judiciais não correspondem sempre aos mesmos conflitos, já que sempre decorre um tempo entre a decisão arbitral e a sentença do processo judicial. Além disso, como não foram analisados casos que estão em segredo de justiça, a taxa de judicialização, ou seja, a razão entre a quantidade de processos judiciais e a quantidade de sentenças arbitrais está subestimada. Por último, não existem informações da quantidade de sentenças para todas as câmaras arbitrais possíveis, então as análises que comparam as contagens consideram somente as câmaras que têm informação.
+
+Feitas as ressalvas, a @tbl-sentencas-processos compara a quantidade de sentenças arbitrais e ações anulatórias encontrados na base de processos judiciais. Em três câmaras (FGV, CAMARB, AMCHAN), não foi encontrada nenhuma ação anulatória. A taxa geral de anulatórias foi de 2.8%. Vale ressaltar, novamente, que este número é possivelmente subestimado.
+
+```{r}
+#| label: tbl-sentencas-processos
+#| tbl-cap: Comparação entre quantidade de decisões arbitrais e ações anulatórias
+
+contagens_camaras <- da_tidy |>
+  dplyr::filter(categoria == "Anulacao") |>
+  dplyr::count(camara_arbitral, sort = TRUE) |>
+  dplyr::transmute(
+    nome_camara = dplyr::if_else(
+      stringr::str_detect(camara_arbitral, "CBMA"),
+      "Centro Brasileiro de Mediação e Arbitragem CBMA",
+      camara_arbitral
+    ),
+    n
+  )
+
+sentencas_camaras |>
+  dplyr::left_join(contagens_camaras, "nome_camara") |>
+  tidyr::replace_na(list(n = 0)) |>
+  dplyr::arrange(dplyr::desc(qtd_sentencas)) |>
+  dplyr::mutate(taxa = formattable::percent(n / qtd_sentencas, 1)) |>
+  janitor::adorn_totals() |>
+  dplyr::mutate(taxa = dplyr::if_else(
+    sigla == "Total",
+    formattable::percent(sum(n) / sum(qtd_sentencas), 1),
+    taxa
+  )) |>
+  knitr::kable(col.names = c(
+    "Sigla", "Câmara", "Decisões arbitrais", "Ações anulatórias", "Taxa"
+  ))
 ```
 
 A @fig-no-tempo mostra o volume de decisões ao longo do tempo, considerando como base a data de disponibilização das sentenças. É possível notar um aumento na quantidade de decisões nos anos de 2021 e 2022 (que ainda não acabou).
@@ -293,9 +333,9 @@ A @fig-no-tempo mostra o volume de decisões ao longo do tempo, considerando com
 #| fig-cap: "Quantidade de decisões por ano"
 #| fig-width: 7
 #| fig-height: 4
-da_tidy |> 
-  dplyr::mutate(ano = lubridate::year(dt_disp)) |> 
-  dplyr::count(ano) |> 
+da_tidy |>
+  dplyr::mutate(ano = lubridate::year(dt_disp)) |>
+  dplyr::count(ano) |>
   ggplot2::ggplot() +
   ggplot2::aes(ano, n) +
   ggplot2::geom_col(fill = col_abj[1], width = .7) +
@@ -313,9 +353,9 @@ A @fig-no-tempo-categoria mostra o volume de decisões ao longo do tempo, separa
 #| fig-cap: "Quantidade de decisões por ano e categoria"
 #| fig-width: 7
 #| fig-height: 4
-da_tidy |> 
-  dplyr::mutate(ano = lubridate::year(dt_disp)) |> 
-  dplyr::count(ano, categoria) |> 
+da_tidy |>
+  dplyr::mutate(ano = lubridate::year(dt_disp)) |>
+  dplyr::count(ano, categoria) |>
   ggplot2::ggplot() +
   ggplot2::aes(ano, n) +
   ggplot2::geom_col(width = .7, position = "dodge", fill = col_abj[1]) +
@@ -334,56 +374,60 @@ A @tbl-resultado mostra os resultados dos processos por categoria, excluindo os 
 #| label: tbl-resultado
 #| tbl-cap: "Resultados dos processos por categoria, excluindo acordos"
 
-tab_geral <- da_tidy |> 
-  dplyr::filter(resultado != "Acordo") |> 
-  dplyr::count(categoria, resultado) |> 
-  dplyr::group_by(categoria) |> 
+tab_geral <- da_tidy |>
+  dplyr::filter(resultado != "Acordo") |>
+  dplyr::count(categoria, resultado) |>
+  dplyr::group_by(categoria) |>
   dplyr::mutate(prop = n/sum(n)) |>
-  dplyr::ungroup() |> 
-  dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, 1)})")) 
+  dplyr::ungroup() |>
+  dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, 1)})"))
 
-tab_total_col <- da_tidy |> 
-  dplyr::filter(resultado != "Acordo") |> 
-  dplyr::count(categoria) |> 
-  dplyr::mutate(prop = n/sum(n)) |> 
-  dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, 1)})")) |> 
+tab_total_col <- da_tidy |>
+  dplyr::filter(resultado != "Acordo") |>
+  dplyr::count(categoria) |>
+  dplyr::mutate(prop = n/sum(n)) |>
+  dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, 1)})")) |>
   dplyr::select(Total = lab)
 
-tab_total_row <- da_tidy |> 
-  dplyr::filter(resultado != "Acordo") |> 
-  dplyr::count(resultado) |> 
-  dplyr::mutate(prop = n/sum(n)) |> 
-  dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, 1)})")) |> 
+tab_total_row <- da_tidy |>
+  dplyr::filter(resultado != "Acordo") |>
+  dplyr::count(resultado) |>
+  dplyr::mutate(prop = n/sum(n)) |>
+  dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, 1)})")) |>
   dplyr::transmute(
     name = resultado,
     value = lab
-  ) |> 
-  tidyr::pivot_wider() |> 
+  ) |>
+  tidyr::pivot_wider() |>
   dplyr::mutate(categoria = "Total", Total = stringr::str_glue("{nrow(da_tidy)} (100%)"))
 
-tab_geral |> 
-  dplyr::select(resultado, categoria, lab) |> 
+tab_geral |>
+  dplyr::select(resultado, categoria, lab) |>
   tidyr::pivot_wider(
-    names_from = resultado, 
-    values_from = lab, 
+    names_from = resultado,
+    values_from = lab,
     values_fill = "0 (0%)"
-  ) |> 
-  dplyr::bind_cols(tab_total_col) |> 
-  dplyr::bind_rows(tab_total_row) |> 
-  dplyr::rename(Categoria = categoria) |> 
+  ) |>
+  dplyr::bind_cols(tab_total_col) |>
+  dplyr::bind_rows(tab_total_row) |>
+  dplyr::rename(Categoria = categoria) |>
   knitr::kable()
 
 ```
 
-A partir da @tbl-resultado, é importante colocar um comentário sobre o **viés de seleção em decisões judiciais** [@priest1984selection]. Os processos que se manifestam no judiciário (por exemplo, ações de anulação de decisão arbitral) são uma amostra de todos os conflitos arbitrais, já que apenas uma parte dos casos vai para o judiciário. No entanto, essa amostra não é aleatória, já que a as probabilidades de dois casos irem ao judiciário após decisão arbitral não são as mesmas. 
+A partir da @tbl-resultado, é importante colocar um comentário sobre o **viés de seleção em decisões judiciais** [@priest1984selection]. Os processos que se manifestam no judiciário (por exemplo, ações de anulação de decisão arbitral) são uma amostra de todos os conflitos arbitrais, já que apenas uma parte dos casos vai para o judiciário. No entanto, essa amostra não é aleatória, já que a as probabilidades de dois casos irem ao judiciário após decisão arbitral não são as mesmas.
 
 Os casos selecionados para serem judicializados são avaliados pelas partes e advogados de ambos os polos de acordo com suas características, em especial se i) há uma probabilidade ponderável do caso ser julgado favoravelmente sob sua perspectiva e ii) o montante do benefício econômico, considerada a probabilidade de êxito, compensa os custos de litigar, incluindo taxas, honorários com advogados, tempo, esforço e verbas sucumbenciais.
 
 Como o caso é selecionado para ser judicializado quando tanto autor como réu consideram suas chances de êxito relevantes, ambos em média tendem a acertar, uma vez que não há elementos para considerar que um dos polos seria sistematicamente mais competente na avaliação de suas chances do que o outro. Por essa razão, as taxas de procedência de ações judiciais tendem, dadas certas condições (acesso a precedentes, custos para litigar e possibilidade de as partes transigirem), a 50%.
 
-Nas discussões sobre a relação entre Poder Judiciário e arbitragem, a comunidade apresentou uma tendência a superestimar a importância das taxas de procedência como medida para a funcionalidade do sistema: quanto menor a taxa, mais funcional a relação. No entanto, esse mecanismo de seleção de casos serve para relativizar a importância das análises de taxas de procedência nesse contexto. 
+Nas discussões sobre a relação entre Poder Judiciário e arbitragem, a comunidade apresentou uma tendência a superestimar a importância das taxas de procedência como medida para a funcionalidade do sistema: quanto menor a taxa, mais funcional a relação. No entanto, esse mecanismo de seleção de casos serve para relativizar a importância das análises de taxas de procedência nesse contexto.
 
-Assim, um importante resultado de @priest1984selection é que, considerando algumas premissas do sistema judiciário (como simetria de informação e existência de custos para litigar), **a taxa de decisões favoráveis no judiciário é diferente da probabilidade de reforma da decisão arbitral, compondo duas grandezas que não podem ser confundidas**. Falando especificamente dos resultados dessa pesquisa, as taxas de 44% e 17% (com e sem Unimed, respectivamente) não devem ser interpretadas como a probabilidade geral para se reverter uma decisão arbitral no judiciário. 
+Assim, um importante resultado de @priest1984selection é que, considerando algumas premissas do sistema judiciário (como simetria de informação e existência de custos para litigar), **a taxa de decisões favoráveis no judiciário é diferente da probabilidade de reforma da decisão arbitral, compondo duas grandezas que não podem ser confundidas**. Falando especificamente dos resultados dessa pesquisa, as taxas de 44% e 17% (com e sem Unimed, respectivamente) não devem ser interpretadas como a probabilidade geral para se reverter uma decisão arbitral no judiciário.
+
+A intensidade da seleção pode ser medida, pelo menos de forma aproximada, a partir de estatísticas da quantidade de decisões arbitrais no mesmo período do estudo. Pela @tbl-sentencas-processos, foi identificada uma taxa de seleção de aproximadamente 2.8% sem considerar processos em segredo de justiça. Ainda que a taxa real fosse de 10%, mais de três vezes a quantidade de casos públicos, a reforma das decisões arbitrais em primeira instância, considerando o mecanismo de seleção, **seria de 1.7%**[^txunimed]. Essa sim seria uma estimativa conservadora para a probabilidade de reverter uma decisão arbitral no judiciário.
+
+[^txunimed]: A taxa considera as decisões sem Unimed (17%), já que a Câmara da Unimed não faz parte do levantamento de sentenças arbitrais.
 
 <!-- A intensidade da seleção pode ser medida a partir de estatísticas da quantidade de decisões arbitrais no mesmo período do estudo. Entre 2018 e 2022, foram identificadas 10.000 decisões [^selma] -->
 
@@ -396,17 +440,17 @@ A @fig-resultado-vara mostra os resultados dos processos por categoria e vara, c
 #| fig-cap: "Proporção dos resultados dos processos por categoria e vara"
 #| fig-width: 8
 #| fig-height: 4
-da_tidy |> 
-  dplyr::count(vara, categoria, resultado) |> 
+da_tidy |>
+  dplyr::count(vara, categoria, resultado) |>
   dplyr::mutate(
     vara = stringr::str_extract(vara, "[12]ª VARA"),
     vara = stringr::str_to_title(vara)
-  ) |> 
-  dplyr::filter(!is.na(vara)) |> 
-  dplyr::group_by(vara, categoria) |> 
+  ) |>
+  dplyr::filter(!is.na(vara)) |>
+  dplyr::group_by(vara, categoria) |>
   dplyr::mutate(prop = n/sum(n), total = sum(n)) |>
-  dplyr::ungroup() |> 
-  dplyr::mutate(vara = paste0(vara, "\n(N=", total, ")")) |> 
+  dplyr::ungroup() |>
+  dplyr::mutate(vara = paste0(vara, "\n(N=", total, ")")) |>
   ggplot2::ggplot(ggplot2::aes(x = vara, y = prop, fill = resultado)) +
   ggplot2::geom_col() +
   ggplot2::facet_wrap(~categoria, nrow = 1, scales = "free_x") +
@@ -422,7 +466,7 @@ Finalmente, a @tbl-tempo mostra os tempos médios e medianos, geral e por catego
 ```{r}
 #| label: tbl-tempo
 #| tbl-cap: "Estatísticas descritivas dos tempos dos processos em dias"
-geral <- da_tidy |> 
+geral <- da_tidy |>
   dplyr::summarise(
     categoria = "Total",
     n = dplyr::n(),
@@ -430,15 +474,15 @@ geral <- da_tidy |>
     mediana = median(tempo)
   )
 
-da_tidy |> 
-  dplyr::group_by(categoria) |> 
+da_tidy |>
+  dplyr::group_by(categoria) |>
   dplyr::summarise(
     n = dplyr::n(),
     media = mean(tempo),
     mediana = median(tempo)
-  ) |> 
-  dplyr::arrange(dplyr::desc(mediana)) |> 
-  dplyr::bind_rows(geral) |> 
+  ) |>
+  dplyr::arrange(dplyr::desc(mediana)) |>
+  dplyr::bind_rows(geral) |>
   knitr::kable(col.names = c("Categoria", "N", "Média", "Mediana"), digits = 1)
 ```
 
@@ -455,24 +499,24 @@ A @tbl-valor-anulatoria-unimed mostra a contagem de processos por faixa de valor
 ```{r}
 #| label: tbl-valor-anulatoria-unimed
 #| tbl-cap: "Faixas de valores nas anulatórias retirando casos da Unimed"
-da_tidy |> 
-  dplyr::filter(categoria == "Anulacao", unimed == "Não") |> 
+da_tidy |>
+  dplyr::filter(categoria == "Anulacao", unimed == "Não") |>
   dplyr::mutate(
     faixa = cut(
-      valor, c(0, 1e4, 1e5, 1e6, 1e7, Inf), 
+      valor, c(0, 1e4, 1e5, 1e6, 1e7, Inf),
       labels = c(
-        "Até R$ 10.000", 
+        "Até R$ 10.000",
         "Entre R$ 10.000 e R$ 100.000",
         "Entre R$ 100.000 e R$ 1 milhão",
         "Entre R$ 1 milhão e R$ 10 milhões",
         "R$ 10 milhões ou mais"
       )
     )
-  ) |> 
-  dplyr::count(faixa) |> 
-  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |> 
-  dplyr::mutate(faixa = forcats::fct_explicit_na(faixa, "(Vazio)")) |> 
-  janitor::adorn_totals() |> 
+  ) |>
+  dplyr::count(faixa) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  dplyr::mutate(faixa = forcats::fct_explicit_na(faixa, "(Vazio)")) |>
+  janitor::adorn_totals() |>
   knitr::kable(col.names = c("Faixa", "N", "%"))
 
 ```
@@ -483,43 +527,43 @@ A @tbl-resultado-unimed mostra as proporções de resultados em processos de anu
 #| label: tbl-resultado-unimed
 #| tbl-cap: "Resultados dos processos por categoria, excluindo acordos e casos da Unimed"
 
-tab_geral <- da_tidy |> 
-  dplyr::filter(resultado != "Acordo", unimed == "Não") |> 
-  dplyr::count(categoria, resultado) |> 
-  dplyr::group_by(categoria) |> 
+tab_geral <- da_tidy |>
+  dplyr::filter(resultado != "Acordo", unimed == "Não") |>
+  dplyr::count(categoria, resultado) |>
+  dplyr::group_by(categoria) |>
   dplyr::mutate(prop = n/sum(n)) |>
-  dplyr::ungroup() |> 
-  dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, 1)})")) 
+  dplyr::ungroup() |>
+  dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, 1)})"))
 
-tab_total_col <- da_tidy |> 
-  dplyr::filter(resultado != "Acordo", unimed == "Não") |> 
-  dplyr::count(categoria) |> 
-  dplyr::mutate(prop = n/sum(n)) |> 
-  dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, 1)})")) |> 
+tab_total_col <- da_tidy |>
+  dplyr::filter(resultado != "Acordo", unimed == "Não") |>
+  dplyr::count(categoria) |>
+  dplyr::mutate(prop = n/sum(n)) |>
+  dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, 1)})")) |>
   dplyr::select(Total = lab)
 
-tab_total_row <- da_tidy |> 
-  dplyr::filter(resultado != "Acordo", unimed == "Não") |> 
-  dplyr::count(resultado) |> 
-  dplyr::mutate(prop = n/sum(n)) |> 
-  dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, 1)})")) |> 
+tab_total_row <- da_tidy |>
+  dplyr::filter(resultado != "Acordo", unimed == "Não") |>
+  dplyr::count(resultado) |>
+  dplyr::mutate(prop = n/sum(n)) |>
+  dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, 1)})")) |>
   dplyr::transmute(
     name = resultado,
     value = lab
-  ) |> 
-  tidyr::pivot_wider() |> 
+  ) |>
+  tidyr::pivot_wider() |>
   dplyr::mutate(categoria = "Total", Total = stringr::str_glue("{nrow(da_tidy)} (100%)"))
 
-tab_geral |> 
-  dplyr::select(resultado, categoria, lab) |> 
+tab_geral |>
+  dplyr::select(resultado, categoria, lab) |>
   tidyr::pivot_wider(
-    names_from = resultado, 
-    values_from = lab, 
+    names_from = resultado,
+    values_from = lab,
     values_fill = "0 (0%)"
-  ) |> 
-  dplyr::bind_cols(tab_total_col) |> 
-  dplyr::bind_rows(tab_total_row) |> 
-  dplyr::rename(Categoria = categoria) |> 
+  ) |>
+  dplyr::bind_cols(tab_total_col) |>
+  dplyr::bind_rows(tab_total_row) |>
+  dplyr::rename(Categoria = categoria) |>
   knitr::kable()
 
 ```
@@ -531,18 +575,18 @@ A @fig-resultado-vara-unimed mostra os resultados dos processos por categoria e 
 #| fig-cap: "Proporção dos resultados dos processos por categoria e vara, retirando casos da Unimed"
 #| fig-width: 8
 #| fig-height: 4
-da_tidy |> 
-  dplyr::filter(unimed == "Não") |> 
-  dplyr::count(vara, categoria, resultado) |> 
+da_tidy |>
+  dplyr::filter(unimed == "Não") |>
+  dplyr::count(vara, categoria, resultado) |>
   dplyr::mutate(
     vara = stringr::str_extract(vara, "[12]ª VARA"),
     vara = stringr::str_to_title(vara)
-  ) |> 
-  dplyr::filter(!is.na(vara)) |> 
-  dplyr::group_by(vara, categoria) |> 
+  ) |>
+  dplyr::filter(!is.na(vara)) |>
+  dplyr::group_by(vara, categoria) |>
   dplyr::mutate(prop = n/sum(n), total = sum(n)) |>
-  dplyr::ungroup() |> 
-  dplyr::mutate(vara = paste0(vara, "\n(N=", total, ")")) |> 
+  dplyr::ungroup() |>
+  dplyr::mutate(vara = paste0(vara, "\n(N=", total, ")")) |>
   ggplot2::ggplot(ggplot2::aes(x = vara, y = prop, fill = resultado)) +
   ggplot2::geom_col() +
   ggplot2::facet_wrap(~categoria, nrow = 1, scales = "free_x") +
@@ -558,8 +602,8 @@ A @tbl-tempo-unimed mostra os tempos médios e medianos, geral e por categoria, 
 ```{r}
 #| label: tbl-tempo-unimed
 #| tbl-cap: "Estatísticas descritivas dos tempos dos processos, retirando casos da Unimed"
-geral <- da_tidy |> 
-  dplyr::filter(unimed == "Não") |> 
+geral <- da_tidy |>
+  dplyr::filter(unimed == "Não") |>
   dplyr::summarise(
     categoria = "Total",
     n = dplyr::n(),
@@ -567,16 +611,16 @@ geral <- da_tidy |>
     mediana = median(tempo)
   )
 
-da_tidy |> 
+da_tidy |>
   dplyr::filter(unimed == "Não") |>
-  dplyr::group_by(categoria) |> 
+  dplyr::group_by(categoria) |>
   dplyr::summarise(
     n = dplyr::n(),
     media = mean(tempo),
     mediana = median(tempo)
-  ) |> 
-  dplyr::arrange(dplyr::desc(mediana)) |> 
-  dplyr::bind_rows(geral) |> 
+  ) |>
+  dplyr::arrange(dplyr::desc(mediana)) |>
+  dplyr::bind_rows(geral) |>
   knitr::kable(col.names = c("Categoria", "N", "Média", "Mediana"), digits = 1)
 ```
 
@@ -587,17 +631,17 @@ A base contém 63 ações cautelares, pouco mais de um quinto da base completa. 
 ```{r}
 #| label: tbl-cautelar-liminar
 #| tbl-cap: Resultados das liminares em ações cautelares.
-da_cautelar <- da_tidy |> 
+da_cautelar <- da_tidy |>
   dplyr::filter(categoria == "Cautelar", !is.na(liminar))
 
-da_cautelar |> 
-  dplyr::count(liminar, sort = TRUE) |> 
+da_cautelar |>
+  dplyr::count(liminar, sort = TRUE) |>
   dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
   dplyr::mutate(
     liminar = tidyr::replace_na(liminar, "(vazio)"),
     liminar = stringr::str_to_title(liminar)
-  ) |> 
-  janitor::adorn_totals() |> 
+  ) |>
+  janitor::adorn_totals() |>
   knitr::kable(col.names = c("Resultado", "N", "%"))
 ```
 
@@ -608,7 +652,7 @@ A @tbl-valor-tipo mostra os valores médios e medianos das causas, geral e por c
 ```{r}
 #| label: tbl-valor-tipo
 #| tbl-cap: "Estatísticas descritivas dos valores de causa dos processos"
-geral <- da_tidy |> 
+geral <- da_tidy |>
   dplyr::summarise(
     categoria = "Total",
     n = dplyr::n(),
@@ -616,20 +660,20 @@ geral <- da_tidy |>
     mediana = median(valor, na.rm = TRUE)
   )
 
-da_tidy |> 
-  dplyr::group_by(categoria) |> 
+da_tidy |>
+  dplyr::group_by(categoria) |>
   dplyr::summarise(
     n = dplyr::n(),
     media = mean(valor, na.rm = TRUE),
     mediana = median(valor, na.rm = TRUE)
-  ) |> 
-  dplyr::arrange(dplyr::desc(mediana)) |> 
-  dplyr::bind_rows(geral) |> 
+  ) |>
+  dplyr::arrange(dplyr::desc(mediana)) |>
+  dplyr::bind_rows(geral) |>
   dplyr::mutate(dplyr::across(
-    c(3,4), 
-    scales::dollar, 
+    c(3,4),
+    scales::dollar,
     prefix = "R$ ", accuracy = .01, big.mark = ".", decimal.mark = ","
-  )) |> 
+  )) |>
   knitr::kable(col.names = c("Categoria", "N", "Média", "Mediana"), digits = 1)
 ```
 
@@ -638,8 +682,8 @@ A @tbl-valor-tipo-unimed mostra as mesmas informações anteriores, mas retirand
 ```{r}
 #| label: tbl-valor-tipo-unimed
 #| tbl-cap: "Estatísticas descritivas dos valores de causa dos processos, retirando casos da Unimed"
-geral <- da_tidy |> 
-  dplyr::filter(unimed == "Não") |> 
+geral <- da_tidy |>
+  dplyr::filter(unimed == "Não") |>
   dplyr::summarise(
     categoria = "Total",
     n = dplyr::n(),
@@ -647,24 +691,23 @@ geral <- da_tidy |>
     mediana = median(valor, na.rm = TRUE)
   )
 
-da_tidy |> 
-  dplyr::filter(unimed == "Não") |> 
-  dplyr::group_by(categoria) |> 
+da_tidy |>
+  dplyr::filter(unimed == "Não") |>
+  dplyr::group_by(categoria) |>
   dplyr::summarise(
     n = dplyr::n(),
     media = mean(valor, na.rm = TRUE),
     mediana = median(valor, na.rm = TRUE)
-  ) |> 
-  dplyr::arrange(dplyr::desc(mediana)) |> 
-  dplyr::bind_rows(geral) |> 
+  ) |>
+  dplyr::arrange(dplyr::desc(mediana)) |>
+  dplyr::bind_rows(geral) |>
   dplyr::mutate(dplyr::across(
-    c(3,4), 
-    scales::dollar, 
+    c(3,4),
+    scales::dollar,
     prefix = "R$ ", accuracy = .01, big.mark = ".", decimal.mark = ","
-  )) |> 
+  )) |>
   knitr::kable(col.names = c("Categoria", "N", "Média", "Mediana"), digits = 1)
 ```
-
 
 ### Qual é a taxa de favorabilidade em anulatórias ao longo do tempo?
 
@@ -676,22 +719,22 @@ A @fig-anulacao-no-tempo mostra a taxa de casos favoráveis (procedentes e parci
 #| fig-width: 7
 #| fig-height: 4
 
-aux_anulacao <- da_tidy |> 
-  dplyr::filter(categoria == "Anulacao", resultado != "Acordo") |> 
+aux_anulacao <- da_tidy |>
+  dplyr::filter(categoria == "Anulacao", resultado != "Acordo") |>
   dplyr::mutate(
     favoravel = resultado %in% c("Acordo", "Parcial", "Procedente"),
     ano = lubridate::year(dt_disp)
   )
 
-prop_geral <- aux_anulacao |> 
+prop_geral <- aux_anulacao |>
   with(mean(favoravel))
 
-aux_anulacao |> 
-  dplyr::group_by(ano) |> 
-  dplyr::summarise(n = dplyr::n(), prop = mean(favoravel)) |> 
+aux_anulacao |>
+  dplyr::group_by(ano) |>
+  dplyr::summarise(n = dplyr::n(), prop = mean(favoravel)) |>
   dplyr::mutate(
     ano = glue::glue("{ano}\n(N={n})")
-  ) |> 
+  ) |>
   ggplot2::ggplot() +
   ggplot2::aes(ano, prop) +
   ggplot2::geom_col(fill = col_abj[1], width = .7) +
@@ -724,13 +767,13 @@ A Tabela @tbl-2inst-status mostra os status dos processos de acordo com as categ
 #| label: tbl-2inst-status
 #| tbl-cap: "Status dos processos na segunda instância de acordo com as categorias fornecidas pelo TJSP"
 
-da_cposg_tidy |> 
-  dplyr::group_by(status) |> 
+da_cposg_tidy |>
+  dplyr::group_by(status) |>
   dplyr::summarise(
-    total = dplyr::n(), 
-  ) |> 
-  dplyr::mutate(prop = formattable::percent(total/sum(total), 1)) |> 
-  dplyr::arrange(dplyr::desc(total)) |> 
+    total = dplyr::n(),
+  ) |>
+  dplyr::mutate(prop = formattable::percent(total/sum(total), 1)) |>
+  dplyr::arrange(dplyr::desc(total)) |>
   knitr::kable(col.names = c("Staus", "N", "%"), digits = 1)
 
 ```
@@ -741,23 +784,23 @@ A taxa de recorribilidade estimada é de quase 60% (173 de 289 casos). Dividindo
 #| label: tbl-tx-recorr-categoria
 #| tbl-cap: "Quantidade e taxa de recorribilidade por categoria."
 
-da_tidy |> 
-  dplyr::left_join(da_cposg_tidy, "id") |> 
-  dplyr::group_by(categoria.x) |> 
+da_tidy |>
+  dplyr::left_join(da_cposg_tidy, "id") |>
+  dplyr::group_by(categoria.x) |>
   dplyr::summarise(
-    total = dplyr::n(), 
+    total = dplyr::n(),
     n = sum(!is.na(tem_decisao)),
     n_decisao = sum(tem_decisao, na.rm = TRUE)
-  ) |> 
-  dplyr::mutate(prop = formattable::percent(n/total, 1)) |> 
-  janitor::adorn_totals() |> 
+  ) |>
+  dplyr::mutate(prop = formattable::percent(n/total, 1)) |>
+  janitor::adorn_totals() |>
   dplyr::mutate(
     prop = dplyr::if_else(
-      categoria.x == "Total", 
+      categoria.x == "Total",
       formattable::percent(n/total, 1),
       prop
     )
-  ) |> 
+  ) |>
   knitr::kable(col.names = c("Categoria", "N total", "N com recursos", "N com decisão", "Taxa recorribilidade"), digits = 1)
 ```
 
@@ -767,82 +810,82 @@ A @tbl-tx-recorr-categoria-unimed mostra as mesmas estatísticas excluindo os ca
 #| label: tbl-tx-recorr-categoria-unimed
 #| tbl-cap: "Quantidade e taxa de recorribilidade por categoria, retirando casos da Unimed"
 
-da_tidy |> 
-  dplyr::filter(unimed == "Não") |> 
-  dplyr::left_join(da_cposg_tidy, "id") |> 
-  dplyr::group_by(categoria.x) |> 
+da_tidy |>
+  dplyr::filter(unimed == "Não") |>
+  dplyr::left_join(da_cposg_tidy, "id") |>
+  dplyr::group_by(categoria.x) |>
   dplyr::summarise(
-    total = dplyr::n(), 
+    total = dplyr::n(),
     n = sum(!is.na(tem_decisao)),
     n_decisao = sum(tem_decisao, na.rm = TRUE)
-  ) |> 
-  dplyr::mutate(prop = formattable::percent(n/total, 1)) |> 
-  janitor::adorn_totals() |> 
+  ) |>
+  dplyr::mutate(prop = formattable::percent(n/total, 1)) |>
+  janitor::adorn_totals() |>
   dplyr::mutate(
     prop = dplyr::if_else(
-      categoria.x == "Total", 
+      categoria.x == "Total",
       formattable::percent(n/total, 1),
       prop
     )
-  ) |> 
+  ) |>
   knitr::kable(col.names = c("Categoria", "N total", "N com recursos", "N com decisão", "Taxa recorribilidade"), digits = 1)
 ```
 
 ```{r}
 #| eval: false
 
-provido <- da_cposg_tidy |> 
-  dplyr::filter(tem_decisao) |> 
-  dplyr::count(dec, sort = TRUE) |> 
-  dplyr::mutate(prop = n/sum(n)) |> 
+provido <- da_cposg_tidy |>
+  dplyr::filter(tem_decisao) |>
+  dplyr::count(dec, sort = TRUE) |>
+  dplyr::mutate(prop = n/sum(n)) |>
   janitor::adorn_totals()
 
-provido_por_categoria <- da_cposg_tidy |> 
+provido_por_categoria <- da_cposg_tidy |>
   dplyr::filter(tem_decisao) |>
-  dplyr::mutate(dec = dec %in% c("Provido", "Provido em parte")) |> 
-  dplyr::group_by(categoria) |> 
+  dplyr::mutate(dec = dec %in% c("Provido", "Provido em parte")) |>
+  dplyr::group_by(categoria) |>
   dplyr::summarise(
     n = dplyr::n(),
     prop = mean(dec)
   )
 
-unimed_decisao <- da_cposg_tidy |> 
-  dplyr::filter(tem_decisao) |> 
-  dplyr::mutate(dec = dec %in% c("Provido", "Provido em parte")) |> 
-  dplyr::group_by(unimed) |> 
+unimed_decisao <- da_cposg_tidy |>
+  dplyr::filter(tem_decisao) |>
+  dplyr::mutate(dec = dec %in% c("Provido", "Provido em parte")) |>
+  dplyr::group_by(unimed) |>
   dplyr::summarise(
     n = dplyr::n(),
     prop_favoravel = mean(dec),
     n_favoravel = sum(dec)
-  ) |> 
+  ) |>
   dplyr::mutate(prop = n/sum(n))
 
-unimed_decisao_parcial <- da_cposg_tidy |> 
-  dplyr::filter(tem_decisao) |> 
-  dplyr::mutate(dec = dec %in% c("Provido em parte")) |> 
-  dplyr::group_by(unimed) |> 
+unimed_decisao_parcial <- da_cposg_tidy |>
+  dplyr::filter(tem_decisao) |>
+  dplyr::mutate(dec = dec %in% c("Provido em parte")) |>
+  dplyr::group_by(unimed) |>
   dplyr::summarise(
     n = dplyr::n(),
     prop_favoravel = mean(dec),
     n_favoravel = sum(dec)
-  ) |> 
+  ) |>
   dplyr::mutate(prop = n/sum(n))
 
-reforma <- da_cposg_tidy |> 
+reforma <- da_cposg_tidy |>
   dplyr::filter(
-    tem_decisao, 
+    tem_decisao,
     reformou_sentenca_arbitral %in% c("Sim", "Não")
-  ) |> 
-  dplyr::count(reformou_sentenca_arbitral) |> 
+  ) |>
+  dplyr::count(reformou_sentenca_arbitral) |>
   dplyr::mutate(prop = n/sum(n))
 
-reforma_sem_unimed <- da_cposg_tidy |> 
+reforma_sem_unimed <- da_cposg_tidy |>
   dplyr::filter(
-    tem_decisao, 
+    tem_decisao,
     reformou_sentenca_arbitral %in% c("Sim", "Não"),
     unimed == "Não"
-  ) |> 
-  dplyr::count(reformou_sentenca_arbitral) |> 
+  ) |>
+  dplyr::count(reformou_sentenca_arbitral) |>
   dplyr::mutate(prop = n/sum(n))
 ```
 
@@ -850,22 +893,20 @@ Como mostrado na @tbl-tx-recorr-categoria, 173 casos com algum recurso, 132 (76%
 
 A @tbl-tx-provido apresenta a taxa de recursos providos ou providos em parte por tipo de recurso. Considerando apenas as anulatórias com alguma decisão (78 casos), a taxa de recursos providos ou providos em parte é de 41% (32 de 78 casos).
 
-
 ```{r}
 #| label: tbl-tx-provido
 #| tbl-cap: Taxa de recursos provido ou providos em parte por categoria
 
-da_cposg_tidy |> 
+da_cposg_tidy |>
   dplyr::filter(tem_decisao) |>
-  dplyr::mutate(dec = dec %in% c("Provido", "Provido em parte")) |> 
-  dplyr::group_by(categoria) |> 
+  dplyr::mutate(dec = dec %in% c("Provido", "Provido em parte")) |>
+  dplyr::group_by(categoria) |>
   dplyr::summarise(
     n = dplyr::n(),
     prop = formattable::percent(mean(dec), 1)
-  ) |> 
+  ) |>
   knitr::kable(col.names = c("Categoria", "N decisões", "% Provido"))
 ```
-
 
 A @tbl-tx-provido-unimed apresenta as mesmas taxas da @tbl-tx-provido excluindo casos da Unimed. Considerando apenas as anulatórias com alguma decisão (22 casos), a taxa de recursos providos ou providos em parte é de 14% (3 de 22 casos).
 
@@ -873,14 +914,14 @@ A @tbl-tx-provido-unimed apresenta as mesmas taxas da @tbl-tx-provido excluindo 
 #| label: tbl-tx-provido-unimed
 #| tbl-cap: Taxa de recursos provido ou providos em parte por categoria, excluindo casos da Unimed.
 
-da_cposg_tidy |> 
+da_cposg_tidy |>
   dplyr::filter(tem_decisao, unimed == "Não") |>
-  dplyr::mutate(dec = dec %in% c("Provido", "Provido em parte")) |> 
-  dplyr::group_by(categoria) |> 
+  dplyr::mutate(dec = dec %in% c("Provido", "Provido em parte")) |>
+  dplyr::group_by(categoria) |>
   dplyr::summarise(
     n = dplyr::n(),
     prop = formattable::percent(mean(dec), 1)
-  ) |> 
+  ) |>
   knitr::kable(col.names = c("Categoria", "N decisões", "% Provido"))
 ```
 
@@ -891,27 +932,27 @@ Uma possível análise de interesse é a **reforma da decisão arbitral em segun
 A análise da reforma foi realizada considerando as anulatórias. Dos 78 recursos em anulatórias que apresentam alguma decisão, 75 são decisões de mérito. Ou seja, são 75 os casos que tiveram alguma decisão que poderiam reformar a sentença arbitral.
 
 ```{r}
-reforma <- da_cposg_tidy |> 
+reforma <- da_cposg_tidy |>
   dplyr::filter(
-    tem_decisao, 
+    tem_decisao,
     categoria == "Anulacao",
     reformou_sentenca_arbitral %in% c("Sim", "Não")
-  ) |> 
-  dplyr::count(reformou_sentenca_arbitral) |> 
+  ) |>
+  dplyr::count(reformou_sentenca_arbitral) |>
   dplyr::mutate(prop = n/sum(n))
 ```
 
-Dos 75 casos com decisão de mérito, foi identificado que 28 (37%) reformaram a decisão arbitral. Isso significa que, após todos os mecanismos de seleção, ou seja, da decisão arbitral para a entrada do processo em primeira instância, e da sentença em primeira instância para o recurso, os poucos casos que sobram apresentam uma taxa de reforma de 37%. 
+Dos 75 casos com decisão de mérito, foi identificado que 28 (37%) reformaram a decisão arbitral. Isso significa que, após todos os mecanismos de seleção, ou seja, da decisão arbitral para a entrada do processo em primeira instância, e da sentença em primeira instância para o recurso, os poucos casos que sobram apresentam uma taxa de reforma de 37%.
 
 ```{r}
-reforma_unimed <- da_cposg_tidy |> 
+reforma_unimed <- da_cposg_tidy |>
   dplyr::filter(
-    tem_decisao, 
+    tem_decisao,
     categoria == "Anulacao",
     reformou_sentenca_arbitral %in% c("Sim", "Não"),
     unimed == "Não"
-  ) |> 
-  dplyr::count(reformou_sentenca_arbitral) |> 
+  ) |>
+  dplyr::count(reformou_sentenca_arbitral) |>
   dplyr::mutate(prop = n/sum(n))
 ```
 

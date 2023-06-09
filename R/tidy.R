@@ -2,7 +2,9 @@ get_category <- function(text, rx) {
   purrr::map(
     rx,
     \(x) {
-      purrr::map_lgl(x, \(z) stringr::str_detect(text, stringr::regex(paste(z, collapse = "|"), TRUE)))
+      purrr::map_lgl(x, \(z) stringr::str_detect(
+        text, stringr::regex(paste(z, collapse = "|"), TRUE)
+      ))
     }
   ) |>
     purrr::map(all) |>
