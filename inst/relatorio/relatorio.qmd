@@ -288,7 +288,7 @@ da_tidy |>
   knitr::kable(col.names = c("Câmara", "N", "%"))
 ```
 
-Em seguida, apresentam-se comparações entre a quantidade de sentenças realizadas no âmbito arbitral e a quantidade de anulatórias. Os dados de sentenças arbitrais foram levantados pela Dra Vera Cecília Monteiro de Barros e gentilmente fornecidos à equipe de pesquisa. Os dados revelam um total de `r sum(sentencas_camaras$n)` sentenças arbitrais no mesmo período que os dados levantados no TJSP.
+Em seguida, apresentam-se comparações entre a quantidade de sentenças realizadas no âmbito arbitral e a quantidade de anulatórias. Os dados de sentenças arbitrais foram levantados pela Dra Vera Cecília Monteiro de Barros e gentilmente fornecidos à equipe de pesquisa. Os dados revelam um total de `r sum(sentencas_camaras$qtd_sentencas)` sentenças arbitrais no mesmo período que os dados levantados no TJSP.
 
 Antes de seguir com as comparações, cabe um detalhamento das limitações do estudo. Primeiro, as contagens disponíveis na base de sentenças arbitrais e na base de processos judiciais não correspondem sempre aos mesmos conflitos, já que sempre decorre um tempo entre a decisão arbitral e a sentença do processo judicial. Além disso, como não foram analisados casos que estão em segredo de justiça, a taxa de judicialização, ou seja, a razão entre a quantidade de processos judiciais e a quantidade de sentenças arbitrais está subestimada. Por último, não existem informações da quantidade de sentenças para todas as câmaras arbitrais possíveis, então as análises que comparam as contagens consideram somente as câmaras que têm informação.
 
@@ -322,7 +322,7 @@ sentencas_camaras |>
     taxa
   )) |>
   knitr::kable(col.names = c(
-    "Sigla", "Câmara", "Decisões arbitrais", "Ações anulatórias", "Taxa"
+    "Sigla", "Câmara", "Decisões arbitrais", "Ações anulatórias", "Taxa de judicialização"
   ))
 ```
 
