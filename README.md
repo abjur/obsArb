@@ -4,6 +4,7 @@
 # obsArb
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 Repositório do Observatório da Arbitragem. O Observatório da Arbitragem
@@ -14,12 +15,28 @@ ii) cumprimento de sentença / execução, iii) medida cautelar antecedente
 ao tribunal arbitral iv) ação de instauração da arbitragem v)
 compromisso arbitral.
 
-Relatório preliminar disponível aqui:
-[\[word\]](https://github.com/abjur/obsArb/raw/main/inst/relatorio/relatorio.docx)
-[\[html\]](https://jtrecenti.quarto.pub/obsarb/)
+Relatório final disponível aqui: [  
+![word](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;word
+"word")  
+](https://github.com/abjur/obsArb/raw/main/inst/relatorio_atualizado/relatorio.docx)
+[  
+![html](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;html
+"html")  
+](https://jtrecenti.quarto.pub/obsarbitragem/)
 
-Base de dados do relatório preliminar disponível aqui:
-[\[xlsx\]](https://github.com/abjur/obsArb/raw/main/inst/da_arbitragem.xlsx)
+Relatório preliminar disponível aqui: [  
+![word](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;word
+"word")  
+](https://github.com/abjur/obsArb/raw/main/inst/relatorio/relatorio.docx)
+[  
+![html](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;html
+"html")  
+](https://jtrecenti.quarto.pub/obsarb/)
+
+Base de dados do relatório preliminar disponível aqui: [  
+![xlsx](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;xlsx
+"xlsx")  
+](https://github.com/abjur/obsArb/raw/main/inst/da_arbitragem.xlsx)
 
 ## Licença
 

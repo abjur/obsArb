@@ -1,0 +1,787 @@
+---
+title: "Processos relacionados à Arbitragem"
+subtitle: "Um levantamento no banco de sentenças do TJSP"
+author: Associação Brasileira de Jurimetria
+date: "2023-09-04"
+execute:
+  echo: false
+  freeze: true
+knitr:
+  opts_chunk:
+    dpi: 300
+    message: false
+    warning: false
+lang: pt
+toc: true
+self-contained: true
+format:
+  html: default
+  docx:
+    reference-doc: template.docx
+bibliography: geral.bib
+---
+
+```{r}
+#| label: setup
+devtools::load_all()
+col_abj <- viridis::viridis(5, 1, .2, .8)
+```
+
+# Introdução
+
+O Observatório da Arbitragem é um projeto que visa a compreender o fenômeno jurídico da arbitragem nos tribunais estaduais. Em sua primeira fase, o projeto busca compreender o fluxo dos processos de i) anulação de decisão arbitral, ii) cumprimento de sentença / execução, iii) medida cautelar antecedente à constrituição do tribunal arbitral, iv) existência, validade e eficácia da convenção de arbitragem e v) ação para instituição da arbitragem com base no art, 7º da Lei de Arbitragem.
+
+O objetivo do levantamento é realizar uma análise preliminar a partir do banco de sentenças do Tribunal de Justiça de São Paulo (TJSP). O levantamento terá como resultado algumas estatísticas básicas como volume de sentenças ao longo do tempo, proporção de decisões favoráveis ao autor e tempo mediano dos processos. O estudo pode ser utilizado como insumo para decidir sobre a viabilidade de uma pesquisa mais aprofundada -- envolvendo análise de autos processuais -- a partir dos dados disponibilizados no banco de sentenças.
+
+O presente levantamento descreve o fluxo de download, arrumação e análise dos dados de sentenças relacionadas à arbitragem. Na parte de download, descrevemos os termos utilizados para consulta e o procedimento de acesso aos dados, que são públicos, mas não são abertos. A parte de arrumação descreve todos os passos para chegar da base bruta até a base organizada, informando as colunas utilizadas. A análise mostra os resultados do levantamento, com estatísticas sobre o perfil dos processos, o volume de sentenças ao longo do tempo, a proporção de decisões favoráveis e o tempo médio das ações.
+
+# Download
+
+Antes de descrever o processo de coleta, é importante ressaltar que o TJSP não forneceu acesso aos processos mantidos sob sigilo, nem forneceu uma lista de processos distribuídos no período. O pedido de dados foi realizado ainda em 2021 e reiterado por diversas vezes.
+
+Em 30 de maio de 2023, seis meses depois da finalização da coleta dos dados, o TJSP enviou um link para acesso à lista. Infelizmente, no entanto, os dados não puderam ser acessados, pois o link não funcionava. Em resumo, mesmo após muitas tentativas de contato, não foi possível acessar os dados através de ofícios enviados ao TJSP.
+
+Como consequência, a pesquisa recorreu ao banco de sentenças públicas, o que implicou a obtenção de uma amostra que não abarca a totalidade dos processos existentes no TJSP. Apesar desta limitação, acredita-se que os dados coletados e analisados ainda são valiosos e oferecem resultados significativos sobre o tema. Além de uma quantidade significativa de casos ser pública, as sentenças analisadas apareceram em quantidades muito próximas nas duas principais varas especializadas, indicando um grau de aleatorização.
+
+É, no entanto, importante levar essa limitação na quantidade de sentenças em consideração ao interpretar os resultados apresentados, em especial no que serefere à quantidade de casos observados, que pode ser de duas ou três vezes menor do que o total geral, bem como nos cuidados em generalizar interpretações ou conclusões a partir dos números.
+
+Feita essa ressalva, passa-se à metodologia de pesquisa.
+
+Os dados de processos do TJSP são públicos, mas não são abertos. Isso significa que não há meio fácil de obter uma lista de todos os processos que existem no tribunal a partir de um critério jurídico, geográfico ou temporal.
+
+O TJSP, no entanto, disponibiliza ferramentas de consulta. Na [Consulta de Julgados do Primeiro Grau (CJPG)](https://esaj.tjsp.jus.br/cjpg/pesquisar.do) é possível acessar, manualmente, a lista de processos a partir de termos de busca (como palavras-chave, classes e assuntos). Cada processo, por sua vez, pode ser pesquisado manualmente em uma consulta de processos [Consulta de Processos do Primeiro Grau](https://esaj.tjsp.jus.br/cpopg/open.do).
+
+Por conta da necessidade de realizar pesquisas no direito, a ABJ desenvolveu, ao longo de sua história, algumas ferramentas que automatizam o fluxo manual de obtenção de dados. Essas ferramentas utilizam técnicas de raspagem de dados [@zhaoWebScraping2017] que, em poucas palavras, envolvem imitar o que um ser humano faria para acessar as páginas, mas de forma automática. Vale ressaltar que essa não é uma estratégia oficial nem desejável de ser utilizada ao acessar dados públicos. No entanto, por conta das limitações do tribunal, utilizar raspagem de dados acaba sendo necessário para tornar as pesquisas viáveis.
+
+Ao acessar os dados via raspagem do CJPG, a primeira limitação que aparece são os campos disponíveis. Processos de arbitragem podem aparecer com classes e assuntos processuais[^1] que não identificam corretamente os casos. Por exemplo, é comum encontrar como classe "procedimento ordinário" ou como assunto "anulação". Por isso, a única forma de listar os processos relacionados à arbitragem é através das palavras-chave.
+
+[^1]: Classes e assuntos são listas de tipos de processos organizadas pelo Conselho Nacional de Justiça (CNJ), através das Tabelas Processuais Unificadas (TPU), Res. 46 CNJ.
+
+A desvantagem em utilizar palavras-chave é que as pesquisas se limitam ao que as ferramentas de pesquisa disponibilizam. Se a ferramenta de busca é falha, o resultado é falho. De qualquer forma, por falta de outros meios, essa foi a decisão tomada para acessar os processos relacionados à arbitragem.
+
+O termo de busca utilizado para realizar a pesquisa foi `"arbitral" OU "lei de arbitragem" OU "9307" OU "9.307"`. A ideia da pesquisa foi realizar a busca mais genérica possível relacionada à arbitragem, sem incluir o termo "arbitragem", já que este aparece no nome das varas, o que implicaria em uma lista com todos os processos da vara.
+
+Outro filtro realizado foi o das varas. Foram consideradas 4 varas no total: 1ª vara empresarial e conflitos de arbitragem, 2ª vara empresarial e conflitos de arbitragem, 1ª vara regional de competência empresarial e de conflitos relacionados à arbitragem e 2ª vara regional de competência empresarial e de conflitos relacionados à arbitragem.
+
+A pesquisa retornou um total de 348 decisões, disponibilizadas entre março de 2018 e novembro de 2022. Dentre esses casos, foram encontrados 338 números de processos únicos, já que um processo pode apresentar mais de uma decisão. A consulta desses processos individualmente retornou 337 casos (1 caso foi descartado por estar em segredo de justiça). A base bruta final desta pesquisa, portanto, possui 337 processos.
+
+Neste ponto, algumas ressalvas devem ser apresentadas sobre o volume total de ações.
+
+Por envolver casos que potencialmente correm em segredo de justiça, é possível que uma parte dos casos não seja acessível através do banco de sentenças. Além disso, por envolver apenas as varas empresariais, o recorte pode apresentar limitações de espaço (regiões) e tempo (criação das varas)[^2]. Por último, por se tratar de um estudo retrospectivo (envolve apenas casos com sentença), casos ativos não sentenciados ficaram fora da lista, que pode não detectar tendências ou mudanças mais recentes no perfil desses conflitos.
+
+[^2]: As três primeiras varas empresariais tiveram sua criação autorizada no dia 14 de dezembro por deliberação unânime do Órgão Especial do Tribunal de Justiça do Estado de São Paulo. Link para o parecer em <https://bit.ly/parecer-varas>. Acesso em 03 de maio de 2023.
+
+De qualquer forma, espera-se que a lista obtida, depois de limpa, possa ser utilizada como amostra aleatória da população de todos os processos relacionados a arbitragem.
+
+# Arrumação
+
+O primeiro passo da arrumação dos dados foi a classificação das categorias de processos e remoção de casos que não fazem parte do escopo. Para classificar as cinco categorias, foram utilizados os termos e expressões regulares da @tbl-rx-tipo.
+
+```{r}
+#| label: tbl-rx-tipo
+#| tbl-cap: "Expressões regulares utilizadas para classificar a categoria de ação"
+rx_tipo() |>
+  tibble::enframe() |>
+  tidyr::unnest(value) |>
+  dplyr::mutate(value = paste0("(", purrr::map_chr(value, paste, collapse = " OU "), ")")) |>
+  dplyr::group_by(name) |>
+  dplyr::summarise(value = paste(value, collapse = " E ")) |>
+  dplyr::transmute(
+    name = stringr::str_to_title(name),
+    value = purrr::map_chr(value, paste, collapse = ", ")
+  ) |>
+  dplyr::arrange(dplyr::desc(name)) |>
+  knitr::kable(col.names = c("Categoria", "Expressões regulares"))
+```
+
+A @tbl-tabela-tipo mostra a quantidade de processos detectada em cada categoria. É importante destacar que toda classificação automática pode incorrer em erros, ou seja, pode ser que as categorias finais fiquem incorretas. Os casos vazios foram retirados.
+
+```{r}
+#| label: tbl-tabela-tipo
+#| tbl-cap: "Processos classificados por categoria"
+da_cjpg_tidy |>
+  dplyr::count(categoria, sort = TRUE) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  dplyr::mutate(
+    categoria = tidyr::replace_na(categoria, "(vazio)"),
+    categoria = stringr::str_to_title(categoria)
+  ) |>
+  janitor::adorn_totals() |>
+  knitr::kable(col.names = c("Resultado", "N", "%"))
+```
+
+O passo seguinte foi a obtenção dos resultados dos processos. Para classificar as categorias de resultados, foram utilizados os termos e expressões regulares da @tbl-rx-resultado.
+
+```{r}
+#| label: tbl-rx-resultado
+#| tbl-cap: "Expressões regulares utilizadas para classificar o resultado"
+rx_resultado() |>
+  tibble::enframe() |>
+  tidyr::unnest(value) |>
+  dplyr::mutate(value = paste0("(", purrr::map_chr(value, paste, collapse = " OU "), ")")) |>
+  dplyr::group_by(name) |>
+  dplyr::summarise(value = paste(value, collapse = " E ")) |>
+  dplyr::transmute(
+    name = stringr::str_to_title(name),
+    value = purrr::map_chr(value, paste, collapse = ", ")
+  ) |>
+  knitr::kable(col.names = c("Categoria", "Expressões regulares"))
+```
+
+Por último, as colunas importantes de análise foram construídas. As colunas escolhidas foram: status (em andamento, extinto, em grau de recurso ou suspenso), classe, assunto, valor da causa, processo digital, data de disponibilização da sentença, vara, resultado e tempo (calculado pelo tempo entre a data de distribuição e data da disponibilização da decisão).
+
+## Revisão manual
+
+A base de dados arrumada foi revisada manualmente a partir da leitura dos textos das decisões e outras características dos processos. A revisão foi realizada por profissionais do direito especializados no tema de arbitragem.
+
+A primeira mudança significativa foi com relação aos casos que fazem parte do escopo. Dos 338 casos iniciais, sobraram 289 que faziam parte do escopo[^3].
+
+[^3]: O critério de exclusão dizia respeito à pertinência do caso ao objeto da pesquisa. Assim, casos nos quais as expressões apresentavam significados distintos (falsos cognatos) foram excluídos. Por exemplo, arbitragem no sentido de arbitragem de preço e não como método de resolução de disputas. Em outros as expressões apareciam por conta de citações acidentais em precedentes e excertos de doutrina, a despeito do caso em si não tratar do tema de interesse. Por fim, um caso identificado em uma nova categoria "Carta Arbitral" (1099760-61.2021.8.26.0100) também foi desconsiderado da análise.
+
+Com relação às colunas da base, as principais informações alteradas foram as de categoria e resultado. A informação de categoria foi a que mais sofreu alterações, especialmente em ações de anulação de decisão arbitral, que ficaram maiores. A @tbl-tabela-tipo-revisao mostra as classificações depois da correção manual.
+
+```{r}
+#| label: tbl-tabela-tipo-revisao
+#| tbl-cap: "Processos classificados por categoria, após revisão"
+da_tidy |>
+  dplyr::count(categoria, sort = TRUE) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  dplyr::mutate(
+    categoria = tidyr::replace_na(categoria, "(vazio)"),
+    categoria = stringr::str_to_title(categoria)
+  ) |>
+  janitor::adorn_totals() |>
+  knitr::kable(col.names = c("Resultado", "N", "%"))
+```
+
+Com relação aos resultados, não houve mudanças significativas. A categoria que mais mudou foi a de acordos, que costumam ser difíceis de mapear apenas por palavras-chave. Os resultados completos são apresentados na próxima seção.
+
+Por último, três colunas foram adicionadas após a classificação manual. A primeira é com relação à concessão de liminar em casos de medida cautelar. A segunda decorreu do fato de, na revisão manual, vários casos relacionados à Unimed terem sido detectados. Assim, uma coluna `unimed` foi adicionada para permitir novos filtros de análise. A terceira é a câmara arbitral de origem do processo.
+
+No final, a base ficou com 289 linhas e 14 colunas, contendo todas as informações utilizadas na parte de análise. A base de dados em Excel pode ser baixada [neste link](https://github.com/abjur/obsArb/raw/main/inst/da_arbitragem.xlsx).
+
+## Segunda instância
+
+Depois de baixar e revisar as sentenças, procuraram-se os números de processos obtidos na segunda instância. Foram considerados casos com apenas um recurso (agravo de instrumento ou apelação). Por exemplo, processos que tiveram mais de um agravo de instrumento foram desconsiderados.
+
+Dos 289 processos, 173 apresentaram algum recurso, sendo 126 (73%) com classe "Apelação Cível" e 47 (27%) com classe "Agravo de Instrumento". Nessa base, somente 132 (76%) possuem alguma decisão, sendo 98 apelações e 34 agravos. Os demais recursos não apresentavam uma tabela de decisões na consulta processual. Além da informação da decisão, também foi coletada a informação do status dos processos no momento da coleta. Essa informação foi extraída diretamente da consulta processual do TJSP, sem nenhum tratamento posterior.
+
+Após o filtro inicial, a base passou por uma revisão manual. A revisão foi realizada nos 57 casos que tinham alguma decisão diferente de não provimento. Na nova análise, foram incluídas duas informações manualmente: se a decisão arbitral foi reformada e uma coluna identificando se o caso era relacionado com a Unimed.
+
+A base de segunda instância foi considerada para calcular a taxa de recorribilidade e a taxa de decisões favoráveis na segunda instância. A taxa de reforma da decisão arbitral foi calculada a partir da análise manual.
+
+A base considerada possui 173 linhas e 8 colunas. A base de dados em Excel pode ser baixada [neste link](https://github.com/abjur/obsArb/raw/main/inst/da_cposg_tidy.xlsx).
+
+# Análise
+
+Esta seção foi organizada em três subseções: análise geral, análise sobre contratos pontuais e análise sobre contratos relacionais. O motivo da separação é (...MOTIVO...).
+
+Os casos de contratos relacionais são definidos com o seguintes critérios: i) casos da Unimed (58 casos), ii) casos envolvendo franquia (13 casos) e iii) casos com origem na câmara da AssoHonda (1 caso). Os casos de contratos pontuais são os demais.
+
+Em todas as subseções, foram incluídas estatísticas descritivas como: tabelas com classe, assunto, faixas de valores, quantidade de processos por câmara arbitral, distribuição entre as duas varas, tempo médio / mediano, volume de decisões ao longo do tempo por categoria. As subseções de contratos pontuais e relacionais receberam análises adicionais.
+
+```{r}
+# separando as bases de dados de cada parte
+da_geral <- da_tidy |>
+  dplyr::mutate(tipo = dplyr::case_when(
+    unimed == "Sim" ~ "Relacional",
+    stringr::str_detect(camara_arbitral, "ASSOHONDA") ~ "Relacional",
+    assunto == "Franquia" ~ "Relacional",
+    .default = "Pontual"
+  )) |>
+  dplyr::mutate(
+    vara = vara |>
+      stringr::str_to_title(locale = "pt_BR") |>
+      stringr::str_replace_all(" E ", " e ") |>
+      stringr::str_replace_all(" De ", " de ") |>
+      stringr::str_replace_all(" À ", " à ")
+  )
+
+da_relacional <- da_geral |>
+  dplyr::filter(tipo == "Relacional")
+
+da_pontual <- da_geral |>
+  dplyr::filter(tipo == "Pontual")
+```
+
+## Análise geral
+
+Em seguida, são apresentadas tabelas das classes e assuntos mais comuns nos processos encontrados. É importante destacar que classes e assuntos nem sempre identificam corretamente o tipo de ação, tanto por motivos de taxonomia (o tipo de processo não existe na classificação do CNJ) quanto por motivos de má classificação (a pessoa que protocolou a ação colocou uma classe/assunto inadequada). Por isso, a classe e assunto não está sendo usada para classificar os tipos de processo.
+
+A @tbl-classe mostra as classes processuais mais comuns encontradas. É possível notar que existem muitas classes que não são relacionadas diretamente a arbitragem.
+
+```{r}
+#| label: tbl-classe
+#| tbl-cap: "Classes mais comuns"
+da_geral |>
+  dplyr::mutate(
+    classe = forcats::fct_lump_n(classe, 10, other_level = "Outros")
+  ) |>
+  dplyr::count(classe, sort = TRUE) |>
+  dplyr::mutate(classe = dplyr::if_else(
+    classe == "Compromisso Arbitral", "Convenção Arbitral", classe
+  )) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  janitor::adorn_totals() |>
+  knitr::kable(col.names = c("Classe", "N", "%"))
+```
+
+A @tbl-assunto mostra os dez assuntos processuais mais comuns encontrados. Assim como nas classes, é possível notar que existem muitos assuntos que não são relacionados diretamente a arbitragem.
+
+```{r}
+#| label: tbl-assunto
+#| tbl-cap: "Assuntos mais comuns"
+da_geral |>
+  dplyr::mutate(
+    assunto = forcats::fct_lump_n(assunto, 10, other_level = "Outros")
+  ) |>
+  dplyr::count(assunto, sort = TRUE) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  janitor::adorn_totals() |>
+  knitr::kable(col.names = c("Assunto", "N", "%"))
+```
+
+A @tbl-valor mostra a contagem de processos por faixa de valores de causa. É possível notar que existe uma alta assimetria, já que temos vários processos de até 10 mil reais, mas também processos de mais de 10 milhões de reais.
+
+```{r}
+#| label: tbl-valor
+#| tbl-cap: "Faixas de valores"
+da_geral |>
+  dplyr::mutate(
+    faixa = cut(
+      valor, c(0, 1e4, 1e5, 1e6, 1e7, Inf),
+      labels = c(
+        "Até R$ 10.000",
+        "Entre R$ 10.000 e R$ 100.000",
+        "Entre R$ 100.000 e R$ 1 milhão",
+        "Entre R$ 1 milhão e R$ 10 milhões",
+        "R$ 10 milhões ou mais"
+      )
+    )
+  ) |>
+  dplyr::count(faixa) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  dplyr::mutate(faixa = forcats::fct_na_value_to_level(faixa, "(Vazio)")) |>
+  janitor::adorn_totals() |>
+  knitr::kable(col.names = c("Faixa", "N", "%"))
+```
+
+A @tbl-vara mostra a contagem de processos por vara. As varas empresariais do foro central cível concentram a maior parte dos casos. Por conta do pequeno número de informações, as análises de contagem de resultados e categorias por vara vão desconsiderar as Regiões Administrativas Judiciárias (RAJs).
+
+```{r}
+#| label: tbl-vara
+#| tbl-cap: "Quantidade de processos por vara"
+da_geral |>
+  dplyr::count(vara, sort = TRUE) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  janitor::adorn_totals() |>
+  knitr::kable(col.names = c("Vara", "N", "%"))
+```
+
+A @fig-no-tempo-categoria mostra o volume de decisões ao longo do tempo, separando por categoria de caso. Com exceção das ações de Anulação, é possível observar um crescimento de casos nos anos de 2021 e 2022.
+
+```{r}
+#| label: fig-no-tempo-categoria
+#| fig-cap: "Quantidade de decisões por ano e categoria"
+#| fig-width: 7
+#| fig-height: 4
+da_geral |>
+  dplyr::mutate(ano = lubridate::year(dt_disp)) |>
+  dplyr::count(ano, categoria) |>
+  ggplot2::ggplot() +
+  ggplot2::aes(ano, n) +
+  ggplot2::geom_col(width = .7, position = "dodge", fill = col_abj[1]) +
+  ggplot2::labs(
+    x = "Ano",
+    y = "Quantidade de decisões",
+    fill = "Categoria"
+  ) +
+  ggplot2::facet_wrap(~categoria) +
+  ggthemes::theme_hc(12)
+```
+
+Finalmente, a @tbl-tempo mostra os tempos médios e medianos, geral e por categoria, em dias. Os processos mais longos são os de convenção arbitral, com mediana de quase um ano. Já os processos mais curtos são os de anulação, com mediana de aproximadamente seis meses.
+
+```{r}
+#| label: tbl-tempo
+#| tbl-cap: "Estatísticas descritivas dos tempos dos processos em dias"
+geral <- da_geral |>
+  dplyr::summarise(
+    categoria = "Total",
+    n = dplyr::n(),
+    media = mean(tempo),
+    mediana = median(tempo)
+  )
+
+da_geral |>
+  dplyr::group_by(categoria) |>
+  dplyr::summarise(
+    n = dplyr::n(),
+    media = mean(tempo),
+    mediana = median(tempo)
+  ) |>
+  dplyr::arrange(dplyr::desc(mediana)) |>
+  dplyr::bind_rows(geral) |>
+  knitr::kable(col.names = c("Categoria", "N", "Média", "Mediana"), digits = 1)
+```
+
+## Contratos Pontuais
+
+A @tbl-classe-pontual mostra as classes processuais mais comuns encontradas. A classe mais comum é o cumprimento de sentença relacionado à Lei Arbitral, seguido pelo procedimento comum cível.
+
+```{r}
+#| label: tbl-classe-pontual
+#| tbl-cap: "Classes mais comuns"
+da_pontual |>
+  dplyr::mutate(
+    classe = forcats::fct_lump_n(classe, 10, other_level = "Outros")
+  ) |>
+  dplyr::count(classe, sort = TRUE) |>
+  dplyr::mutate(classe = dplyr::if_else(
+    classe == "Compromisso Arbitral", "Convenção Arbitral", classe
+  )) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  janitor::adorn_totals() |>
+  knitr::kable(col.names = c("Classe", "N", "%"))
+```
+
+A @tbl-assunto-pontual mostra os dez assuntos processuais mais comuns encontrados. O assunto mais comum é a sentença arbitral, seguido pela liminar.
+
+```{r}
+#| label: tbl-assunto-pontual
+#| tbl-cap: "Assuntos mais comuns"
+da_pontual |>
+  dplyr::mutate(
+    assunto = forcats::fct_lump_n(assunto, 10, other_level = "Outros")
+  ) |>
+  dplyr::count(assunto, sort = TRUE) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  janitor::adorn_totals() |>
+  knitr::kable(col.names = c("Assunto", "N", "%"))
+```
+
+A @tbl-valor-pontual mostra a contagem de processos por faixa de valores de causa. Assim como na análise anterior, existe uma alta assimetria, já que existem vários processos de até 10 mil reais, mas também processos de mais de 10 milhões de reais.
+
+```{r}
+#| label: tbl-valor-pontual
+#| tbl-cap: "Faixas de valores"
+da_pontual |>
+  dplyr::mutate(
+    faixa = cut(
+      valor, c(0, 1e4, 1e5, 1e6, 1e7, Inf),
+      labels = c(
+        "Até R$ 10.000",
+        "Entre R$ 10.000 e R$ 100.000",
+        "Entre R$ 100.000 e R$ 1 milhão",
+        "Entre R$ 1 milhão e R$ 10 milhões",
+        "R$ 10 milhões ou mais"
+      )
+    )
+  ) |>
+  dplyr::count(faixa) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  dplyr::mutate(faixa = forcats::fct_na_value_to_level(faixa, "(Vazio)")) |>
+  janitor::adorn_totals() |>
+  knitr::kable(col.names = c("Faixa", "N", "%"))
+```
+
+A @tbl-valor-anulatoria-pontual mostra a contagem de processos por faixa de valores de causa nas anulatórias em contratos pontuais. Mais da metade dos processos estão na faixa de até 100 mil reais.
+
+```{r}
+#| label: tbl-valor-anulatoria-pontual
+#| tbl-cap: "Faixas de valores nas anulatórias"
+da_pontual |>
+  dplyr::filter(categoria == "Anulacao") |>
+  dplyr::mutate(
+    faixa = cut(
+      valor, c(0, 1e4, 1e5, 1e6, 1e7, Inf),
+      labels = c(
+        "Até R$ 10.000",
+        "Entre R$ 10.000 e R$ 100.000",
+        "Entre R$ 100.000 e R$ 1 milhão",
+        "Entre R$ 1 milhão e R$ 10 milhões",
+        "R$ 10 milhões ou mais"
+      )
+    )
+  ) |>
+  dplyr::count(faixa) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  dplyr::mutate(faixa = forcats::fct_explicit_na(faixa, "(Vazio)")) |>
+  janitor::adorn_totals() |>
+  knitr::kable(col.names = c("Faixa", "N", "%"))
+
+```
+
+A @tbl-vara-pontual mostra a contagem de processos por vara. A proporção é similar ao encontrado na @tbl-vara.
+
+```{r}
+#| label: tbl-vara-pontual
+#| tbl-cap: "Quantidade de processos por vara"
+da_pontual |>
+  dplyr::count(vara, sort = TRUE) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  janitor::adorn_totals() |>
+  knitr::kable(col.names = c("Vara", "N", "%"))
+```
+
+A @tbl-camara-origem-pontual mostra a contagem e proporção de processos por câmara arbitral de origem nas anulatórias. Mais de um quarto dos casos são do CAM-CCBC.
+
+```{r}
+#| label: tbl-camara-origem-pontual
+#| tbl-cap: "Quantidade de processos por câmara arbitral de origem"
+da_pontual |>
+  dplyr::filter(categoria == "Anulacao") |>
+  dplyr::count(camara_arbitral, sort = TRUE) |>
+  dplyr::filter(camara_arbitral != "Não identificado") |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  janitor::adorn_totals() |>
+  knitr::kable(col.names = c("Câmara", "N", "%"))
+```
+
+A @fig-no-tempo-categoria-pontual mostra o volume de decisões ao longo do tempo, separando por categoria de caso. É possível observar um crescimento de casos nos anos de 2021 e 2022.
+
+```{r}
+#| label: fig-no-tempo-categoria-pontual
+#| fig-cap: "Quantidade de decisões por ano e categoria"
+#| fig-width: 7
+#| fig-height: 4
+da_pontual |>
+  dplyr::mutate(ano = lubridate::year(dt_disp)) |>
+  dplyr::count(ano, categoria) |>
+  ggplot2::ggplot() +
+  ggplot2::aes(ano, n) +
+  ggplot2::geom_col(width = .7, position = "dodge", fill = col_abj[1]) +
+  ggplot2::labs(
+    x = "Ano",
+    y = "Quantidade de decisões",
+    fill = "Categoria"
+  ) +
+  ggplot2::facet_wrap(~categoria) +
+  ggthemes::theme_hc(12)
+```
+
+Em seguida, apresentam-se comparações entre a quantidade de sentenças arbitrais proferidas em arbitragens com sede em São Paulo e a quantidade de anulatórias em contratos pontuais.
+
+Os dados de sentenças arbitrais foram levantados pela Dra Vera Cecília Monteiro de Barros e gentilmente fornecidos à equipe de pesquisa. Os dados revelam um total de `r sum(sentencas_camaras$qtd_sentencas)` sentenças arbitrais no mesmo período que os dados levantados no TJSP.
+
+A @tbl-sentencas-processos-pontual compara a quantidade de sentenças arbitrais e ações anulatórias encontradas na base contratos pontuais. A taxa geral de anulatórias foi de 2.8%.
+
+```{r}
+#| label: tbl-sentencas-processos-pontual
+#| tbl-cap: Comparação entre quantidade de decisões arbitrais e ações anulatórias
+
+contagens_camaras <- da_pontual |>
+  dplyr::filter(categoria == "Anulacao") |>
+  dplyr::count(camara_arbitral, sort = TRUE) |>
+  dplyr::transmute(
+    nome_camara = dplyr::if_else(
+      stringr::str_detect(camara_arbitral, "CBMA"),
+      "Centro Brasileiro de Mediação e Arbitragem CBMA",
+      camara_arbitral
+    ),
+    n
+  )
+
+sentencas_camaras |>
+  dplyr::left_join(contagens_camaras, "nome_camara") |>
+  tidyr::replace_na(list(n = 0)) |>
+  dplyr::arrange(dplyr::desc(qtd_sentencas)) |>
+  dplyr::mutate(taxa = formattable::percent(n / qtd_sentencas, 1)) |>
+  janitor::adorn_totals() |>
+  dplyr::mutate(taxa = dplyr::if_else(
+    sigla == "Total",
+    formattable::percent(sum(n) / sum(qtd_sentencas), 1),
+    taxa
+  )) |>
+  dplyr::mutate(
+    nome_camara = dplyr::if_else(
+      nome_camara == "CCI",
+      "Corte Internacional de Arbitragem da Câmara de Comércio Internacional - CCI",
+      nome_camara
+    )
+  ) |>
+  knitr::kable(col.names = c(
+    "Sigla", "Câmara", "Decisões arbitrais", "Ações anulatórias", "Taxa de judicialização"
+  ))
+```
+
+Antes de seguir com as comparações, cabe um detalhamento das limitações do estudo. Primeiro, as contagens disponíveis na base de sentenças arbitrais e na base de processos judiciais não correspondem sempre aos mesmos conflitos, já que sempre decorre um tempo entre a decisão arbitral e a sentença do processo judicial. Segundo, como não foram analisados casos que estão em segredo de justiça, a taxa de judicialização, ou seja, a razão entre a quantidade de processos judiciais e a quantidade de sentenças arbitrais está subestimada. Por último, não existem informações da quantidade de sentenças para todas as câmaras arbitrais possíveis, então as análises que comparam as contagens consideram somente as câmaras que têm informação.
+
+A @tbl-resultado-pontual mostra os resultados dos processos por categoria, excluindo os acordos. Nas últimas linha e coluna, são apresentadas as contagens e proporções marginais. A taxa de procedência em anulatórias (considerando casos procedentes e parcialmente procedentes e excluindo acordos do denominador) é de aproximadamente 17.7%.
+
+```{r}
+#| label: tbl-resultado-pontual
+#| tbl-cap: "Resultados dos processos por categoria, excluindo acordos"
+
+tab_geral <- da_pontual |>
+  dplyr::filter(resultado != "Acordo") |>
+  dplyr::count(categoria, resultado) |>
+  dplyr::group_by(categoria) |>
+  dplyr::mutate(prop = n/sum(n)) |>
+  dplyr::ungroup() |>
+  dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, .1)})"))
+
+tab_total_col <- da_pontual |>
+  dplyr::filter(resultado != "Acordo") |>
+  dplyr::count(categoria) |>
+  dplyr::mutate(prop = n/sum(n)) |>
+  dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, .1)})")) |>
+  dplyr::select(Total = lab)
+
+tab_total_row <- da_pontual |>
+  dplyr::filter(resultado != "Acordo") |>
+  dplyr::count(resultado) |>
+  dplyr::mutate(prop = n/sum(n)) |>
+  dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, .1)})")) |>
+  dplyr::transmute(
+    name = resultado,
+    value = lab
+  ) |>
+  tidyr::pivot_wider() |>
+  dplyr::mutate(categoria = "Total", Total = stringr::str_glue("{nrow(da_pontual)} (100.0%)"))
+
+tab_geral |>
+  dplyr::select(resultado, categoria, lab) |>
+  tidyr::pivot_wider(
+    names_from = resultado,
+    values_from = lab,
+    values_fill = "0 (0.0%)"
+  ) |>
+  dplyr::bind_cols(tab_total_col) |>
+  dplyr::bind_rows(tab_total_row) |>
+  dplyr::rename(Categoria = categoria) |>
+  knitr::kable()
+```
+
+Com base nos dados levantados, é possível desenvolver uma análise meramente exploratória sobre a probabilidade de uma sentença arbitral ser anulada, total ou parcialmente, pela justiça. Se assumirmos, conservadoramente, que, considerando as ações que se encontram em segredo de justiça, a taxa de judicialização efetiva seria três vezes superior à taxa de 2.8% detectada na @tbl-sentencas-processos-pontual, chegaríamos a uma taxa de judicialização real de 8.4%. Assumindo que a taxa de procedência parcial e total das ações anulatórias permaneceria estável, no patamar geral de 17.7% indicado na @tbl-resultado-pontual, a probabilidade de reversão de qualquer sentença arbitral proferida no mercado de arbitragem perante as varas empresariais seria a multiplicação entre essas proporções, ou seja, 1.5%.
+
+Finalmente, a @tbl-tempo-pontual mostra os tempos médios e medianos, geral e por categoria, em dias. Os processos de anulação estão em segundo lugar, com tempo mediano de quase dez meses até a sentença.
+
+```{r}
+#| label: tbl-tempo-pontual
+#| tbl-cap: "Estatísticas descritivas dos tempos dos processos em dias"
+geral <- da_pontual |>
+  dplyr::summarise(
+    categoria = "Total",
+    n = dplyr::n(),
+    media = mean(tempo),
+    mediana = median(tempo)
+  )
+
+da_pontual |>
+  dplyr::group_by(categoria) |>
+  dplyr::summarise(
+    n = dplyr::n(),
+    media = mean(tempo),
+    mediana = median(tempo)
+  ) |>
+  dplyr::arrange(dplyr::desc(mediana)) |>
+  dplyr::bind_rows(geral) |>
+  knitr::kable(col.names = c("Categoria", "N", "Média", "Mediana"), digits = 1)
+```
+
+## Contratos Relacionais
+
+A @tbl-classe-relacional mostra as classes processuais mais comuns encontradas. A classe mais comum é Convenção Arbitral, que ocorre em três quartos dos casos.
+
+```{r}
+#| label: tbl-classe-relacional
+#| tbl-cap: "Classes mais comuns"
+da_relacional |>
+  dplyr::mutate(
+    classe = forcats::fct_lump_n(classe, 10, other_level = "Outros")
+  ) |>
+  dplyr::count(classe, sort = TRUE) |>
+  dplyr::mutate(classe = dplyr::if_else(
+    classe == "Compromisso Arbitral", "Convenção Arbitral", classe
+  )) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  janitor::adorn_totals() |>
+  knitr::kable(col.names = c("Classe", "N", "%"))
+```
+
+A @tbl-assunto-relacional mostra os dez assuntos processuais mais comuns encontrados. A maior parte dos casos foi classificada com assunto "Defeito, nulidade ou anulação".
+
+```{r}
+#| label: tbl-assunto-relacional
+#| tbl-cap: "Assuntos mais comuns"
+da_relacional |>
+  dplyr::mutate(
+    assunto = forcats::fct_lump_n(assunto, 10, other_level = "Outros")
+  ) |>
+  dplyr::count(assunto, sort = TRUE) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  janitor::adorn_totals() |>
+  knitr::kable(col.names = c("Assunto", "N", "%"))
+```
+
+A @tbl-valor-relacional mostra a contagem de processos por faixa de valores de causa. Pouco mais da metade dos casos estão na faixa entre 100 mil reais e 1 milhão de reais.
+
+```{r}
+#| label: tbl-valor-relacional
+#| tbl-cap: "Faixas de valores"
+da_relacional |>
+  dplyr::mutate(
+    faixa = cut(
+      valor, c(0, 1e4, 1e5, 1e6, 1e7, Inf),
+      labels = c(
+        "Até R$ 10.000",
+        "Entre R$ 10.000 e R$ 100.000",
+        "Entre R$ 100.000 e R$ 1 milhão",
+        "Entre R$ 1 milhão e R$ 10 milhões",
+        "R$ 10 milhões ou mais"
+      )
+    )
+  ) |>
+  dplyr::count(faixa) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  dplyr::mutate(faixa = forcats::fct_na_value_to_level(faixa, "(Vazio)")) |>
+  janitor::adorn_totals() |>
+  knitr::kable(col.names = c("Faixa", "N", "%"))
+```
+
+A @tbl-valor-anulatoria-relacional mostra a contagem de processos por faixa de valores de causa nas anulatórias em contratos relacionais. Novamente, mais da metade dos processos estão na faixa de 100 mil reais a 1 milhão de reais.
+
+```{r}
+#| label: tbl-valor-anulatoria-relacional
+#| tbl-cap: "Faixas de valores nas anulatórias"
+da_relacional |>
+  dplyr::filter(categoria == "Anulacao") |>
+  dplyr::mutate(
+    faixa = cut(
+      valor, c(0, 1e4, 1e5, 1e6, 1e7, Inf),
+      labels = c(
+        "Até R$ 10.000",
+        "Entre R$ 10.000 e R$ 100.000",
+        "Entre R$ 100.000 e R$ 1 milhão",
+        "Entre R$ 1 milhão e R$ 10 milhões",
+        "R$ 10 milhões ou mais"
+      )
+    )
+  ) |>
+  dplyr::count(faixa) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  dplyr::mutate(faixa = forcats::fct_explicit_na(faixa, "(Vazio)")) |>
+  janitor::adorn_totals() |>
+  knitr::kable(col.names = c("Faixa", "N", "%"))
+
+```
+
+A @tbl-vara-relacional mostra a contagem de processos por vara. Novamente, os casos estão distribuídos de forma homogênea entre as varas empresariais. Não foram identificados casos nas RAJs para contratos relacionais.
+
+```{r}
+#| label: tbl-vara-relacional
+#| tbl-cap: "Quantidade de processos por vara"
+da_relacional |>
+  dplyr::count(vara, sort = TRUE) |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  janitor::adorn_totals() |>
+  knitr::kable(col.names = c("Vara", "N", "%"))
+```
+
+A @tbl-camara-origem-relacional mostra a contagem e proporção de processos por câmara arbitral de origem nas anulatórias em contratos relacional. Quase todos os casos têm origem na câmara arbitral do Fórum Unimed. A câmara de origem não foi identificada em 12 casos.
+
+```{r}
+#| label: tbl-camara-origem-relacional
+#| tbl-cap: "Quantidade de processos por câmara arbitral de origem"
+da_relacional |>
+  dplyr::filter(categoria == "Anulacao") |>
+  dplyr::count(camara_arbitral, sort = TRUE) |>
+  dplyr::filter(camara_arbitral != "Não identificado") |>
+  dplyr::mutate(prop = formattable::percent(n/sum(n), 1)) |>
+  janitor::adorn_totals() |>
+  knitr::kable(col.names = c("Câmara", "N", "%"))
+```
+
+A @fig-no-tempo-categoria-relacional mostra o volume de decisões ao longo do tempo, separando por categoria de caso. As anulatórias estão concentradas entre 2018 e 2020.
+
+```{r}
+#| label: fig-no-tempo-categoria-relacional
+#| fig-cap: "Quantidade de decisões por ano e categoria"
+#| fig-width: 7
+#| fig-height: 4
+da_relacional |>
+  dplyr::mutate(ano = lubridate::year(dt_disp)) |>
+  dplyr::count(ano, categoria) |>
+  ggplot2::ggplot() +
+  ggplot2::aes(ano, n) +
+  ggplot2::geom_col(width = .7, position = "dodge", fill = col_abj[1]) +
+  ggplot2::labs(
+    x = "Ano",
+    y = "Quantidade de decisões",
+    fill = "Categoria"
+  ) +
+  ggplot2::facet_wrap(~categoria) +
+  ggthemes::theme_hc(12)
+```
+
+A @tbl-resultado-relacional mostra os resultados dos processos por categoria, excluindo os acordos. A taxa de procedência em anulatórias (considerando casos procedentes e parcialmente procedentes e excluindo acordos do denominador) é de aproximadamente 59.3%, significativamente maior do que foi observado na @tbl-resultado-pontual.
+
+```{r}
+#| label: tbl-resultado-relacional
+#| tbl-cap: "Resultados dos processos por categoria, excluindo acordos"
+
+tab_geral <- da_relacional |>
+  dplyr::filter(resultado != "Acordo") |>
+  dplyr::count(categoria, resultado) |>
+  dplyr::group_by(categoria) |>
+  dplyr::mutate(prop = n/sum(n)) |>
+  dplyr::ungroup() |>
+  dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, .1)})"))
+
+tab_total_col <- da_relacional |>
+  dplyr::filter(resultado != "Acordo") |>
+  dplyr::count(categoria) |>
+  dplyr::mutate(prop = n/sum(n)) |>
+  dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, .1)})")) |>
+  dplyr::select(Total = lab)
+
+tab_total_row <- da_relacional |>
+  dplyr::filter(resultado != "Acordo") |>
+  dplyr::count(resultado) |>
+  dplyr::mutate(prop = n/sum(n)) |>
+  dplyr::mutate(lab = stringr::str_glue("{n} ({scales::percent(prop, .1)})")) |>
+  dplyr::transmute(
+    name = resultado,
+    value = lab
+  ) |>
+  tidyr::pivot_wider() |>
+  dplyr::mutate(categoria = "Total", Total = stringr::str_glue("{nrow(da_relacional)} (100.0%)"))
+
+tab_geral |>
+  dplyr::select(resultado, categoria, lab) |>
+  tidyr::pivot_wider(
+    names_from = resultado,
+    values_from = lab,
+    values_fill = "0 (0.0%)"
+  ) |>
+  dplyr::bind_cols(tab_total_col) |>
+  dplyr::bind_rows(tab_total_row) |>
+  dplyr::rename(Categoria = categoria) |>
+  knitr::kable()
+```
+
+Finalmente, a @tbl-tempo-relacional mostra os tempos médios e medianos, geral e por categoria, em dias. Os processos mais longos são os de convenção arbitral, com mediana de mais de um ano.
+
+```{r}
+#| label: tbl-tempo-relacional
+#| tbl-cap: "Estatísticas descritivas dos tempos dos processos em dias"
+geral <- da_relacional |>
+  dplyr::summarise(
+    categoria = "Total",
+    n = dplyr::n(),
+    media = mean(tempo),
+    mediana = median(tempo)
+  )
+
+da_relacional |>
+  dplyr::group_by(categoria) |>
+  dplyr::summarise(
+    n = dplyr::n(),
+    media = mean(tempo),
+    mediana = median(tempo)
+  ) |>
+  dplyr::arrange(dplyr::desc(mediana)) |>
+  dplyr::bind_rows(geral) |>
+  knitr::kable(col.names = c("Categoria", "N", "Média", "Mediana"), digits = 1)
+```

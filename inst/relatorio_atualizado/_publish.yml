@@ -1,0 +1,4 @@
+- source: relatorio.qmd
+  quarto-pub:
+    - id: d5f6b177-f73a-411f-af33-7f527274cc66
+      url: 'https://abj.quarto.pub/obsarbitragem'
