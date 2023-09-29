@@ -2,7 +2,7 @@
 title: "Processos relacionados à Arbitragem"
 subtitle: "Um levantamento no banco de sentenças do TJSP"
 author: Associação Brasileira de Jurimetria
-date: "2023-09-04"
+date: "2023-09-29"
 execute:
   echo: false
   freeze: true
@@ -29,9 +29,9 @@ col_abj <- viridis::viridis(5, 1, .2, .8)
 
 # Introdução
 
-O Observatório da Arbitragem é um projeto que visa a compreender o fenômeno jurídico da arbitragem nos tribunais estaduais. Em sua primeira fase, o projeto busca compreender o fluxo dos processos de i) anulação de decisão arbitral, ii) cumprimento de sentença / execução, iii) medida cautelar antecedente à constrituição do tribunal arbitral, iv) existência, validade e eficácia da convenção de arbitragem e v) ação para instituição da arbitragem com base no art, 7º da Lei de Arbitragem.
+O Observatório da Arbitragem é um projeto que visa a compreender o fenômeno jurídico da arbitragem nos tribunais estaduais. Em sua primeira fase, o projeto busca compreender o fluxo dos processos de i) anulação de decisão arbitral, ii) cumprimento de sentença / execução, iii) medida cautelar antecedente à constituição do tribunal arbitral, iv) existência, validade e eficácia da convenção de arbitragem e v) ação para instituição da arbitragem com base no art, 7º da Lei de Arbitragem.
 
-O objetivo do levantamento é realizar uma análise preliminar a partir do banco de sentenças do Tribunal de Justiça de São Paulo (TJSP). O levantamento terá como resultado algumas estatísticas básicas como volume de sentenças ao longo do tempo, proporção de decisões favoráveis ao autor e tempo mediano dos processos. O estudo pode ser utilizado como insumo para decidir sobre a viabilidade de uma pesquisa mais aprofundada -- envolvendo análise de autos processuais -- a partir dos dados disponibilizados no banco de sentenças.
+O objetivo do levantamento é realizar uma análise preliminar a partir do banco de sentenças do Tribunal de Justiça de São Paulo (TJSP). O levantamento tem como resultado algumas estatísticas básicas como volume de sentenças ao longo do tempo, proporção de decisões favoráveis ao autor e tempo mediano dos processos. O estudo pode ser utilizado como insumo para decidir sobre a viabilidade de uma pesquisa mais aprofundada -- envolvendo análise de autos processuais -- a partir dos dados disponibilizados no banco de sentenças.
 
 O presente levantamento descreve o fluxo de download, arrumação e análise dos dados de sentenças relacionadas à arbitragem. Na parte de download, descrevemos os termos utilizados para consulta e o procedimento de acesso aos dados, que são públicos, mas não são abertos. A parte de arrumação descreve todos os passos para chegar da base bruta até a base organizada, informando as colunas utilizadas. A análise mostra os resultados do levantamento, com estatísticas sobre o perfil dos processos, o volume de sentenças ao longo do tempo, a proporção de decisões favoráveis e o tempo médio das ações.
 
@@ -43,13 +43,13 @@ Em 30 de maio de 2023, seis meses depois da finalização da coleta dos dados, o
 
 Como consequência, a pesquisa recorreu ao banco de sentenças públicas, o que implicou a obtenção de uma amostra que não abarca a totalidade dos processos existentes no TJSP. Apesar desta limitação, acredita-se que os dados coletados e analisados ainda são valiosos e oferecem resultados significativos sobre o tema. Além de uma quantidade significativa de casos ser pública, as sentenças analisadas apareceram em quantidades muito próximas nas duas principais varas especializadas, indicando um grau de aleatorização.
 
-É, no entanto, importante levar essa limitação na quantidade de sentenças em consideração ao interpretar os resultados apresentados, em especial no que serefere à quantidade de casos observados, que pode ser de duas ou três vezes menor do que o total geral, bem como nos cuidados em generalizar interpretações ou conclusões a partir dos números.
+É importante, no entanto, levar essa limitação quanto à quantidade de sentenças em consideração ao interpretar os resultados apresentados, quantidade que pode ser duas ou três vezes menor do que o total geral, tanto quanto acautelar-se ao generalizar interpretações ou conclusões a partir dos números. Nenhum resultado expressado deve ser interpretado como indicativo tendencial de uma maior ou menor possibilidade de êxito, em abstrato, quanto às categorias de processos analisados.
 
-Feita essa ressalva, passa-se à metodologia de pesquisa.
+Feitas essas ressalvas, passa-se à metodologia de pesquisa.
 
 Os dados de processos do TJSP são públicos, mas não são abertos. Isso significa que não há meio fácil de obter uma lista de todos os processos que existem no tribunal a partir de um critério jurídico, geográfico ou temporal.
 
-O TJSP, no entanto, disponibiliza ferramentas de consulta. Na [Consulta de Julgados do Primeiro Grau (CJPG)](https://esaj.tjsp.jus.br/cjpg/pesquisar.do) é possível acessar, manualmente, a lista de processos a partir de termos de busca (como palavras-chave, classes e assuntos). Cada processo, por sua vez, pode ser pesquisado manualmente em uma consulta de processos [Consulta de Processos do Primeiro Grau](https://esaj.tjsp.jus.br/cpopg/open.do).
+O TJSP, entretanto, disponibiliza ferramentas de consulta. Na [Consulta de Julgados do Primeiro Grau (CJPG)](https://esaj.tjsp.jus.br/cjpg/pesquisar.do) é possível acessar, manualmente, a lista de processos a partir de termos de busca (como palavras-chave, classes e assuntos). Cada processo, por sua vez, pode ser pesquisado manualmente em uma consulta de processos [Consulta de Processos do Primeiro Grau](https://esaj.tjsp.jus.br/cpopg/open.do).
 
 Por conta da necessidade de realizar pesquisas no direito, a ABJ desenvolveu, ao longo de sua história, algumas ferramentas que automatizam o fluxo manual de obtenção de dados. Essas ferramentas utilizam técnicas de raspagem de dados [@zhaoWebScraping2017] que, em poucas palavras, envolvem imitar o que um ser humano faria para acessar as páginas, mas de forma automática. Vale ressaltar que essa não é uma estratégia oficial nem desejável de ser utilizada ao acessar dados públicos. No entanto, por conta das limitações do tribunal, utilizar raspagem de dados acaba sendo necessário para tornar as pesquisas viáveis.
 
@@ -59,7 +59,7 @@ Ao acessar os dados via raspagem do CJPG, a primeira limitação que aparece sã
 
 A desvantagem em utilizar palavras-chave é que as pesquisas se limitam ao que as ferramentas de pesquisa disponibilizam. Se a ferramenta de busca é falha, o resultado é falho. De qualquer forma, por falta de outros meios, essa foi a decisão tomada para acessar os processos relacionados à arbitragem.
 
-O termo de busca utilizado para realizar a pesquisa foi `"arbitral" OU "lei de arbitragem" OU "9307" OU "9.307"`. A ideia da pesquisa foi realizar a busca mais genérica possível relacionada à arbitragem, sem incluir o termo "arbitragem", já que este aparece no nome das varas, o que implicaria em uma lista com todos os processos da vara.
+O termo de busca utilizado para realizar a pesquisa foi `"arbitral" OU "lei de arbitragem" OU "9307" OU "9.307"`. A ideia da pesquisa foi realizar a busca mais genérica possível relacionada à arbitragem, sem incluir o termo "arbitragem", já que este aparece no nome das varas, o que implicaria uma lista com todos os processos da vara.
 
 Outro filtro realizado foi o das varas. Foram consideradas 4 varas no total: 1ª vara empresarial e conflitos de arbitragem, 2ª vara empresarial e conflitos de arbitragem, 1ª vara regional de competência empresarial e de conflitos relacionados à arbitragem e 2ª vara regional de competência empresarial e de conflitos relacionados à arbitragem.
 
@@ -67,11 +67,11 @@ A pesquisa retornou um total de 348 decisões, disponibilizadas entre março de 
 
 Neste ponto, algumas ressalvas devem ser apresentadas sobre o volume total de ações.
 
-Por envolver casos que potencialmente correm em segredo de justiça, é possível que uma parte dos casos não seja acessível através do banco de sentenças. Além disso, por envolver apenas as varas empresariais, o recorte pode apresentar limitações de espaço (regiões) e tempo (criação das varas)[^2]. Por último, por se tratar de um estudo retrospectivo (envolve apenas casos com sentença), casos ativos não sentenciados ficaram fora da lista, que pode não detectar tendências ou mudanças mais recentes no perfil desses conflitos.
+Por envolver casos que potencialmente correm em segredo de justiça, é possível que uma parte dos casos não seja acessível por meio do banco de sentenças. Além disso, por envolver apenas as varas empresariais, o recorte pode apresentar limitações de espaço (regiões) e tempo (criação das varas)[^2]. Por último, por se tratar de um estudo retrospectivo (envolve apenas casos com sentença), casos ativos não sentenciados ficaram fora da lista, que pode não detectar tendências ou mudanças mais recentes no perfil desses conflitos.
 
-[^2]: As três primeiras varas empresariais tiveram sua criação autorizada no dia 14 de dezembro por deliberação unânime do Órgão Especial do Tribunal de Justiça do Estado de São Paulo. Link para o parecer em <https://bit.ly/parecer-varas>. Acesso em 03 de maio de 2023.
+[^2]: As três primeiras varas empresariais tiveram sua criação autorizada no dia 14 de dezembro de 2017 por deliberação unânime do Órgão Especial do Tribunal de Justiça do Estado de São Paulo. Link para o parecer em <https://bit.ly/parecer-varas>. Acesso em 03 de maio de 2023.
 
-De qualquer forma, espera-se que a lista obtida, depois de limpa, possa ser utilizada como amostra aleatória da população de todos os processos relacionados a arbitragem.
+De qualquer forma, espera-se que a lista obtida, depois de limpa, possa ser utilizada como amostra aleatória da população de todos os processos relacionados à arbitragem.
 
 # Arrumação
 
@@ -174,11 +174,17 @@ A base considerada possui 173 linhas e 8 colunas. A base de dados em Excel pode 
 
 # Análise
 
-Esta seção foi organizada em três subseções: análise geral, análise sobre contratos pontuais e análise sobre contratos relacionais. O motivo da separação é (...MOTIVO...).
+Esta seção foi organizada em três subseções: análise geral, análise sobre contratos em geral e uma análise específica sobre contratos de colaboração. Para os fins desta pesquisa, adota-se o conceito de contratos de colaboração para aqueles contratos não societários que têm por objetivo balizar a relação entre as partes em termos mais amplos ao longo do tempo, com áleas distintas, mas interdependentes, sem configurar uma sociedade propriamente dita, conforme ensina a Profa. Paula Forgioni[^paula]. Os contratos de colaboração identificados nesta pesquisa são aqueles: (i) do sistema arbitral Unimed (58 casos), (ii) envolvendo franquias (13 casos) e (iii) envolvendo associação entre concessionárias e montadoras de veículos automotores (1 caso). Os casos de contratos em geral são todos os demais. Essa segregação foi possível porque os relatórios das decisões judiciais contêm uma descrição da natureza dos contratos sub judice e sua qualificação, o que permite a separação. A razão para a separação entre contratos em geral e contratos de colaboração é a maior propensão destes últimos, pelas suas características, à judicialização da arbitragem em razão de certas peculiaridades envolvendo o consentimento e a autonomia das partes, marcados pela subordinação de uma parte à outra e, assim, por assimetria em dose mais relevante[^explicacao-relevante] (o que, não raro, se instrumentaliza pela celebração de contratos por adesão, p. ex., ou por contratos com dependência econômica, que constituem categoria intermédia entre os paritários e os por adesão[^adesao]). Isso torna útil que, ao lado da análise geral, sejam apresentados também os dados segregados para esses dois grupos de contratos, a fim de permitir inferências específicas e aderentes à realidade própria de cada um desses grupos.
 
-Os casos de contratos relacionais são definidos com o seguintes critérios: i) casos da Unimed (58 casos), ii) casos envolvendo franquia (13 casos) e iii) casos com origem na câmara da AssoHonda (1 caso). Os casos de contratos pontuais são os demais.
+[^paula]: Contratos Empresariais: teoria geral e aplicação, 4ª edição, 2019, p. 179-207.
 
-Em todas as subseções, foram incluídas estatísticas descritivas como: tabelas com classe, assunto, faixas de valores, quantidade de processos por câmara arbitral, distribuição entre as duas varas, tempo médio / mediano, volume de decisões ao longo do tempo por categoria. As subseções de contratos pontuais e relacionais receberam análises adicionais.
+[^explicacao-relevante]: No que haveria exceção à presunção do art. 421-A do Código Civil, que determina se devem presumir "paritários e simétricos" os contratos civis e empresariais "até a presença de elementos concretos que justifiquem o afastamento dessa presunção".
+
+[^adesao]: Nesses negócios, a dependência se caracteriza "por (a) influência decisiva (b) de poder (c) de uma das partes para (d) impor circunstâncias e condições à outra, (e) que as aceita para manter o contrato e (f) se manter no mercado" (DINIZ, Gustavo Saad. Dependência econômica nos acordos verticais. Revista de Direito Privado. São Paulo: RT, 2014, v. 59, pp. 93-94). No mesmo sentido: PUGLIESI, Adriana Valéria. O abuso da dependência econômica. Revista de Direito Recuperacional e Empresa. São Paulo: RT, 2018, v. 7, p. 1 e ss.; TOMASETTI JR., Alcides. Abuso do poder econômico e abuso de poder contratual. Regime jurídico particularizado. Denunciabilidade restrita da relação contratual a tempo determinado. Contrato de fornecimento interempresarial. Monopólio estatal de sociedade fornecedora. Aumento arbitrário de lucros. Ilícitos constitucionais e de direito comum. Providências processuais corretivas. Revista dos Tribunais. São Paulo: RT, 1995, v. 715, p. 87 e ss.
+
+Os casos de contratos de colaboração são definidos com o seguintes critérios: i) casos da Unimed (58 casos), ii) casos envolvendo franquia (13 casos) e iii) casos com origem na câmara da AssoHonda (1 caso). Os casos de contratos em geral são os demais.
+
+Em todas as subseções, foram incluídas estatísticas descritivas como: tabelas com classe, assunto, faixas de valores, quantidade de processos por câmara arbitral, distribuição entre as duas varas, tempo médio / mediano, volume de decisões ao longo do tempo por categoria. As subseções de contratos em geral e de colaboração receberam análises adicionais.
 
 ```{r}
 # separando as bases de dados de cada parte
@@ -208,7 +214,7 @@ da_pontual <- da_geral |>
 
 Em seguida, são apresentadas tabelas das classes e assuntos mais comuns nos processos encontrados. É importante destacar que classes e assuntos nem sempre identificam corretamente o tipo de ação, tanto por motivos de taxonomia (o tipo de processo não existe na classificação do CNJ) quanto por motivos de má classificação (a pessoa que protocolou a ação colocou uma classe/assunto inadequada). Por isso, a classe e assunto não está sendo usada para classificar os tipos de processo.
 
-A @tbl-classe mostra as classes processuais mais comuns encontradas. É possível notar que existem muitas classes que não são relacionadas diretamente a arbitragem.
+A @tbl-classe mostra as classes processuais mais comuns encontradas. É possível notar que existem muitas classes que não são relacionadas diretamente à arbitragem.
 
 ```{r}
 #| label: tbl-classe
@@ -226,7 +232,7 @@ da_geral |>
   knitr::kable(col.names = c("Classe", "N", "%"))
 ```
 
-A @tbl-assunto mostra os dez assuntos processuais mais comuns encontrados. Assim como nas classes, é possível notar que existem muitos assuntos que não são relacionados diretamente a arbitragem.
+A @tbl-assunto mostra os dez assuntos processuais mais comuns encontrados. Assim como nas classes, é possível notar que existem muitos assuntos que não são relacionados diretamente à arbitragem.
 
 ```{r}
 #| label: tbl-assunto
@@ -241,7 +247,7 @@ da_geral |>
   knitr::kable(col.names = c("Assunto", "N", "%"))
 ```
 
-A @tbl-valor mostra a contagem de processos por faixa de valores de causa. É possível notar que existe uma alta assimetria, já que temos vários processos de até 10 mil reais, mas também processos de mais de 10 milhões de reais.
+A @tbl-valor mostra a contagem de processos por faixa de valores de causa. É possível notar que existe uma alta assimetria, já que há vários processos de até 10 mil reais, mas também processos de mais de 10 milhões de reais.
 
 ```{r}
 #| label: tbl-valor
@@ -266,7 +272,7 @@ da_geral |>
   knitr::kable(col.names = c("Faixa", "N", "%"))
 ```
 
-A @tbl-vara mostra a contagem de processos por vara. As varas empresariais do foro central cível concentram a maior parte dos casos. Por conta do pequeno número de informações, as análises de contagem de resultados e categorias por vara vão desconsiderar as Regiões Administrativas Judiciárias (RAJs).
+A @tbl-vara mostra a contagem de processos por vara. As varas empresariais do foro central cível concentram a maior parte dos casos. Por conta do pequeno número de informações, as análises de contagem de resultados e categorias por vara desconsideram as Regiões Administrativas Judiciárias (RAJs).
 
 ```{r}
 #| label: tbl-vara
@@ -300,7 +306,7 @@ da_geral |>
   ggthemes::theme_hc(12)
 ```
 
-Finalmente, a @tbl-tempo mostra os tempos médios e medianos, geral e por categoria, em dias. Os processos mais longos são os de convenção arbitral, com mediana de quase um ano. Já os processos mais curtos são os de anulação, com mediana de aproximadamente seis meses.
+A @tbl-tempo mostra os tempos médios e medianos, geral e por categoria, em dias. Os processos mais longos são os de convenção arbitral, com mediana de quase um ano. Já os processos mais curtos são os de anulação, com mediana de aproximadamente seis meses.
 
 ```{r}
 #| label: tbl-tempo
@@ -325,9 +331,56 @@ da_geral |>
   knitr::kable(col.names = c("Categoria", "N", "Média", "Mediana"), digits = 1)
 ```
 
-## Contratos Pontuais
+Em seguida, apresentam-se comparações entre a quantidade de sentenças arbitrais e a quantidade de anulatórias.
 
-A @tbl-classe-pontual mostra as classes processuais mais comuns encontradas. A classe mais comum é o cumprimento de sentença relacionado à Lei Arbitral, seguido pelo procedimento comum cível.
+Os dados de sentenças arbitrais foram levantados pela Dra Vera Cecília Monteiro de Barros e gentilmente fornecidos à equipe de pesquisa. Os dados revelam um total de `r sum(sentencas_camaras$qtd_sentencas)` sentenças arbitrais proferidas em arbitragens com sede em São Paulo administradas pelas principais câmaras de arbitragem no mesmo período que os dados levantados no TJSP.
+
+A @tbl-sentencas-processos-pontual compara a quantidade de sentenças arbitrais proferidas em arbitragens com sede em São Paulo nesse conjunto de câmaras e de ações anulatórias encontradas, tendo por objeto sentenças proferidas nessas mesmas câmaras. A taxa geral de anulatórias foi de 2.8%.
+
+```{r}
+#| label: tbl-sentencas-processos-pontual
+#| tbl-cap: Comparação entre quantidade de decisões arbitrais e ações anulatórias
+
+contagens_camaras <- da_pontual |>
+  dplyr::filter(categoria == "Anulacao") |>
+  dplyr::count(camara_arbitral, sort = TRUE) |>
+  dplyr::transmute(
+    nome_camara = dplyr::if_else(
+      stringr::str_detect(camara_arbitral, "CBMA"),
+      "Centro Brasileiro de Mediação e Arbitragem CBMA",
+      camara_arbitral
+    ),
+    n
+  )
+
+sentencas_camaras |>
+  dplyr::left_join(contagens_camaras, "nome_camara") |>
+  tidyr::replace_na(list(n = 0)) |>
+  dplyr::arrange(dplyr::desc(qtd_sentencas)) |>
+  dplyr::mutate(taxa = formattable::percent(n / qtd_sentencas, 1)) |>
+  janitor::adorn_totals() |>
+  dplyr::mutate(taxa = dplyr::if_else(
+    sigla == "Total",
+    formattable::percent(sum(n) / sum(qtd_sentencas), 1),
+    taxa
+  )) |>
+  dplyr::mutate(
+    nome_camara = dplyr::if_else(
+      nome_camara == "CCI",
+      "Corte Internacional de Arbitragem da Câmara de Comércio Internacional - CCI",
+      nome_camara
+    )
+  ) |>
+  knitr::kable(col.names = c(
+    "Sigla", "Câmara", "Sentenças arbitrais", "Ações anulatórias", "Taxa de judicialização"
+  ))
+```
+
+Antes de seguir com as comparações, cabe um detalhamento das limitações do estudo. Primeiro, as contagens disponíveis na base de sentenças arbitrais e na base de processos judiciais não correspondem sempre aos mesmos conflitos, já que sempre decorre um tempo entre a sentença arbitral e a sentença do processo judicial. Segundo, como não foram analisados casos que estão em segredo de justiça, a taxa de judicialização, ou seja, a razão entre a quantidade de processos judiciais e a quantidade de sentenças arbitrais está subestimada. Por último, não existem informações da quantidade de sentenças para todas as câmaras arbitrais possíveis, então as análises que comparam as contagens consideram somente as câmaras que têm informação.
+
+## Contratos em Geral
+
+A @tbl-classe-pontual mostra as classes processuais mais comuns encontradas. A classe mais comum é o cumprimento de sentença relacionado à Lei de Arbitragem, seguido pelo procedimento comum cível.
 
 ```{r}
 #| label: tbl-classe-pontual
@@ -385,7 +438,7 @@ da_pontual |>
   knitr::kable(col.names = c("Faixa", "N", "%"))
 ```
 
-A @tbl-valor-anulatoria-pontual mostra a contagem de processos por faixa de valores de causa nas anulatórias em contratos pontuais. Mais da metade dos processos estão na faixa de até 100 mil reais.
+A @tbl-valor-anulatoria-pontual mostra a contagem de processos por faixa de valores de causa nas anulatórias em contratos em geral. Mais da metade dos processos estão na faixa de até 100 mil reais.
 
 ```{r}
 #| label: tbl-valor-anulatoria-pontual
@@ -460,54 +513,7 @@ da_pontual |>
   ggthemes::theme_hc(12)
 ```
 
-Em seguida, apresentam-se comparações entre a quantidade de sentenças arbitrais proferidas em arbitragens com sede em São Paulo e a quantidade de anulatórias em contratos pontuais.
-
-Os dados de sentenças arbitrais foram levantados pela Dra Vera Cecília Monteiro de Barros e gentilmente fornecidos à equipe de pesquisa. Os dados revelam um total de `r sum(sentencas_camaras$qtd_sentencas)` sentenças arbitrais no mesmo período que os dados levantados no TJSP.
-
-A @tbl-sentencas-processos-pontual compara a quantidade de sentenças arbitrais e ações anulatórias encontradas na base contratos pontuais. A taxa geral de anulatórias foi de 2.8%.
-
-```{r}
-#| label: tbl-sentencas-processos-pontual
-#| tbl-cap: Comparação entre quantidade de decisões arbitrais e ações anulatórias
-
-contagens_camaras <- da_pontual |>
-  dplyr::filter(categoria == "Anulacao") |>
-  dplyr::count(camara_arbitral, sort = TRUE) |>
-  dplyr::transmute(
-    nome_camara = dplyr::if_else(
-      stringr::str_detect(camara_arbitral, "CBMA"),
-      "Centro Brasileiro de Mediação e Arbitragem CBMA",
-      camara_arbitral
-    ),
-    n
-  )
-
-sentencas_camaras |>
-  dplyr::left_join(contagens_camaras, "nome_camara") |>
-  tidyr::replace_na(list(n = 0)) |>
-  dplyr::arrange(dplyr::desc(qtd_sentencas)) |>
-  dplyr::mutate(taxa = formattable::percent(n / qtd_sentencas, 1)) |>
-  janitor::adorn_totals() |>
-  dplyr::mutate(taxa = dplyr::if_else(
-    sigla == "Total",
-    formattable::percent(sum(n) / sum(qtd_sentencas), 1),
-    taxa
-  )) |>
-  dplyr::mutate(
-    nome_camara = dplyr::if_else(
-      nome_camara == "CCI",
-      "Corte Internacional de Arbitragem da Câmara de Comércio Internacional - CCI",
-      nome_camara
-    )
-  ) |>
-  knitr::kable(col.names = c(
-    "Sigla", "Câmara", "Decisões arbitrais", "Ações anulatórias", "Taxa de judicialização"
-  ))
-```
-
-Antes de seguir com as comparações, cabe um detalhamento das limitações do estudo. Primeiro, as contagens disponíveis na base de sentenças arbitrais e na base de processos judiciais não correspondem sempre aos mesmos conflitos, já que sempre decorre um tempo entre a decisão arbitral e a sentença do processo judicial. Segundo, como não foram analisados casos que estão em segredo de justiça, a taxa de judicialização, ou seja, a razão entre a quantidade de processos judiciais e a quantidade de sentenças arbitrais está subestimada. Por último, não existem informações da quantidade de sentenças para todas as câmaras arbitrais possíveis, então as análises que comparam as contagens consideram somente as câmaras que têm informação.
-
-A @tbl-resultado-pontual mostra os resultados dos processos por categoria, excluindo os acordos. Nas últimas linha e coluna, são apresentadas as contagens e proporções marginais. A taxa de procedência em anulatórias (considerando casos procedentes e parcialmente procedentes e excluindo acordos do denominador) é de aproximadamente 17.7%.
+A @tbl-resultado-pontual mostra os resultados dos processos por categoria, **excluindo os acordos**. Nas últimas linha e coluna, são apresentadas as contagens e proporções marginais. A taxa de procedência em anulatórias (considerando casos procedentes e parcialmente procedentes e excluindo acordos do denominador) é de aproximadamente 17.7%.
 
 ```{r}
 #| label: tbl-resultado-pontual
@@ -553,7 +559,7 @@ tab_geral |>
   knitr::kable()
 ```
 
-Com base nos dados levantados, é possível desenvolver uma análise meramente exploratória sobre a probabilidade de uma sentença arbitral ser anulada, total ou parcialmente, pela justiça. Se assumirmos, conservadoramente, que, considerando as ações que se encontram em segredo de justiça, a taxa de judicialização efetiva seria três vezes superior à taxa de 2.8% detectada na @tbl-sentencas-processos-pontual, chegaríamos a uma taxa de judicialização real de 8.4%. Assumindo que a taxa de procedência parcial e total das ações anulatórias permaneceria estável, no patamar geral de 17.7% indicado na @tbl-resultado-pontual, a probabilidade de reversão de qualquer sentença arbitral proferida no mercado de arbitragem perante as varas empresariais seria a multiplicação entre essas proporções, ou seja, 1.5%.
+Com base nos dados levantados, é possível desenvolver uma análise meramente exploratória sobre a probabilidade de uma sentença arbitral ser anulada, total ou parcialmente, pela justiça. Se assumirmos, conservadoramente, que, considerando as ações que se encontram em segredo de justiça, a taxa de judicialização efetiva seria três vezes superior à taxa de 2.8% detectada na @tbl-sentencas-processos-pontual, chegaríamos a uma taxa de judicialização real de 8.4%. Assumindo que a taxa de procedência parcial e total das ações anulatórias permaneceria estável, no patamar geral de 17.7% indicado na @tbl-resultado-pontual, a probabilidade de reversão de qualquer sentença arbitral perante as varas empresariais seria a multiplicação entre essas proporções, ou seja, 1.5%.
 
 Finalmente, a @tbl-tempo-pontual mostra os tempos médios e medianos, geral e por categoria, em dias. Os processos de anulação estão em segundo lugar, com tempo mediano de quase dez meses até a sentença.
 
@@ -580,7 +586,7 @@ da_pontual |>
   knitr::kable(col.names = c("Categoria", "N", "Média", "Mediana"), digits = 1)
 ```
 
-## Contratos Relacionais
+## Contratos de Colaboração
 
 A @tbl-classe-relacional mostra as classes processuais mais comuns encontradas. A classe mais comum é Convenção Arbitral, que ocorre em três quartos dos casos.
 
@@ -640,7 +646,7 @@ da_relacional |>
   knitr::kable(col.names = c("Faixa", "N", "%"))
 ```
 
-A @tbl-valor-anulatoria-relacional mostra a contagem de processos por faixa de valores de causa nas anulatórias em contratos relacionais. Novamente, mais da metade dos processos estão na faixa de 100 mil reais a 1 milhão de reais.
+A @tbl-valor-anulatoria-relacional mostra a contagem de processos por faixa de valores de causa nas anulatórias em contratos de colaboração. Novamente, mais da metade dos processos estão na faixa de 100 mil reais a 1 milhão de reais.
 
 ```{r}
 #| label: tbl-valor-anulatoria-relacional
@@ -667,7 +673,7 @@ da_relacional |>
 
 ```
 
-A @tbl-vara-relacional mostra a contagem de processos por vara. Novamente, os casos estão distribuídos de forma homogênea entre as varas empresariais. Não foram identificados casos nas RAJs para contratos relacionais.
+A @tbl-vara-relacional mostra a contagem de processos por vara. Novamente, os casos estão distribuídos de forma homogênea entre as varas empresariais. Não foram identificados casos nas RAJs para contratos de colaboração.
 
 ```{r}
 #| label: tbl-vara-relacional
@@ -679,7 +685,7 @@ da_relacional |>
   knitr::kable(col.names = c("Vara", "N", "%"))
 ```
 
-A @tbl-camara-origem-relacional mostra a contagem e proporção de processos por câmara arbitral de origem nas anulatórias em contratos relacional. Quase todos os casos têm origem na câmara arbitral do Fórum Unimed. A câmara de origem não foi identificada em 12 casos.
+A @tbl-camara-origem-relacional mostra a contagem e proporção de processos por câmara arbitral de origem nas anulatórias em contratos de colaboração. Quase todos os casos têm origem na câmara arbitral do Fórum Unimed. A câmara de origem não foi identificada em 12 casos.
 
 ```{r}
 #| label: tbl-camara-origem-relacional
@@ -715,7 +721,7 @@ da_relacional |>
   ggthemes::theme_hc(12)
 ```
 
-A @tbl-resultado-relacional mostra os resultados dos processos por categoria, excluindo os acordos. A taxa de procedência em anulatórias (considerando casos procedentes e parcialmente procedentes e excluindo acordos do denominador) é de aproximadamente 59.3%, significativamente maior do que foi observado na @tbl-resultado-pontual.
+A @tbl-resultado-relacional mostra os resultados dos processos por categoria, **excluindo os acordos**. A taxa de procedência em anulatórias (considerando casos procedentes e parcialmente procedentes e excluindo acordos do denominador) é de aproximadamente 59.3%, significativamente maior do que foi observado na @tbl-resultado-pontual.
 
 ```{r}
 #| label: tbl-resultado-relacional
@@ -761,7 +767,10 @@ tab_geral |>
   knitr::kable()
 ```
 
+Replicando a conta da seção anterior: se assumirmos, conservadoramente, que, considerando as ações que se encontram em segredo de justiça, a taxa de judicialização efetiva seria três vezes superior à taxa de 2.8% detectada na @tbl-sentencas-processos-pontual, chegaríamos a uma taxa de judicialização real de 8.4%. Assumindo que a taxa de procedência parcial e total das ações anulatórias em contratos de colaboração permaneceria estável, no patamar geral de 59.3% indicado na @tbl-resultado-relacional, a probabilidade de reversão de qualquer sentença arbitral perante as varas empresariais seria a multiplicação entre essas proporções, ou seja, 5.0%.
+
 Finalmente, a @tbl-tempo-relacional mostra os tempos médios e medianos, geral e por categoria, em dias. Os processos mais longos são os de convenção arbitral, com mediana de mais de um ano.
+
 
 ```{r}
 #| label: tbl-tempo-relacional
